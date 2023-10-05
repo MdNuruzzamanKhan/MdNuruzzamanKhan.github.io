@@ -27,12 +27,12 @@
     <a id="home" href="#hm" class="w3-bar-item w3-button w3-margin-right w3-padding-small w3-white fa fa-home" style="width:25%"></a>
    <a class="w3-bar-item w3-button w3-margin-right w3-padding-small w3-white" style="width:32%" ><b>{< >}</b></a>
    
-    <a href="https://md-nuruzzaman-khan.github.io/aboutme.html" class="w3-bar-item w3-button w3-hide-small w3-padding-small w3-hover-white">About me</a>
+    <a href="#ame" class="w3-bar-item w3-button w3-hide-small w3-padding-small w3-hover-white" onclick="bio()" >About me</a>
   </div>
 
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-gray w3-hide w3-hide-large w3-hide-medium w3-large"> 
-    <a href="https://md-nuruzzaman-khan.github.io/aboutme.html" class="w3-bar-item w3-button w3-padding-large">About me</a>
+    <a href="#ame" class="w3-bar-item w3-button w3-padding-large" onclick="bio()" >About me</a>
   </div>
 </div>
 
@@ -42,12 +42,7 @@
   <h6 class="w3-center w3-animate-zoom"><i>Developing by Md. Nuruzzaman Khan</i></h6>
   <a href="#frm" class="baxa w3-hover-opacity w3-animate-bottom" style="color:white;padding:5px; text-decoration:none" onclick="inf()"><b>Click here</b> </a>
 </header>
-<div id="ame" class="w3-container w3-purple city" style="display:none">
-  <h2>Md. Nuruzzaman Khan</h2>
-  <p>Class : 10(examinee)<br>
-  Roll : 08<br>
-  School Name : Hajigonj Government Pilot High School And College.</p>
-  </div>
+
 
   <div id="frm" class="w3-card w3-light-blue" style="width:90%; margin:5%; border-radius:9px; padding:10px; display:none">
    <h2 style="text-align:center">Give information</h2>
@@ -62,6 +57,13 @@
 <button onclick="pin()" class="w3-block">SUBMIT</button>
 
 </form>
+</div>
+  <div id="ame" class="w3-container w3-purple city" style="display:none">
+  <p>Enter your pin :</p>
+ <form>
+   <input id="pw" type="password" required>
+  <button onclick="pw()" class="w3-block">SUBMIT</button>
+ </form>
 </div>
 </body>
 
@@ -81,6 +83,14 @@ div.innerHTML =`Your PIN=${p}` ;
 function bio(){
   var a = document.getElementById("ame");
   a.style.display="block";
+function pw(){
+  var b = document.getElementById("fn");
+ let c = fn.value;
+  var pw = document.getElementById("pw");
+  let pw1 = pw.value;
+  if ( pw1=c){var pw2 = document.getElementById("ame");
+  pw2.href="https://MdNuruzzamanKhan.github.io/aboutme.html";}
+}  
 }
 function inf(){
   var d = document.getElementById("frm");
