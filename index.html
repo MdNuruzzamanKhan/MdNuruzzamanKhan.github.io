@@ -62,7 +62,7 @@
   <p>Enter your pin :</p>
  <form>
    <input id="pw" type="password" required>
-  <button onclick="pw()" class="w3-block">SUBMIT</button>
+  <a href="#" id="submit" onclick="pw()" class="w3-block">SUBMIT</a>
  </form>
 </div>
 </body>
@@ -88,7 +88,7 @@ function pw(){
  let c = fn.value;
   var pw = document.getElementById("pw");
   let pw1 = pw.value;
-  if ( pw1=c){var pw2 = document.getElementById("ame");
+  if ( pw1=c){var pw2 = document.getElementById("submit");
   pw2.href="https://MdNuruzzamanKhan.github.io/aboutme.html";}
 }  
 }
