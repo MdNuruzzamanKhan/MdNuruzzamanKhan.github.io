@@ -59,10 +59,11 @@
 
 </form>
 </div>
-  <div id="ame" class="w3-container w3-pale-green" style="display:none; margin-bottom:5% ;">
-  <p>Enter your pin :</p>
+ </div>
+  <div id="ame" class="w3-container w3-pale-green" style="display:none; margin-bottom:3% ;">
+  <p id="cg" >Enter your pin :</p>
  <form>
-   <input id="pw" style="background-color:white" type="password" placeholder="" required>
+   <input id="pw" style="background-color:white" type="password" required>
   <a href="#frm" id="submit" onclick="pw()" class="w3-block"><b>submit</b></a>
  </form>
 </div>
@@ -87,8 +88,8 @@ function pw(){
   if(pw1 == p){
   var op = document.getElementById("submit");
   op.href ='https://mdnuruzzamankhan.github.io/aboutme.html'}
-  else{var opp = document.getElementById("pw");
-  opp.placeholder="try again...";}
+  else{var opp = document.getElementById("cg");
+  opp.innerHTML="Incorrect pin, try again...";}
 }
 function inf(){
   var d = document.getElementById("frm");
