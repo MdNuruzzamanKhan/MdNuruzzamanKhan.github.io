@@ -16,6 +16,9 @@
     .baxa{background-color:blue; border:none; border-radius:8px; height:50px; animation-delay:1s}
     h1{color:green; text-shadow:3px 3px 4px}
    #home{height:35px}
+   #submit{color:#567890;  text-decoration:none;text-align:center; border:none; width:80px;
+    background-color:white; padding:4px; border-radius:5px}
+    #pw{width:70%}
     </style>
   </head>
 <body>
@@ -58,11 +61,11 @@
 
 </form>
 </div>
-  <div id="ame" class="w3-container w3-purple city" style="display:none">
+  <div id="ame" class="w3-container w3-pale-green" style="display:none; margin-bottom:5% ;">
   <p>Enter your pin :</p>
  <form>
-   <input id="pw" type="password" required>
-  <a href="#frm" id="submit" onclick="pw()" class="w3-block">SUBMIT</a>
+   <input id="pw" style="background-color:white" type="password" placeholder="" required>
+  <a href="#frm" id="submit" onclick="pw()" class="w3-block">submit</a>
  </form>
 </div>
 </body>
@@ -86,7 +89,8 @@ function pw(){
   if(pw1 == p){
   var op = document.getElementById("submit");
   op.href ='https://mdnuruzzamankhan.github.io/aboutme.html'}
-  
+  else{var opp = document.getElementById("pw");
+  opp.placeholder="try again...";}
 }
 function inf(){
   var d = document.getElementById("frm");
