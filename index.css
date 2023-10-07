@@ -1,0 +1,27 @@
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+    
+     body, html {
+  height: 100%;
+  margin: 0%;
+}
+
+.bg {
+  /* The image used */
+background-image:url(https://images.pexels.com/photos/3137052/pexels-photo-3137052.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+  /* Full height */
+  height: 820px;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+    .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+    .baxa{background-color:blue; border:none; border-radius:8px; height:50px; animation-delay:1s}
+    h1{color:green; text-shadow:3px 3px 4px}
+   #home{height:35px}
+   #submit{color:#567890;  text-decoration:none;text-align:center; border:none; width:80px;
+    background-color:#ccccff; padding:4px; border-radius:5px; margin:3px}
+    #pw{width:70%}
+    #an{padding-top:10px;}
+    #navbar{position:fixed; z-index:2}
+    #navDemo{position:fixed; z-index:1; width:100%; height:70px}
