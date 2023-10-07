@@ -45,14 +45,14 @@ background-image:url(https://images.pexels.com/photos/3137052/pexels-photo-31370
   <div class="w3-bar w3-blue w3-card w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-small w3-hover-violet w3-large w3-white" style="width:25%" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <a id="home" href="#hm" class="w3-bar-item w3-button w3-margin-right w3-padding-small w3-white fa fa-home" style="width:25%"></a>
-   <a class="w3-bar-item w3-button w3-margin-right w3-padding-small w3-white" style="width:32%" ><b>{< >}</b></a>
+   <a href="#ame" class="w3-bar-item w3-button w3-margin-right w3-padding-small w3-white" style="width:32%" onclick="bio()" ><b>{< >}</b></a>
    
-    <a href="#ame" class="w3-bar-item w3-button w3-hide-small w3-padding-small w3-hover-white" onclick="bio()" >About me</a>
+    <a href="https://mdnuruzzamankhan.github.io/aboutme.html" class="w3-bar-item w3-button w3-hide-small w3-padding-small w3-hover-white" >About me</a>
   </div>
 </div>
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-gray w3-hide w3-hide-large w3-hide-medium w3-large"> 
-    <p id="an"><a href="#ame" onclick="bio()" class=" w3-bar-item w3-button">About me</a></p>
+    <p id="an"><a href="https://mdnuruzzamankhan.github.io/aboutme.html" class=" w3-bar-item w3-button">About me</a></p>
 </div>
 
 <!-- Header -->
@@ -104,7 +104,7 @@ function pw(){
   let pw1 = pw.value;
   if(pw1 == p){
   var op = document.getElementById("submit");
-  op.href ='https://mdnuruzzamankhan.github.io/aboutme.html'}
+  op.href ='https://mdnuruzzamankhan.github.io/code.html'}
   else{var opp = document.getElementById("cg");
   opp.innerHTML="Incorrect pin, try again...";}
 }
