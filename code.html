@@ -23,7 +23,7 @@
   background-color: white;
   overflow: hidden;
 }
-.accordion{background-color:#aabbcc; border-radius:3px; margin:3px}
+.accordion{background-color:#aaccbb; border-radius:3px; margin:3px}
 .bg {
   /* The image used */
 background-image:url(https://images.pexels.com/photos/3137052/pexels-photo-3137052.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
@@ -65,28 +65,9 @@ background-image:url(https://images.pexels.com/photos/3137052/pexels-photo-31370
         <p>Enter Function:</p>
     <p><input id="equation" type="text" value="x * 2 + 17"></p>
     <p>
-    <button onclick='plot("lines")'>Graph equation</button>
+    <button onclick='plot("lines")'>Graph function</button>
     </p>
     <div id="myPlot" style="width:100%;max-width:700px"></div>
-
-    <script>
-    function plot(type) {
-    const exp = document.getElementById("equation").value;
-    const xValues = [];
-    const yValues = [];
-    let mode = "lines";
-// Generate values
-    for (let x = -10; x <= 10; x += 1) {
-  xValues.push(x);
-  yValues.push(eval(exp));
-      }
-
-// Display using Plotly
-    const data = [{x:xValues, y:yValues, mode:mode, type:"scatter"}];
-    const layout = {title: "y = " + exp};
-    Plotly.newPlot("myPlot", data, layout);
-    }
-    </script>
     </div>
 </div>    
     <script>
@@ -112,6 +93,22 @@ for (i = 0; i < acc.length; i++) {
     }
   });
 }
+    function plot(type) {
+    const exp = document.getElementById("equation").value;
+    const xValues = [];
+    const yValues = [];
+    let mode = "lines";
+// Generate values
+    for (let x = -10; x <= 10; x += 1) {
+  xValues.push(x);
+  yValues.push(eval(exp));
+      }
+
+// Display using Plotly
+    const data = [{x:xValues, y:yValues, mode:mode, type:"scatter"}];
+    const layout = {title: "y = " + exp};
+    Plotly.newPlot("myPlot", data, layout);
+    }
 </script>
   </body>
 </html>
