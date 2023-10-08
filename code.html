@@ -17,13 +17,7 @@
   height: 100%;
   margin: 0%;
 }
-.panel {
-  padding: 0 18px;
-  display: none;
-  background-color: white;
-  overflow: hidden;
-}
-.accordion{background-color:#aabbcc; border-radius:3px; 
+.link{background-color:#bbccbb; border-radius:3px; display:block;
 margin:3px; border:1px solid black; text-decoration:none; padding:5px}
 .bg {
   /* The image used */
@@ -61,16 +55,36 @@ background-image:url(https://images.pexels.com/photos/3137052/pexels-photo-31370
 <!-- Header -->
 <div id="main" class="w3-container">
     
-      <a href="#" class="accordion">1.Function Grapher</a>
-        <div id="f" class="panel">
-        <p>Enter Function:</p>
-    <p><input id="equation" type="text" value="x * 2 + 17"></p>
-    <p>
-    <button onclick='plot("lines")'>Graph function</button>
-    </p>
-    <div id="myPlot" style="width:100%;max-width:700px"></div>
-    </div>
-  <a href="https://mdnuruzzamankhan.github.io/code2.html" class="accordion">2.Archery Game</a>
+      <a }
+    .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+    #an{padding-top:10px;}
+    #navbar{position:fixed; z-index:2}
+    #navDemo{position:fixed; z-index:1; width:100%; height:70px}
+    #main{margin-top:35px}
+    </style>
+  </head>
+<body>
+<div class="bg">
+<!-- Navbar -->
+<div id="navbar" class="w3-top" style="display:inline" >
+  <div class="w3-bar w3-blue w3-card w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-small w3-hover-violet w3-large w3-white" style="width:25%" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a id="home" href="https://mdnuruzzamankhan.github.io/index.html" class="w3-bar-item w3-button w3-white fa fa-home" style="width:25%; margin-right:12.5%"></a>
+   <a href="#f" class="w3-bar-item w3-button w3-padding-small w3-white" style="width:25%; margin-right:12.5%"><b>code</b></a>
+   
+    <a href="https://mdnuruzzamankhan.github.io/aboutme.html" class="w3-bar-item w3-button w3-hide-small w3-padding-small w3-hover-white" >About me</a>
+  </div>
+</div>
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-gray w3-hide w3-hide-large w3-hide-medium w3-large"> 
+    <p id="an"><a href="https://mdnuruzzamankhan.github.io/aboutme.html" class=" w3-bar-item w3-button">About me</a></p>
+</div>
+<!-- Header -->
+<div id="main" class="w3-container">
+    
+      <a href="https://mdnuruzzamankhan.github.io/code1.html" class="link">1.Function Grapher</a>
+        
+  <a href="https://mdnuruzzamankhan.github.io/code2.html" class="link">2.Archery Game</a>
 </div>    
     <script>
       function myFunction() {
@@ -80,25 +94,7 @@ background-image:url(https://images.pexels.com/photos/3137052/pexels-photo-31370
   } else { 
     x.className = x.className.replace(" w3-show", "");
   }
-}
-
-}
-    function plot(type) {
-    const exp = document.getElementById("equation").value;
-    const xValues = [];
-    const yValues = [];
-    let mode = "lines";
-// Generate values
-    for (let x = -10; x <= 10; x += 1) {
-  xValues.push(x);
-  yValues.push(eval(exp));
-      }
-
-// Display using Plotly
-    const data = [{x:xValues, y:yValues, mode:mode, type:"scatter"}];
-    const layout = {title: "y = " + exp};
-    Plotly.newPlot("myPlot", data, layout);
-    }
+}   
 </script>
   </body>
 </html>
