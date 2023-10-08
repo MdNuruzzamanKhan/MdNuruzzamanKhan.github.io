@@ -23,7 +23,8 @@
   background-color: white;
   overflow: hidden;
 }
-.accordion{background-color:#aaccbb; border-radius:3px; margin:3px}
+.accordion{background-color:#aabbcc; border-radius:3px; 
+margin:3px; border:1px solid black; text-decoration:none; padding:5px}
 .bg {
   /* The image used */
 background-image:url(https://images.pexels.com/photos/3137052/pexels-photo-3137052.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
@@ -60,7 +61,7 @@ background-image:url(https://images.pexels.com/photos/3137052/pexels-photo-31370
 <!-- Header -->
 <div id="main" class="w3-container">
     
-      <button  class="accordion">1.Function Grapher</button>
+      <a href="#" class="accordion">1.Function Grapher</a>
         <div id="f" class="panel">
         <p>Enter Function:</p>
     <p><input id="equation" type="text" value="x * 2 + 17"></p>
@@ -69,6 +70,7 @@ background-image:url(https://images.pexels.com/photos/3137052/pexels-photo-31370
     </p>
     <div id="myPlot" style="width:100%;max-width:700px"></div>
     </div>
+  <a href="https://mdnuruzzamankhan.github.io/code2.html" class="accordion">2.Archery Game</a>
 </div>    
     <script>
       function myFunction() {
@@ -79,19 +81,7 @@ background-image:url(https://images.pexels.com/photos/3137052/pexels-photo-31370
     x.className = x.className.replace(" w3-show", "");
   }
 }
-var acc = document.getElementsByClassName("accordion");
-var i;
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-    } else {
-      panel.style.display = "block";
-    }
-  });
 }
     function plot(type) {
     const exp = document.getElementById("equation").value;
