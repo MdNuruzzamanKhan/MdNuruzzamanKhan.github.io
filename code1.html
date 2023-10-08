@@ -13,10 +13,7 @@
 
     <style>
     body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
-     body, html {
-  height: 100%;
-  margin: 0%;
-}
+
 .link{background-color:#bbccbb; border-radius:3px; display:block;
 margin:3px; border:1px solid black; text-decoration:none; padding:5px}
     .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
@@ -26,9 +23,10 @@ margin:3px; border:1px solid black; text-decoration:none; padding:5px}
         <p>Enter Function:</p>
     <p><input id="equation" type="text" value="x * 2 + 17"></p>
     <p>
-    <button></button>
-
-}
+    <button onclick='plot("lines")'>Graph function</button>
+    </p>
+    <div id="myPlot" style="width:100%;max-width:700px"></div>
+<script>
     function plot(type) {
     const exp = document.getElementById("equation").value;
     const xValues = [];
