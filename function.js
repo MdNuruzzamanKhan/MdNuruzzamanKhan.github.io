@@ -1,4 +1,4 @@
-const  p=Math.floor(Math.random() * 10000);
+ const  p=Math.floor(1000+(Math.random()* 8999));
 function pin(){
 var b = document.getElementById("fn");
  let c=fn.value;
