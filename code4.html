@@ -219,7 +219,7 @@
       <div class="cross"></div>
       <div class="circle"></div>
     </label>
-  <a class="replay" href="javascript:replay();">REPLAY</a>
+  <button class="replay" onclick="replay()">REPLAY</button>
    
   </div>
   <div class="overlay"></div>
@@ -358,16 +358,6 @@ function replay() {
   $('.lost').classList.remove('show');
   $('.draw').classList.remove('show');
   gameEnd = false;
-}
-
-lvl = idx => {
-  const lvls = ['easy', 'normal', 'impossible'];
-  lvls.forEach(level => {
-    $('.tic-tac-toe').classList.remove(level);
-    $('.controls .'+level).classList.remove('active');
-  })
-  $('.tic-tac-toe').classList.add(lvls[idx]);
-  $('.controls .'+lvls[idx]).classList.add('active');
 }
       </script>
 </body>
