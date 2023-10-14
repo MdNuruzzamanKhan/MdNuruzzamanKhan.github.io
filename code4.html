@@ -294,7 +294,7 @@ function calculateNextPosition() {
   while (checkIncludeO(tar) || checkIncludeX(tar)) {
     tar = Math.ceil(Math.random()*9);
   }
-  if (!$('.tic-tac-toe').classList.contains('easy')) {
+  
     for (let x = 1; x < 10; x++) {
       if (checkIncludeX(x, x+1)) {
         // x x _ / _ x x
@@ -327,8 +327,7 @@ function calculateNextPosition() {
         // _ _ x / x _ _
         const _tar = (x == 7) ? 3 : 1;
         isValidNextPosition(_tar)
-      }
-      if ($('.tic-tac-toe').classList.contains('impossible')) {   
+      }   
         if (checkIncludeX(x, x+6) && x <= 3) {
           // x _ _ / _ x _ / _ _ x
           // _ _ _ / _ _ _ / _ _ _
@@ -341,8 +340,8 @@ function calculateNextPosition() {
           // _ _ x / x _ _
           isValidNextPosition(5)
         }
-      }
-    }
+    
+  
   }
   addCircle(tar);
 }
