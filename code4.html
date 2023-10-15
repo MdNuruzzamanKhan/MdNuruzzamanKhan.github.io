@@ -21,7 +21,7 @@
     display: none;
     position: absolute;
     width: 100%;
-    height: 85vh;
+    height: 300px;
     top: 0;
   }
   .overlay.show {
@@ -42,7 +42,6 @@
     position: absolute;
     margin:0;
     width: 100%;
-    height:100px;
     background: rgba(85, 204, 204, 0.8);
     text-align: center;
     line-height: 80vh;
@@ -189,14 +188,14 @@
       <div class="cross"></div>
       <div class="circle"></div>
     </label>
-   
+   <button class="replay" onclick="replay()">REPLAY</button>
   </div>
   <div class="overlay"></div>
   <div class="msg">
       <span class="win">YOU WIN!</span>
       <span class="lost">YOU LOST!</span>
       <span class="draw">DRAW!</span></div>
-    <button class="replay" onclick="replay()">REPLAY</button>
+    
       <!-- now add javascript code -->
       <script>
         const boxes = document.querySelectorAll('.box');
