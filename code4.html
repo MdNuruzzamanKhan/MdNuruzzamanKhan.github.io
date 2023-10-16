@@ -266,7 +266,7 @@ function calculateNextPosition() {
   }
   
     for (let x = 1; x < 10; x++) {
-      if (checkIncludeO(x) && x != 5) {
+      if (checkIncludeX(x) && x != 5) {
           // x _ _ / _ x _ / _ _ x
           // _ _ _ / _ _ _ / _ _ _
           // x _ _ / _ x _ / _ _ x
@@ -316,7 +316,50 @@ function calculateNextPosition() {
           // _ _ x / x _ _
           isValidNextPosition(5)
         }
-    
+    if (checkIncludeO(x, x+1)) {
+        // x x _ / _ x x
+        if ([1, 4, 7].includes(x)) {
+          isValidNextPosition(x+2);
+        } else if ([2, 5, 8].includes(x)) {
+          isValidNextPosition(x-1)
+        }
+      }
+      if (checkIncludeO(x, x+2) && [1, 4, 7].includes(x)) {
+        // x _ x
+        isValidNextPosition(x+1)
+      }
+      if (checkIncludeO(x, x+3) && x <= 6) {
+        // x _ _ / _ x _ / _ _ x
+        // x _ _ / _ x _ / _ _ x
+        const _tar = (x+6 > 9) ? x-3 : x+6;
+        isValidNextPosition(_tar)
+      }
+      if ( [1, 3].includes(x) && checkIncludeO(x, 5) ) {
+        // x _ _ / _ _ x
+        // _ x _ / _ x _
+        // _ _ _ / _ _ _
+        const _tar = (x == 1) ? 9 : 7;
+        isValidNextPosition(_tar)
+      }
+      if ( [7, 9].includes(x) && checkIncludeO(x, 5) ) {
+        // _ _ _ / _ _ _
+        // _ x _ / _ x _
+        // _ _ x / x _ _
+        const _tar = (x == 7) ? 3 : 1;
+        isValidNextPosition(_tar)
+      }   
+        if (checkIncludeO(x, x+6) && x <= 3) {
+          // x _ _ / _ x _ / _ _ x
+          // _ _ _ / _ _ _ / _ _ _
+          // x _ _ / _ x _ / _ _ x
+          isValidNextPosition(x+3)
+        }   
+        if ( (x == 1 && checkIncludeO(x, x+8)) || (x == 3 && checkIncludeO(x, x+4)) ) {
+          // x _ _ / _ _ x
+          // _ _ _ / _ _ _
+          // _ _ x / x _ _
+          isValidNextPosition(5)
+        }
   
   }
   addCircle(tar);
