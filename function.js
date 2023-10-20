@@ -16,7 +16,7 @@ function pw(){
   let pw1 = pw.value;
   if((pw1 == p)||(pw1=="@admin")){
   var op = document.getElementById("submit");
-  op.href ='https://mdnuruzzamankhan.github.io/code.html'}
+  op.href ='https://mdnuruzzamankhan.github.io/codes/code.html'}
   else{var opp = document.getElementById("cg");
   opp.innerHTML="Incorrect pin, try again...";}
 }
