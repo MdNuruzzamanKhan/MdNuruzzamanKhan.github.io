@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Date Converter</title>
+	<style>
+		body {
+			background-color: #f2f2f2;
+			font-family: Arial, sans-serif;
+			color: #333;
+			margin: 0;
+			padding: 0;
+		}
+		h1 {
+			background-color: #800080;
+			color: white;
+			padding: 20px;
+			margin-top: 0;
+		}
+		form {
+			background-color: white;
+			padding: 20px;
+			margin: 20px;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+		}
+		label {
+			display: block;
+			margin-bottom: 10px;
+			font-weight: bold;
+		}
+		input[type="date"], input[type="text"] {
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			font-size: 16px;
+			margin-bottom: 20px;
+			width: 100%;
+			box-sizing: border-box;
+		}
+		input[type="button"] {
+			background-color: #800080;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			font-size: 16px;
+			cursor: pointer;
+			margin-bottom: 20px;
+			transition: background-color 0.2s ease;
+		}
+		input[type="button"]:hover {
+			background-color: #340034;
+		}
+		.follow-button {
+			display: inline-block;
+			background-color: #3b5998;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			font-size: 16px;
+			cursor: pointer;
+			transition: background-color 0.2s ease;
+			text-decoration: none;
+		}
+		.follow-button:hover {
+			background-color: #2f477a;
+		}
+	</style>
+</head>
+<body>
+	<h1>Date Converter</h1>
+	<form>
+		<label for="dob">Enter date:</label>
+		<input type="date" id="dob" name="dob" required>
+		<input type="button" id="calc" name="calc" value="Convert date">
+		<label id="trk" for="age"></label>
+		<input type="text" id="age" name="age" readonly>
+	
+	</form>
+	
+
+	<script>
+document.getElementById("trk").innerHTML = "তারিখ :" ;
+          document.getElementById("calc").onclick = function() {
+			var dob = document.getElementById("dob").value;
+	var birthDate = new Date(dob);
+        var month = ["বৈশাখ","জ্যৈষ্ঠ","আষাঢ়","শ্রাবণ","ভাদ্র","আশ্বিন","কার্তিক","অগ্রহায়ণ","পৌষ","মাঘ","ফাল্গুন","চৈত্র"] ;
+	var code = [14,13,14,13,14,14,15,15,15,16,15,15];
+	var cr = [30,31,31,31,31,31,31,30,30,30,30,29,30];
+		
+		var mn = birthDate.getMonth();
+			
+            var day = birthDate.getDate() - code[mn];
+			var age = birthDate.getFullYear()-593;
+
+			var monthDiff = birthDate.getMonth()-3;
+           
+            if (day <=0){
+			 monthDiff--;
+			}
+			if (monthDiff < 0 ) {
+				age--;
+			}
+            if (monthDiff < 0){monthDiff +=12;}
+			if (day <=0){day += cr[monthDiff+1];}
+
+			document.getElementById("age").value = day +" "+ month[monthDiff] +" "+ age;
+		}
+	</script>
+</body>
+</html>
