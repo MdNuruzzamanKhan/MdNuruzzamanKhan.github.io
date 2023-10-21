@@ -7,7 +7,7 @@ var b = document.getElementById("fn");
 
 const div=document.getElementById("frm");
 div.innerHTML =`Your PIN=${p}
-Click the button CODES in topbar and enter this pin` ;
+Click the button 'CODE' in topbar and enter this pin` ;
 }
 function bio(){
   var a = document.getElementById("ame");
