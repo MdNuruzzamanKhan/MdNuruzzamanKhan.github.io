@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:500" rel="stylesheet">
+  <style>
+    body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  user-select: none;
+}
+
+body,
+#base,
+#inner,
+#sub-inner {
+  display: grid;
+  align-content: center;
+  justify-content: center
+}
+
+#base:active {
+  opacity: 0.8; 
+  transition-duration: 0.3s;  
+}
+
+#base {
+  background-color: #333;
+  border-radius: 50%;
+  height: 16em;
+  width: 16em;
+}
+
+#hourNum {
+    color: #eee;
+}
+
+#hourNum,
+#minuteNum,
+#indicators {
+  text-align: center;
+  transform-origin: center center;
+  position: absolute;
+  height: inherit;
+  width: inherit;
+}
+
+span {
+  transform-origin: bottom center;
+  margin-left: -1em;
+  width: 2em;
+  position: absolute;
+  text-align: center;
+  line-height: 2em;
+}
+
+/* ▲ ▼ ↑ */
+
+#hourNum span {
+  height: 8em;
+}
+
+#inner::before {
+  content: '🔻';
+  text-align: center;
+  font-size: .5em;
+  position: absolute;
+  width: inherit;
+  margin-top: -.5em;
+  color: #333;
+}
+
+#hourHand {
+  width: inherit;
+  height: inherit;
+  text-align: center;
+  font-size: 0.7em;
+  position: absolute;
+  line-height: 5em;
+  color: #eee;
+}
+
+#inner {
+  height: 12em;
+  width: 12em;
+  border-radius: 50%;
+  background: #eee;
+}
+
+#minuteNum span {
+  height: 6em;
+  color: #333;
+}
+
+#sub-inner,
+#seconds {
+  height: 8em;
+  width: 8em;
+  border-radius: 50%;
+  background: #fff
+}
+
+#sub-inner {
+  box-shadow: inset 0 0 3px 0 #333;
+}
+
+#indicators span {
+  height: 4em;
+  width: 0;
+  margin-left: 0;
+}
+
+#indicators .large div {
+  height: 7px;
+}
+
+#indicators div {
+  height: 3px;
+  width: 1px;
+  background: #333;
+}
+
+#seconds {
+  border-radius: 50%;
+  background: transparent;
+  text-align: center;
+  font-weight: 800;
+  position: absolute;
+  /* animation: spin 60s infinite linear */
+}
+
+#info {
+  display: grid;
+  height: 4em;
+  width: 4em;
+  justify-items: center;
+}
+
+#day {
+    text-transform: uppercase;
+}
+
+#date {
+  font-size: 2em
+}
+
+/* 
+@keyframes spin {
+  0% {
+    transform: rotate(calc(var(--initial-second) * 1deg))
+  }
+  100% {
+    transform: rotate(calc(var(--initial-second) * 1deg + 360deg))
+  }
+} */
+  </style>
+</head>
+
+<body>
+  <div id="base">
+    <div id="hourNum"></div>
+    <div id="hourHand">🔺</div>
+    <div id="inner">
+      <div id="minuteNum"></div>
+      <div id="sub-inner">
+        <div id="indicators"></div>
+        <div id="seconds">▫️</div>
+        <div id="info">
+          <div id="date"></div>
+          <div id="day"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  const dayName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+
+const degree = {
+  second: 0,
+  minute: 0,
+  hour: 0
+}
+
+const nodes = {
+  second: null,
+  minute: null,
+  hour: null,
+  day: null,
+  date: null
+}
+
+function setDayDate(day, date) {
+  nodes.day.innerText = dayName[day]
+  nodes.date.innerText = date
+}
+
+function rotate(...param) {
+  param.forEach((e, i) => {
+    const count = e.childElementCount
+    e.childNodes.forEach((cN, j) => {
+      cN.style.transform = `rotate(${(360/count) * j}deg)`
+      if (i === 0) {
+        cN.firstChild.style.transform = `rotate(${-30 * j}deg)`
+      }
+    })
+  })
+  update(nodes.minute, new Date(), -1)
+}
+
+function rotateHour(hourDegree) {
+  nodes.hour.style.transform = `rotate(${hourDegree}deg)`
+}
+
+function update(minuteNode, date, lastDay) {
+  degree.second = date.getSeconds() * 6
+  degree.minute = date.getMinutes() * 6 + degree.second / 60
+  degree.hour = date.getHours() * 30 + degree.minute / 12
+  nodes.second.style.transform = `rotate(${degree.second}deg)`
+  minuteNode.style.transform = `rotate(${-degree.minute}deg)`
+  rotateHour(degree.hour)
+  if (lastDay != date.getDay()) {
+    lastDay = date.getDay()
+    setDayDate(lastDay, date.getDate())
+  }
+  setTimeout(update, 0, minuteNode, new Date(), lastDay)
+}
+
+function indicators() {
+  const element = document.getElementById('indicators')
+  for (let i = 0; i < 60; i++) {
+    const span = document.createElement('span')
+    const div = document.createElement('div')
+    if (i % 5 === 0) {
+      span.setAttribute('class', 'large');
+    }
+    span.appendChild(div)
+    element.appendChild(span)
+  }
+  return element
+}
+
+function initializeNode() {
+  nodes.minute = document.getElementById('minuteNum')
+  nodes.hour = document.getElementById('hourHand')
+  nodes.day = document.getElementById('day')
+  nodes.date = document.getElementById('date')
+  nodes.second = document.getElementById('seconds')
+}
+
+function init() {
+  const hrNum = document.getElementById('hourNum')
+  initializeNode()
+  // document.body.style.setProperty('--initial-second', new Date().getSeconds() * 6)
+  for (let i = 0; i < 12; i++) {
+    const hNum = document.createElement('span')
+    const mNum = document.createElement('span')
+    mNum.textContent = (i * 5).toString().length > 1 ? i * 5 : '0' + i * 5
+    hNum.innerHTML = `<div>${i % 12 ? i % 12 : 12}</div>`
+    hrNum.appendChild(hNum)
+    nodes.minute.appendChild(mNum)
+  }
+  rotate(hrNum, nodes.minute, indicators())
+}
+
+window.onload = init
+</script>
+</html>
