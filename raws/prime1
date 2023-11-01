@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Page Title</title>
+		<title>Is it a prime number?</title>
+		<style>
+		html{background-color: black;}
+.code
+{
+color:white;padding: 2vw;overflow: visible;
+}</style>
 	</head>
 	<body>
       <pre class="code">
