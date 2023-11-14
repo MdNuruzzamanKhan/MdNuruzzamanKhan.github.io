@@ -11,7 +11,7 @@
          form{display: block;}
          input{border: 2px solid blueviolet;}
          label{display: block;color: blue;font-weight: bold;padding: 3px;}
-         button{width:100px;margin: 3px;}
+          button{width:100px;margin-top: 3px;margin-bottom: 3px;}
           /*  padding-top: 10%;} */
     </style>
 </head>
@@ -24,25 +24,28 @@
             <label>velocity: <input id="beeg" type="number" min="0" max="100" name="velocity" value="100" required> m/s</label>
             <label>Angle: <input id="kone" type="number" min="1" max="90" name="angle" value="60" required> <sup>o</sup></label>
         </form>
-        <button onclick="man()">OK</button>
+        <button id="btn" onclick="man()">Start</button><!-- </canvas> -->     
     </div>
     <!-- <canvas id="cnv" height="200" width="350" style="border:2px solid black;margin-right: 10wh;margin-left:-50wh;"> -->
         
-        <svg id="an" height="200" width="350" style="border:2px solid rgb(29, 109, 15);background-color:rgb(242, 247, 245)">
+        <svg id="an" height="200" width="350" style="border:2px solid rgb(29, 109, 15);margin-right: 10wh;background-color:rgb(242, 247, 245)">
         <circle id="cl" cx="8" cy="290" r="8">
     </svg>
-    </div><!-- </canvas> -->
+    </div>
+   
 </body>
 <script>
     function man() {
         var gola = document.getElementById("cl");
         var kone = document.getElementById("kone");
+        var btn= document.getElementById("btn");
+        btn.innerHTML="Replay";
         const kon = kone.value;
         var velocity= document.getElementById("beeg").value;
         let i = 0;
         let vel=velocity*0.11;
         let a = kon* Math.PI / 180;
-        let id = setInterval(rpt, 1);
+        let id = setInterval(rpt, 3);
         let xk;
         function rpt() {
             if (xk >190) { clearInterval(id); }
