@@ -33,12 +33,12 @@ background-image:url(https://images.pexels.com/photos/3137052/pexels-photo-31370
   background-attachment: fixed;
 }
     .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
-    .baxa{background-color:blue; border:none; border-radius:8px; height:50px; animation-delay:1s}
+    .baxa{background-color:blue; border:none;display: block;text-align: center;
+      text-decoration: none; border-radius:2px; padding: 5px;color: white;margin: 20px;}
     h1{color:green; text-shadow:4px 4px 6px}
    #home{height:35px}
-   #submit{color:#6789ab;  text-decoration:none;text-align:center; border:none; width:80px;
-    background-color:#ccccff; padding:4px; border-radius:5px; margin:3px}
-      #submit:hover{background-color:#cccccc;}
+   
+     
     #pw{width:70%}
     #an{padding-top:10px;}
     #navbar{position:fixed; z-index:2}
@@ -52,7 +52,7 @@ background-image:url(https://images.pexels.com/photos/3137052/pexels-photo-31370
   <div class="w3-bar w3-blue w3-card w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-small w3-hover-violet w3-large w3-white" style="width:25%" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <a id="home" href="#hm" class="w3-bar-item w3-button w3-white fa fa-home" style="width:25%; margin-right:12.5%"></a>
-   <a href="#ame" class="w3-bar-item w3-button w3-padding-small w3-white" style="width:25%; margin-right:12.5%" onclick="bio()" ><b>CODE</b></a>
+   <a href="" class="w3-bar-item w3-button w3-padding-small w3-white" style="width:25%; margin-right:12.5%" ><b>CODE</b></a>
    
     <a href="https://mdnuruzzamankhan.github.io/aboutme.html" class="w3-bar-item w3-button w3-hide-small w3-padding-small w3-hover-white" >About  developer</a>
   </div>
@@ -63,7 +63,7 @@ background-image:url(https://images.pexels.com/photos/3137052/pexels-photo-31370
 </div>
 <!-- Header -->
 <header id="hm" class="w3-container w3-center" style="padding:128px 16px">
-  <h1 class="w3-animate-tom"><b>CODES</b></h1>
+  <h1  class="w3-animate-tom"><b>CODES</b></h1>
   <h6 class="w3-center w3-animate-zoom"><i>Developing by Md. Nuruzzaman Khan</i></h6>
   <div style="display:none">
   <a href="https://mdnuruzzamankhan.github.io/">Codes</a>
@@ -73,33 +73,12 @@ background-image:url(https://images.pexels.com/photos/3137052/pexels-photo-31370
     <a href="https://mdnuruzzamankhan.github.io/">by Nuruzzaman</a>
     <a href="https://mdnuruzzamankhan.github.io/">Md.Nuruzzaman Khan</a>
   </div>
-<a href="#frm" class="baxa w3-hover-opacity w3-animate-bottom" style="color:white; padding:10px; text-decoration:none" onclick="inf()"><b>Click Me</b> </a>
 </header>
-
-
-  <div id="frm" class="w3-card w3-light-blue" style="width:90%; margin:5%; border-radius:9px; padding:10px; display:none">
-   <h2 style="text-align:center">Give information</h2>
-   <form class="w3-container" >
-
-<label for="fn"><b>Full Name:</b></label>
-<input id="fn" class="w3-input" type="text" required>
-
-<label for="cls"><b>Class:</b></label>
-<input id="cls" class="w3-input" type="number" min="1" max="12" required><br>
-
-<button onclick="pin()" class="w3-block">SUBMIT</button>
-
-</form>
+<div style="display:block">
+  <a class="baxa" href="https://mdnuruzzamankhan.github.io/codes/code.html">Web  Codes</a>
+  <a class="baxa" href="https://mdnuruzzamankhan.github.io/raws/raw.html">Raw  Codes</a>
+  <a class="baxa" href="https://mdnuruzzamankhan.github.io/aboutme.html">About  Developer</a>
 </div>
- <div id="ame" class="w3-container w3-pale-green" style="width:90%; margin-left:5%; border-radius:9px; padding:10px; display:none">
-  <p id="cg" >Enter your pin :</p>
- <form>
-   <input id="pw" style="background-color:white" type="password" required>
-   <a href="#frm" id="submit" onclick="pw()" class="w3-block"><b>submit</b></a>
- </form>
-</div>
-</div>
-  <script src="https://mdnuruzzamankhan.github.io/function.js"></script>
 <script>
 // Used to toggle the menu on small screens when clicking on the menu button
 function myFunction() {
