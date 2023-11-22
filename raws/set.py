@@ -77,7 +77,7 @@ while True:
 # Elements of number 1 Set: 1,2,3,4,5,6,7,8,9
 # Elements of number 2 Set: 1,3,5,7,9
 # Elements of number 3 Set: 2,4,6,8  
-# Set method: union,
+# Set method: union
 # Union=  {'2', '8', '3', '4', '6', '1', '5', '9', '7'}
 # Set method: intersection
 # Intersection= {}
