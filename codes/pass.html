@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <title>Password Generator</title>
+    <style>
+        body {
+			background-color: #f2f2f2;
+			font-family: Arial, sans-serif;
+			color: #333;
+			margin: 0;
+			padding: 0;
+		}
+		h1 {
+			background-color: #5d81a5;
+			color: white;
+			padding: 20px;
+			margin-top: 0;
+		}
+		 div{
+			background-color: white;
+			padding: 20px;
+			margin:5%;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+		}
+		label {
+			display: block;
+			margin-bottom: 10px;
+			font-weight: bold;
+		}
+		input[type="number"], input[type="text"],input[type="password"] {
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			font-size: 16px;
+			margin-bottom: 20px;
+			width: 100%;
+			box-sizing: border-box;
+		}
+		input[type="button"],button{
+			background-color: #5d81a5;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			font-size: 16px;
+			cursor: pointer;
+			margin-bottom: 20px;
+			transition: background-color 0.2s ease;
+		}
+		input[type="button"]:hover {
+			background-color: #7972b5;
+		}
+    </style>
+</head>
+<body>
+    <h1>Password Generator</h1>
+	<div id="d2">
+		<label for="n">Password Length :</label>
+		<input type="number" min="2" max="20" id="n" name="n" required>
+		<input type="button" id="bn" name="bn" onclick="fn()" value="Generate">
+        </div>
+        <div id="d1" style="display: none;">
+            <label for="p">Password : </label>
+            <input type="password" id="p" name="p" style="width: 77%;" readonly>
+            <button onmousedown='document.getElementById("p").type="text"' onmouseleave='document.getElementById("p").type="password"' >See</button>
+        </div>
+	
+	
+<script>
+    function fn()
+    {   document.getElementById("d1").style.display="block";
+        document.getElementById("p").value="";
+        var btn=document.getElementById("bn");
+        btn.value="Re-generate";
+        var n=document.getElementById("n").value;
+        text="=ABCDEXYZ?!0123456()78qrx:yz9@#;$%jklmno/&FGH^IJ[]RSTUV*pWKLMN-+OPQabcdes{}tuvwfghi";
+        for(let i=0;i<n;i++){
+            let x=Math.floor(Math.random()*68)
+            document.getElementById("p").value+=text[x];
+        }
+    }
+    function fn2() {
+        document.getElementById("p").type="text";
+    }
+</script>
+</html>
