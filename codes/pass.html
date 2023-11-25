@@ -78,14 +78,12 @@
         var btn=document.getElementById("bn");
         btn.value="Re-generate";
         var n=document.getElementById("n").value;
-        text="=ABCDEXYZ?!0123456()78qrx:yz9@#$%jklmno/&FGHIJ[*]RSTUVpWKLMN-+OPQabcdes{}tuvwfghi";
+        const text="=AB{CDEXYZ?!0123456)78qrx[:yz9@%jklmno/&FGHIJ*]RSTUV#$pWKLMN-+OPQabcdes}tuvw(fghi";
         for(let i=0;i<n;i++){
-            let x=Math.floor(Math.random()*68)
+            let x=Math.floor(Math.random()*80)
             document.getElementById("p").value+=text[x];
+			// document.getElementById("p").value=text.length;
         }
-    }
-    function fn2() {
-        document.getElementById("p").type="text";
     }
 </script>
 </html>
