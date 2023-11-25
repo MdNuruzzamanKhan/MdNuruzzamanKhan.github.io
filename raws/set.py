@@ -1,8 +1,9 @@
 # Set Method (py)
 # Author: Md. Nuruzzaman Khan 
-# 1.Enter the number of Set(s)
-# 2.Enter element of the sets(separated by ",")
-# 3.Enter the Set method (Example: Union,Intersection,Difference,Number of Elements,cross)
+
+#1.Enter the number of Set(s)
+#2.Enter element of the sets(separated by ",")
+#3.Enter the Set method (Example: Union,Intersection,Difference,Number of Elements,cross)
 
 SetList=[]
 Newst=[]
@@ -14,6 +15,11 @@ for x in range(n):
     else:
         vv=input("Elements of number {} Set: ".format(x+1))
     values=vv.split(",")
+    for x in range(len(values)):
+        if values[x].isdigit():
+            values[x]=int(values[x])
+        else:
+            continue
     SetList.append(set(values))
 while True:
     mtd1=input("Set method: ")
@@ -74,21 +80,20 @@ while True:
 # OUTPUT:
 
 # Enter the number of Set(s): 3
-# Elements of number 1 Set: 1,2,3,4,5,6,7,8,9
-# Elements of number 2 Set: 1,3,5,7,9
-# Elements of number 3 Set: 2,4,6,8  
+# Elements of number 1 Set: 1,2,3,4,5
+# Elements of number 2 Set: 1,3,5
+# Elements of number 3 Set: 2,4
 # Set method: union
-# Union=  {'2', '8', '3', '4', '6', '1', '5', '9', '7'}
+# Union=  {1, 2, 3, 4, 5}
 # Set method: intersection
 # Intersection= {}
 # Set method: difference
 # Enter two Set numbers: 1,3
-# Difference=  {'3', '1', '5', '9', '7'}
+# Difference=  {1, 3, 5}
 # Set method: number of elements
-# Set number: 1
-# Number of elements= 9
+# Set number: 2
+# Number of elements= 3
 # Set method: cross
 # Enter two Set numbers A, B: 2,3
-# Cartesian Product‍‍‌,A X B =  {('5', '6'), ('1', '4'), ('3', '4'), ('1', '2'), ('7', '4'), ('9', '8'), ('3','2'), ('7', '2'),
-# ('5', '8'), ('9', '4'),('1', '6'), ('5', '4'), ('3', '6'), ('7', '6'), ('9', '2'), ('5', '2'), ('1', '8'), ('9', '6'), ('3', '8'), ('7', '8')}
-# Set method: exit
+# Cartesian Product‍‍‌,A X B =  {(1, 2), (3, 4), (5, 4), (1, 4), (3, 2), (5, 2)}
+# Set method: close
