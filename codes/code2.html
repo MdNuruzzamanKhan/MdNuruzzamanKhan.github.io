@@ -11,6 +11,7 @@
     text-align:center;
     height: 100vh;
     width: 100vw;
+    background-color:rgb(237, 237, 237) ;
 }
 
 #mainContainer {
@@ -29,7 +30,7 @@
     text-align:center;
     font-size:60px;
     font-weight:900;
-    color:#45f;
+    color:blueviolet;
 }
 
 #showPoint {
@@ -65,6 +66,7 @@
     position:absolute;
     margin:0;
     top:0;
+    color: gold;
     padding-left:10px;
 }
 
@@ -72,10 +74,11 @@
     position:absolute;
     top:0;
     left:0;
-    background:#fff;
+    background:rgb(237, 237, 237);
     z-index:1000;
     width:100%;
     height:100%;
+    
 }
 
 #startMenu h1 {
@@ -88,8 +91,8 @@
     font-size:22px;
     background:none;
     border:none;
-    border-top:3px solid #000;
-    border-bottom:3px solid #000;
+    border-top:3px solid blueviolet;
+    border-bottom:3px solid blueviolet;
     padding:10px 30px 5px;
     line-height:20px;
     outline:none;
@@ -168,47 +171,13 @@ startPage.addEventListener("click",startGame)
 function startGame(){
     startPage.style.display = "none";
     loadGame();
-    try{
-        startSound.play().catch(function(e){});
-        if(bgSound.paused) bgSound.play().catch(function(e){});
-        if(runCount == 0){
-        endSound.play().catch(function(e){})
-        hitSound.play().catch(function(e){});
-        successSound.play().catch(function(e){});
-        highScoreSound.play().catch(function(e){});
-        runCount++;
-        }
-    }catch(err){}
     
 }
         
 var bestScore = 0;
 var runCount = 0;
         
-var startSound = new Audio();
-startSound.src = "https://"+asrcd+".000webhostapp.com/snd/whistlestart.ogg";
-startSound.volume = 0.6;
-        
-var shootSound = new Audio();
-shootSound.src = "https://"+asrcd+".000webhostapp.com/snd/arrow.ogg";
-        
-var hitSound = new Audio();
-hitSound.src = "https://"+asrcd+".000webhostapp.com/snd/arrowhit.ogg";
-        
-var bgSound = new Audio();
-bgSound.src = "https://"+asrcd+".000webhostapp.com/snd/bg.mp3"//"music2.ogg";
-bgSound.loop = true;
-//bgSound.volume = 0.8;
-        
-var endSound = new Audio();
-endSound.src = "https://"+asrcd+".000webhostapp.com/snd/whistleover.ogg";
-endSound.volume = 0.6;
-        
-var successSound = new Audio();
-successSound.src = "https://"+asrcd+".000webhostapp.com/snd/bell.ogg";
-        
-var highScoreSound = new Audio();
-highScoreSound.src = "https://"+asrcd+".000webhostapp.com/snd/crowdcheer.ogg";
+
         
 
 function loadGame(){
@@ -305,6 +274,7 @@ function loadGame(){
     fwBuilder.prototype.draw = function(){
         for(var i = 0; i < this.n; i++){
             ctx2.beginPath();
+            ctx2.fillStyle='violet'
             ctx2.arc(this.balls[i].x,this.balls[i].y,7,0,Math.PI*2);
             ctx2.fill();
             ctx2.closePath();
@@ -361,7 +331,7 @@ function loadGame(){
         y:100,
         dy:3,
           r:50,
-          color:"#000",
+          color:"gold",
           lw:3,
           start:Math.PI+Math.PI/2,
           end:Math.PI-Math.PI/2
@@ -371,7 +341,7 @@ function loadGame(){
         h:arc.r*2,
           lw:1,
           x:arc.x-25,
-          color:"#000",
+          color:"gold",
           status:true
     }
 
@@ -390,15 +360,17 @@ function loadGame(){
 
     function drawBoard() {
         ctx.beginPath();
+        ctx.fillStyle='green'
         ctx.fillRect(board.x,board.y-5,40,board.width+3);
         ctx.fillRect(board.x,board.y-board.height/2,board.width,board.height);
+
         ctx.moveTo(board.x,board.y-15);
         ctx.quadraticCurveTo(board.x-10,board.y,board.x,board.y+15);
         //ctx.lineTo(10,6);
         ctx.fillStyle = "#36e";
         ctx.fill();
         ctx.closePath();
-        ctx.fillStyle = "#000";
+        ctx.fillStyle = "gold";
     
         if(board.y >= h || board.y <= 0){
             board.dy *= -1;
@@ -448,6 +420,7 @@ function loadGame(){
                 ctx.fillRect(this.x,this.fy-3,10,6);
                 ctx.fillRect(this.x,this.fy-1,this.w,2);
                 ctx.beginPath();
+                ctx.fillStyle='gold';
                 ctx.moveTo(this.x+this.w,this.fy-4);
                 ctx.lineTo(this.x+this.w+12,this.fy);
                 ctx.lineTo(this.x+this.w,this.fy+4);
@@ -482,18 +455,11 @@ function loadGame(){
                         
                         
                                 if(this.fy >= board.y-board.height/2 && this.fy <= board.y+board.height/2) {
-            try{
-                                    hitSound.play().catch(function(e){});
-            }catch(err){}
                                     var scores = this.fy - board.y;
                                     var currentScore = Math.round(board.height/20)-Math.round(Math.abs(scores/10));
                                     if(currentScore >= 7){
                                         newF();
                                         totalArr+=2;
-                                        try{
-                                            successSound.play().catch(function(e){});
-                                        }catch(err){
-                                    }
                                 }
                             
                                 totalScore += currentScore;
@@ -515,21 +481,13 @@ function loadGame(){
                             else updArr(totalArr);
                                 if(totalArr <= 0){
                                     clearInterval(intv);
-                                    try{
-                                        //bgSound.pause();
-                                        endSound.play().catch(function(e){});
-                                    }catch(err){
-                                }
                                 document.getElementById("animCanvas").removeEventListener("click",shoot);
                                 document.body.removeEventListener("keydown",shoot);
                                 startPage.style.display = "block";
                                 document.getElementById("title").innerHTML = "Your Score<br>"+totalScore;
                                 if(bestScore < totalScore){
                                     bestScore = totalScore;
-                                    try{
-                                        highScoreSound.play().catch(function(e){});
-                                    }catch(err){
-                                }
+                                    
                             }
                             document.getElementById("score").innerHTML = 0;
                             document.getElementById("best").innerHTML = bestScore;
@@ -550,6 +508,7 @@ function loadGame(){
                 ctx.fillRect(rope.x,arc.y-3,10,6);
                 ctx.fillRect(rope.x,arc.y-1,this.w,2);
                 ctx.beginPath();
+                ctx.fillStyle='gold'
                 ctx.moveTo(rope.x+this.w,arc.y-4);
                 ctx.lineTo(rope.x+this.w+12,arc.y);
                 ctx.lineTo(rope.x+this.w,arc.y+4);
@@ -583,8 +542,9 @@ function loadGame(){
 
     function drawArc() {
         ctx.beginPath();
+        ctx.fillStyle='gold'
           ctx.arc(arc.x,arc.y,arc.r,arc.start,arc.end);
-          ctx.strokeStyle = arc.color;
+          ctx.fillStyle = arc.color;
           ctx.lineWidth = arc.lw;
           ctx.stroke();
           ctx.closePath();
@@ -592,13 +552,14 @@ function loadGame(){
 
     function drawRope() {
         ctx.beginPath();
+        ctx.fillStyle='gold'
           ctx.moveTo(arc.x,arc.y-arc.r);
           if(arrow1.vis && arrow2.vis){
             ctx.lineTo(rope.x,arc.y);
           }
           ctx.lineTo(arc.x,arc.y+arc.r);
           ctx.lineWidth = rope.lw;
-          ctx.strokeStyle = rope.color;
+          ctx.fillStyle = rope.color;
           ctx.stroke();
           ctx.closePath();
     }
@@ -633,9 +594,6 @@ function loadGame(){
                   arrow1.vis = false;
             }
             totalArr--;
-            try{
-                shootSound.play().catch(function(e){});
-                }catch(err){}
           }
           arrows++;
     }
