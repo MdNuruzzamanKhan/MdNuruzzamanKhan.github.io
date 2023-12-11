@@ -346,7 +346,7 @@ function loadGame(){
     }
 
     var board = {
-        x:w-40,
+        x:w-20,
         y:h/2,
         dy:4,
         height:150,
@@ -361,7 +361,7 @@ function loadGame(){
     function drawBoard() {
         ctx.beginPath();
         ctx.fillStyle='green'
-        ctx.fillRect(board.x,board.y-5,40,board.width+3);
+        ctx.fillRect(board.x,board.y-5,20,board.width+3);
         ctx.fillRect(board.x,board.y-board.height/2,board.width,board.height);
 
         ctx.moveTo(board.x,board.y-15);
