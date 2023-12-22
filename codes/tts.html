@@ -27,6 +27,7 @@
   </div>
         <script>
             window.onload = abc();
+            document.getElementById('txt').style.height=(screen.availHeight*0.58)+'px';
            function abc(){
              function getVoices() {
            let voices = speechSynthesis.getVoices();
@@ -63,11 +64,6 @@
            let text = document.getElementById('txt').value;
            
            speak(text, voices[2], rate, pitch, volume);
-          //  setTimeout(()=>{ // speak after 2 seconds 
-          //  rate = 0.5; pitch = 1.5, volume = 0.5;
-          //  text = "Spaecking with volume = 0.5 rate = 0.5 pitch = 1.5 ";
-          //  speak(text, voices[10], rate, pitch, volume );
-          //  }, 2000);
            }else{
            console.log(' Speech Synthesis Not Supported 😞'); 
            }
