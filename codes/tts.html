@@ -21,7 +21,7 @@
     <h1>Text to Speech...</h1>
     <div id="content">
         <textarea style="width:95%;resize: none;" id="txt" placeholder="Write something..."></textarea><br>
-        <button onclick="abc(1)">Male <i class="fa-solid fa-volume-high"></i></button><br>
+        <button onclick="abc(1)">Male <i class="fa-solid fa-volume-high"></i></button><br><br>
         <button onclick="abc(2)">Female <i class="fa-solid fa-volume-high"></i></button>
         <!-- <button onclick="abc()">Speak</button> -->
   </div>
@@ -58,7 +58,7 @@
            if ('speechSynthesis' in window) {
            
            let voices = getVoices();
-           let rate = 1, pitch = 1, volume = 1;
+           let rate = 1, pitch = 1, volume = 0.8;
            let text = document.getElementById('txt').value;
            
            speak(text, voices[gend], rate, pitch, volume);
