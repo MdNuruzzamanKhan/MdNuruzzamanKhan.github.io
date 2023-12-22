@@ -8,10 +8,11 @@
     <style>
         textarea{
            padding: 10px;color: black;background-color: rgb(230, 224, 224);
-           border-radius: 5px;font-size: large;border: 2px solid rgb(111, 117, 145);height: 320px;
+           border-radius: 5px;font-size: large;border: 2px solid rgb(111, 117, 145);
         }
         button{width: 50px;font-weight: bold;border-radius: 5px;border: none;
             background-color: rgb(6, 112, 98);color: aliceblue;height: 40px;}
+        
         h1{text-align: center;color: rgb(72, 209, 93);}
         html{background-color: whitesmoke;}
         html,body{height: 100%;}
@@ -20,14 +21,16 @@
 <body>
     <h1>Text to Speech...</h1>
     <div id="content">
-        <textarea style="width:90%;resize: none;" id="txt" placeholder="Write something..."></textarea><br><br>
-<!--         <button onclick="abc(1)">Male <i class="fa-solid fa-volume-high"></i></button><br><br> -->
+        <textarea style="resize: none;" id="txt" placeholder="Write something..."></textarea><br><br>
+        <!-- <button onclick="abc(1)">Male <i class="fa-solid fa-volume-high"></i></button><br> -->
         <button onclick="abc()"><i class="fa-solid fa-volume-high" style="transform: scale(1.4);"></i></button>
         <!-- <button onclick="abc()">Speak</button> -->
   </div>
         <script>
             window.onload = abc();
-            document.getElementById('txt').style.height=(screen.availHeight*0.58)+'px';
+            let txt=document.getElementById('txt');
+            txt.style.height=(screen.availHeight*0.55)+'px';
+            txt.style.width=(screen.availWidth*0.95)+'px';
            function abc(){
              function getVoices() {
            let voices = speechSynthesis.getVoices();
