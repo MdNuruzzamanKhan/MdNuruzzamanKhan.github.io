@@ -22,11 +22,11 @@
     <div id="content">
         <textarea style="width:90%;resize: none;" id="txt" placeholder="Write something..."></textarea><br><br>
 <!--         <button onclick="abc(1)">Male <i class="fa-solid fa-volume-high"></i></button><br><br> -->
-        <button onclick="abc(2)"><i class="fa-solid fa-volume-high" style="transform: scale(1.4);"></i></button>
+        <button onclick="abc()"><i class="fa-solid fa-volume-high" style="transform: scale(1.4);"></i></button>
         <!-- <button onclick="abc()">Speak</button> -->
   </div>
         <script>
-           function abc(gend){
+           function abc(){
              function getVoices() {
            let voices = speechSynthesis.getVoices();
            if(!voices.length){
@@ -61,7 +61,7 @@
            let rate = 1, pitch = 1, volume = 0.8;
            let text = document.getElementById('txt').value;
            
-           speak(text, voices[gend], rate, pitch, volume);
+           speak(text, voices[2], rate, pitch, volume);
           //  setTimeout(()=>{ // speak after 2 seconds 
           //  rate = 0.5; pitch = 1.5, volume = 0.5;
           //  text = "Spaecking with volume = 0.5 rate = 0.5 pitch = 1.5 ";
