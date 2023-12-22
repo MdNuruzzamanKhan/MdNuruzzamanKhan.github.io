@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Text to Speech</title>
+    <style>
+        textarea{
+           padding: 10px;color: black;background-color: rgb(230, 224, 224);
+           border-radius: 5px;font-size: large;border: 2px solid rgb(111, 117, 145);height: 320px;
+        }
+        button{width: 100px;margin: 5px;font-weight: bold;border-radius: 5px;border: none;
+            background-color: rgb(6, 112, 98);color: aliceblue;height: 30px;}
+        h1{text-align: center;color: rgb(72, 209, 93);}
+        html{background-color: whitesmoke;}
+        html,body{height: 100%;}
+     </style>
+</head>
+<body>
+    <h1>Text to Speech...</h1>
+    <div id="content">
+        <textarea style="width:95%;resize: none;" id="txt" placeholder="Write something..."></textarea><br>
+        <button onclick="abc(1)">Male <i class="fa-solid fa-volume-high"></i></button><br>
+        <button onclick="abc(2)">Female <i class="fa-solid fa-volume-high"></i></button>
+        <!-- <button onclick="abc()">Speak</button> -->
+  </div>
+        <script>
+           function abc(gend){
+             function getVoices() {
+           let voices = speechSynthesis.getVoices();
+           if(!voices.length){
+           // some time the voice will not be initialized so we can call speak with empty string
+           // this will initialize the voices 
+           let utterance = new SpeechSynthesisUtterance("");
+           speechSynthesis.speak(utterance);
+           voices = speechSynthesis.getVoices();
+           }
+           return voices;
+           }
+           
+           
+           function speak(text, voice, rate, pitch, volume) {
+           // create a SpeechSynthesisUtterance to configure the how text to be spoken 
+           let speakData = new SpeechSynthesisUtterance();
+           speakData.volume = volume; // From 0 to 1
+           speakData.rate = rate; // From 0.1 to 10
+           speakData.pitch = pitch; // From 0 to 2
+           speakData.text = text;
+           speakData.lang = 'en';
+           speakData.voice = voice;
+           
+           // pass the SpeechSynthesisUtterance to speechSynthesis.speak to start speaking 
+           speechSynthesis.speak(speakData);
+           
+           }
+           
+           if ('speechSynthesis' in window) {
+           
+           let voices = getVoices();
+           let rate = 1, pitch = 2, volume = 1;
+           let text = document.getElementById('txt').value;
+           
+           speak(text, voices[gend], rate, pitch, volume);
+          //  setTimeout(()=>{ // speak after 2 seconds 
+          //  rate = 0.5; pitch = 1.5, volume = 0.5;
+          //  text = "Spaecking with volume = 0.5 rate = 0.5 pitch = 1.5 ";
+          //  speak(text, voices[10], rate, pitch, volume );
+          //  }, 2000);
+           }else{
+           console.log(' Speech Synthesis Not Supported 😞'); 
+           }
+           }
+        </script>
+</body>
+</html>
