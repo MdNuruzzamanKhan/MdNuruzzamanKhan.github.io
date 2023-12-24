@@ -32,8 +32,7 @@
             let txt=document.getElementById('txt');
             txt.style.height=(screen.availHeight*0.55)+'px';
             txt.style.width=(screen.availWidth*0.89)+'px';
-           function abc(){
-             function getVoices() {
+            function getVoices() {
            let voices = speechSynthesis.getVoices();
            if(!voices.length){
            // some time the voice will not be initialized so we can call speak with empty string
@@ -44,7 +43,8 @@
            }
            return voices;
            }
-           
+           function abc(){
+             
            
            function speak(text, voice, rate, pitch, volume) {
            // create a SpeechSynthesisUtterance to configure the how text to be spoken 
