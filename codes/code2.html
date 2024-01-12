@@ -174,7 +174,7 @@ function startGame(){
     
 }
         
-var bestScore = 0;
+var bestScore = getBestScoreCookie();
 var runCount = 0;
         
 
@@ -487,6 +487,7 @@ function loadGame(){
                                 document.getElementById("title").innerHTML = "Your Score<br>"+totalScore;
                                 if(bestScore < totalScore){
                                     bestScore = totalScore;
+                                    setBestScoreCookie(bestScore);
                                     
                             }
                             document.getElementById("score").innerHTML = 0;
@@ -611,7 +612,25 @@ function loadGame(){
     },15)
 }
 }
-//window.onload = setTimeout(loadGame,2000);
+function setBestScoreCookie(bestScore) {
+  document.cookie = "bestScore=" + bestScore + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+}
+
+// Function to get the best score from the cookie
+function getBestScoreCookie() {
+  const name = "bestScore=";
+  const cookies = document.cookie.split(';');
+
+  for (let i = 0; i < cookies.length; i++) {
+    let cookie = cookies[i].trim();
+    if (cookie.indexOf(name) === 0) {
+      return parseInt(cookie.substring(name.length), 10);
+    }
+  }
+
+  return 0; // Return 0 if the cookie is not found
+}
+
 
     </script>
 </html>
