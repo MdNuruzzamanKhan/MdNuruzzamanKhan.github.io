@@ -149,8 +149,8 @@
         <div id="startMenu">
             <h1 id="title"><span style="font-size:50px">A</span>RCHERY<br><span style="font-size:50px">G</span>AME</h1>
             <button>TAP TO START</button>
-            <h2><span id="best">179</span><br>Highest Score</h2>
-           
+            <h2><span id="best"></span><br>Your best</h2>
+           <h2><span>179</span><br>Highest</h2>
         </div>
     </div>
     </body>
@@ -176,7 +176,7 @@ function startGame(){
         
 var bestScore = getBestScoreCookie();
 var runCount = 0;
-        
+document.getElementById("best").innerHTML = bestScore;        
 
         
 
@@ -491,7 +491,7 @@ function loadGame(){
                                     
                             }
                             document.getElementById("score").innerHTML = 0;
-                            document.getElementById("best").innerHTML = bestScore;
+                            
                             }
                         
                             }
