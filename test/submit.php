@@ -7,10 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $comment = $_POST['comment'];
 
     // Database connection parameters
-    $servername = "localhost";
-    $username = "id21795201_data1";
-    $password = "amarjonmosal2008@Data1";
-    $dbname = "id21795201_nuruzzaman";
+    $servername = "sql301.infinityfree.com";
+    $username = "if0_35795163";
+    $password = "DLOfMFxXYf";
+    $dbname = "if0_35795163_Nuruzzaman2";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
