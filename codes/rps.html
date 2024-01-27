@@ -73,7 +73,7 @@ button:hover {
         var a = 0;
         function playGame(userChoice) {
         a++;
-        var s1 = 0;
+        var s1 = '-1';
             var choices = ['rock', 'paper', 'scissors'];
             var div = document.getElementById("result").style;
             var computerChoice = choices[Math.floor(Math.random() * 3)];
@@ -83,8 +83,7 @@ button:hover {
             
             if (userChoice === computerChoice) {
                 result = "It's a tie!";
-                s+=1;
-                s1 = 1;
+                s1 ='+0';
                 div.color = 'gray';
             } else if (
                 (userChoice === 'rock' && computerChoice === 'scissors') ||
@@ -92,15 +91,16 @@ button:hover {
                 (userChoice === 'scissors' && computerChoice === 'paper')
             ) {
                 result = "You win!";
-                s+=2;
-                s1 = 2;
+                s++;
+                s1 = '+1';
                 div.color = 'green';
             } else {
                 result = "You lose!";
+                s--;
                 div.color = 'red';
             }
             document.getElementById('top').innerText = `Your attempts = ${a}\nYour score = ${s}`;
-            document.getElementById('result').innerText = `\n${result}\nYou chose ${userChoice}.\nComputer chose ${computerChoice}.\nScore = +${s1}`;
+            document.getElementById('result').innerText = `\n${result}\nYou chose ${userChoice}.\nComputer chose ${computerChoice}.\nScore = ${s1}`;
         }
     </script>
 
