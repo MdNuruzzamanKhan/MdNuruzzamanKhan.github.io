@@ -83,7 +83,7 @@ button:hover {
         function playGame(userChoice) {
         a++;
         var s1 = '-1';
-        var str = 'but';
+        var str = 'But';
             var choices = ['rock', 'paper', 'scissors'];
             var div = document.getElementById("result").style;
             var computerChoice = choices[Math.floor(Math.random() * 3)];
@@ -94,7 +94,7 @@ button:hover {
             if (userChoice === computerChoice) {
                 result = "It's a tie!";
                 s1 ='+0';
-                 str = 'also';
+                 str = 'Also';
                 div.color = 'gray';
             } else if (
                 (userChoice === 'rock' && computerChoice === 'scissors') ||
@@ -111,7 +111,7 @@ button:hover {
                 div.color = 'red';
             }
             document.getElementById('top').innerText = `Your attempts = ${a}\nYour score = ${s}`;
-            document.getElementById('result').innerText = `${result}\nBecause, you chose ${userChoice},\n${str} computer chose ${computerChoice}.\nScore = ${s1}`;
+            document.getElementById('result').innerText = `\n${result}\nBecause, you chose ${userChoice},\n${str}, computer chose ${computerChoice}.\nScore = ${s1}`;
         }
  function capital(word) {
   return word.charAt(0).toUpperCase() + word.slice(1);
