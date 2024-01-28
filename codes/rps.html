@@ -44,7 +44,7 @@ button {
     background-color: #3498db;
     color: white;
     border: none;
-    box-shadow:0px 4px 4px #000000b1;
+    box-shadow:4px 0px 4px #000000b1;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -67,13 +67,13 @@ button:hover {
     <p>Rock Paper Scissors</p>
     <div id="top">Your attempts = 0<br>Your score = 0</div>
     <h3>Computer :</h3>
-    <button id="co"><i class="fas fa-handshake"></i></button>
+    <span id="co"><button><i class="fas fa-handshake"></i></button><br>waiting...</span>
     <h3>You :</h3>
     <div class="choices">
         
-        <button onclick="playGame('rock')"><i class="fas fa-hand-rock"></i></button>
-        <button onclick="playGame('paper')"><i class="fas fa-hand-paper"></i></button>
-        <button onclick="playGame('scissors')"><i class="fas fa-hand-scissors"></i></button>
+        <span><button onclick="playGame('rock')"><i class="fas fa-hand-rock"></i></button><br>Rock</span>
+        <span><button onclick="playGame('paper')"><i class="fas fa-hand-paper"></i></button><br>Paper</span>
+        <span><button onclick="playGame('scissors')"><i class="fas fa-hand-scissors"></i></button><br>Scissors</span>
     </div>
     <div class="result" id="result"></div>
 
@@ -87,7 +87,7 @@ button:hover {
             var div = document.getElementById("result").style;
             var computerChoice = choices[Math.floor(Math.random() * 3)];
             var com = document.getElementById("co");
-            com.innerHTML = "<i class = 'fas fa-hand-" + computerChoice +"'></i>";
+            com.innerHTML = "<button><i class = 'fas fa-hand-" + computerChoice +"'></i></button><br>"+ computerChoice;
             var result = "";
             
             if (userChoice === computerChoice) {
@@ -109,7 +109,7 @@ button:hover {
                 div.color = 'red';
             }
             document.getElementById('top').innerText = `Your attempts = ${a}\nYour score = ${s}`;
-            document.getElementById('result').innerText = `\n${result}\nYou chose ${userChoice}.\nComputer chose ${computerChoice}.\nScore = ${s1}`;
+            document.getElementById('result').innerText = `${result}\nYou chose ${userChoice}.\nComputer chose ${computerChoice}.\nScore = ${s1}`;
         }
     </script>
 
