@@ -73,6 +73,10 @@
       cursor: pointer;
       font-size: 16px;
     }
+    a{
+        text-decoration:none;
+        color:white;
+    }
 
     #result {
       margin-top: 20px;
@@ -106,12 +110,12 @@
       <option value="female">Female</option>
     </select>
 
-    <button onclick="calculate()">Calculate</button>
+    <button onclick="calculate()"><a href="#result">Calculate</a></button>
 
     <div id="result"></div>
   </div>
 
-  <script>
+  <script>      
     function calculate() {
       const height = parseFloat(document.getElementById('height').value);
       const unit = document.getElementById('unit').value;
