@@ -51,6 +51,7 @@
 
     input {
       width: 100%;
+      border-radius:2px;
       padding: 10px;
       margin-bottom: 15px;
       box-sizing: border-box;
@@ -82,6 +83,9 @@
       margin-top: 20px;
       color: #333;
     }
+    p{
+        font-size:1.1em;
+    }
 
   </style>
 </head>
@@ -90,21 +94,21 @@
   <div class="calculator">
     <h1>BMI & BMR Calculator</h1>
 
-    <label for="height">Height:</label>
+    <label for="height">Height :</label>
     <div id="ht">
     <input type="number" id="height" placeholder="Enter your height" required>
-    <select id="unit" style="width:50%" required>
+    <select id="unit" style="width:40%" required>
       <option value="cm">cm</option>
       <option value="in">inch</option>
     </select>
 </div>
-    <label for="weight">Weight (kg):</label>
+    <label for="weight">Weight (kg) :</label>
     <input type="number" id="weight" placeholder="Enter your weight" required>
 
-    <label for="age">Age:</label>
+    <label for="age">Age :</label>
     <input type="number" id="age" placeholder="Enter your age" required>
 
-    <label for="gender">Gender:</label>
+    <label for="gender">Gender :</label>
     <select id="gender" required>
       <option value="male">Male</option>
       <option value="female">Female</option>
@@ -141,9 +145,9 @@
       // Display the results
       const resultDiv = document.getElementById('result');
       resultDiv.innerHTML = `
-        <h2>=== Results ===</h2>
-        <p id="bmin"><strong>BMI:</strong> ${bmi.toFixed(2)}</p>
-        <p><strong>BMR:</strong> ${bmr.toFixed(2)} calories/day</p>
+        <h2>----- Results -----</h2>
+        <p id="bmin"><strong>BMI :</strong> ${bmi.toFixed(2)}</p>
+        <p><strong>BMR :</strong> ${bmr.toFixed(2)} calories/day</p>
       `;
       var clr = document.getElementById("bmin").style;
       if(bmi>=18.5 && bmi<=24.9){
