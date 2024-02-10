@@ -40,7 +40,8 @@ background-image:url(https://images.pexels.com/photos/3137052/pexels-photo-31370
   background-attachment: fixed;
 }
     .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
-    .baxa{background-color:blue; border:none;display: block;text-align: center;
+    #baxa{box-shadow:1px 1px 6px black;
+    background-color:blue; border:none;display: block;text-align: center;
       text-decoration: none; border-radius:4px; padding: 12px;color: white;margin: 20px;
     animation: focus 3s linear 0s infinite alternate;}
     h1{color:green; text-shadow:4px 4px 8px;;}
@@ -98,7 +99,7 @@ background-image:url(https://images.pexels.com/photos/3137052/pexels-photo-31370
 
 <div style="display:block;margin: 120px 10% 0 10%;">
   <!-- <a id="new"  class="baxa" href="">New  Code</a> -->
-  <a class="baxa" href="https://mdnuruzzamankhan.github.io/codes/code.html">Click me to continue</a>
+  <a id="baxa" href="https://mdnuruzzamankhan.github.io/codes/code.html" onclick="load()">Click me to continue</a>
   <!-- <a class="baxa" href="https://mdnuruzzamankhan.github.io/raws/raw.html">Raw  Codes</a> -->
   <!-- <a class="baxa" href="https://mdnuruzzamankhan.github.io/aboutme.html">About  Developer</a> -->
 </div>
@@ -113,8 +114,12 @@ background-image:url(https://images.pexels.com/photos/3137052/pexels-photo-31370
     <li> SM Ibrahim Johan</li>
   </b></b>
 </div>
+<br>
 <div id="age"></div>
 </main>
-<script src="function.js"></script>
+<script src="https://mdnuruzzamankhan.github.io/function.js"></script>
+<script>
+  function load(){ document.getElementById("baxa").innerText ='Loading...';}
+</script>
 </body>
 </html>
