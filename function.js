@@ -13,4 +13,4 @@ var today = new Date();
 				age--;
 			}
             if (monthDiff < 0){monthDiff +=12;}
-			document.getElementById("age").innerText = age +" Year "+ monthDiff +" Month "+ day +" Day\nSince 05 October 2023";
+			document.getElementById("age").innerText = age +"  Year  "+ monthDiff +"  Month  "+ day +"  Day\nSince  05  October  2023";
