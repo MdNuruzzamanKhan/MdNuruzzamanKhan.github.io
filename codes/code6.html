@@ -24,12 +24,12 @@
          label{display: block;color: blue;font-weight: bold;padding: 3px;}
          
           button{width:50px;margin-top: 3px;margin-bottom: 3px;height:45px; display:block; font-size:1.3em; border-radius:10%; background-color:#5a5; color:white}
-          
+          p{color:purple ; text-align:center; font-family:monospace; font-size:1.15em; display:none}
     </style>
 </head>
 
 <body>
-    <h1 style="text-align: center;border-bottom: 1px solid rgb(145, 129, 129); font-family:monospace">Projectile Motion</h1>
+    <h1 style="text-align: center;border-bottom: 1px solid rgb(145, 129, 129); font-family:fantasy">Projectile Motion</h1>
     <div>
     <div>
         <form>
@@ -44,12 +44,19 @@
         <circle id="cl" cx="8" cy="290" r="8">
     </svg>
     </div>
-<button id="btn" onclick="man()"><i class="fa-solid fa-play"></i></button>   
+<button id="btn" onclick="man()"><i class="fa-solid fa-play"></i></button>
+
+<p id="txt">Rotate your screen and device to see the 'gola'.</p>
 </body>
 <script>
 const slider1 = document.getElementById('beeg');
         const slider1Value = document.getElementById('beeg1');
         slider1.addEventListener('input', () => {
+        txt = document.getElementById("txt").style;
+        var abc = slider1.value;
+        if(abc > 90){ txt.display = 'block';
+        }
+        else{txt.display="none";}
             slider1Value.textContent = slider1.value;
         });
 
@@ -66,6 +73,7 @@ const slider1 = document.getElementById('beeg');
         btn.innerHTML='<i class="fa-solid fa-rotate-right"></i>';
         const kon = kone.value;
         var velocity= document.getElementById("beeg").value;
+        
         let i = 0;
         let vel=velocity*0.11;
         let a = kon* Math.PI / 180;
