@@ -13,42 +13,57 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Projectile Motion</title>
     <style>
         /* body{transform: rotate(270Deg);} */
          div{position: relative;display: block;}
-         form{display: block;}
-         input{border: 2px solid blueviolet;}
+         
+         form{display: block;margin-bottom:15px}
+         
          label{display: block;color: blue;font-weight: bold;padding: 3px;}
-          button{width:150px;margin-top: 3px;margin-bottom: 3px;height:30px}
-          /*  padding-top: 10%;} */
+         
+          button{width:50px;margin-top: 3px;margin-bottom: 3px;height:45px; display:block; font-size:1.3em; border-radius:10%; background-color:#5a5; color:white}
+          
     </style>
 </head>
 
 <body>
-    <h1 style="text-align: center;border-bottom: 1px solid rgb(145, 129, 129);">Projectile Motion</h1>
+    <h1 style="text-align: center;border-bottom: 1px solid rgb(145, 129, 129); font-family:monospace">Projectile Motion</h1>
     <div>
     <div>
         <form>
-            <label>velocity: <input id="beeg" type="number" min="0" max="100" name="velocity" value="100" required> m/s</label>
-            <label>Angle: <input id="kone" type="number" min="1" max="90" name="angle" value="60" required> <sup>o</sup></label>
+            <label>Velocity : <input id="beeg" type="range" min="0" max="120" name="velocity" value="90" required> <span id="beeg1">90</span> m/s</label>
+            <label>Angle : <input id="kone" type="range" min="1" max="90" name="angle" value="60" required> <span id="kone1">60</span><sup> o</sup></label>
         </form>
-        <button id="btn" onclick="man()">Start</button><!-- </canvas> -->     
+        <!-- </canvas> -->     
     </div>
     <!-- <canvas id="cnv" height="200" width="350" style="border:2px solid black;margin-right: 10wh;margin-left:-50wh;"> -->
         
-        <svg id="an" height="200" width="350" style="border:2px solid rgb(29, 109, 15);margin-right: 10wh;background-color:rgb(242, 247, 245)">
+        <svg id="an" height="200" width="100%" style="border:2px solid rgb(29, 109, 15);margin-right: 10wh;background-color:rgb(242, 247, 245)">
         <circle id="cl" cx="8" cy="290" r="8">
     </svg>
     </div>
-   
+<button id="btn" onclick="man()"><i class="fa-solid fa-play"></i></button>   
 </body>
 <script>
+const slider1 = document.getElementById('beeg');
+        const slider1Value = document.getElementById('beeg1');
+        slider1.addEventListener('input', () => {
+            slider1Value.textContent = slider1.value;
+        });
+
+        const slider2 = document.getElementById('kone');
+        const slider2Value = document.getElementById('kone1');
+        slider2.addEventListener('input', () => {
+            slider2Value.textContent = slider2.value;
+        });
+    
     function man() {
         var gola = document.getElementById("cl");
         var kone = document.getElementById("kone");
         var btn= document.getElementById("btn");
-        btn.innerHTML="Replay";
+        btn.innerHTML='<i class="fa-solid fa-rotate-right"></i>';
         const kon = kone.value;
         var velocity= document.getElementById("beeg").value;
         let i = 0;
@@ -57,7 +72,7 @@
         let id = setInterval(rpt, 3);
         let xk;
         function rpt() {
-            if (xk >190) { clearInterval(id); }
+            if (xk >190) { clearInterval(id); btn.innerHTML='<i class="fa-solid fa-play"></i>';}
             else {
                 gola.style.cx = vel * i * Math.cos(a)+10;
                 xk = 190 - (vel * i * Math.sin(a) - 0.16 * i * i);
@@ -66,6 +81,7 @@
             }
         }
     }
+    
 </script>
 
 </html>
