@@ -22,10 +22,11 @@
          
          label{display: block;color: blue;font-weight: bold;padding: 3px;}
          
- input{width:42%}
+ input{width:45%}
  
  @media only screen and (orientation: landscape){
      input{width:60%}
+     p{display: none !important}
  }
          
           button{width:50px;margin-top: 3px;margin-bottom: 3px;height:45px; display:block; font-size:1.3em; border-radius:10%; background-color:#5a5; color:white}
@@ -39,8 +40,8 @@
     <div>
     <div>
         <form>
-            <label>Velocity : <input id="beeg" type="range" min="0" max="125" name="velocity" value="80" required> <span id="beeg1">80</span> m/s</label>
-            <label>Angle : <input id="kone" type="range" min="1" max="90" name="angle" value="45" required> <span id="kone1">45</span><sup> o</sup></label>
+            <label>Velocity : <input id="beeg" type="range" min="0" max="125" name="velocity" value="90" required> <span id="beeg1">90</span> m/s</label>
+            <label>Angle : <input id="kone" type="range" min="0" max="90" name="angle" value="60" required> <span id="kone1">60</span><sup> o</sup></label>
         </form>
         <!-- </canvas> -->     
     </div>
@@ -60,7 +61,7 @@ const slider1 = document.getElementById('beeg');
         slider1.addEventListener('input', () => {
         txt = document.getElementById("txt").style;
         var abc = slider1.value;
-        if(abc > 80 && txt.display=="none"){ txt.display = 'block';
+        if(abc > 80){ txt.display = 'block';
         }
         else{txt.display="none";}
             slider1Value.textContent = slider1.value;
