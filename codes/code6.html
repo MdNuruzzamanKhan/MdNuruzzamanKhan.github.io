@@ -26,12 +26,12 @@
  
  @media only screen and (orientation: landscape){
      input{width:60%}
-     p{display: none !important}
+     p{display: none}
  }
          
           button{width:50px;margin-top: 3px;margin-bottom: 3px;height:45px; display:block; font-size:1.3em; border-radius:10%; background-color:#5a5; color:white}
           
-          p{color:purple ; text-align:center; font-family:monospace; font-size:1.25em; display:none}
+          p{color:purple ; text-align:center; font-family:monospace; font-size:1.25em;}
           circle{ fill: gray}
           
           circle:last-child{
@@ -53,8 +53,8 @@
     </div>
     <!-- <canvas id="cnv" height="200" width="350" style="border:2px solid black;margin-right: 10wh;margin-left:-50wh;"> -->
         
-        <svg id="an" height="202" width="100%" style="border:2px solid rgb(29, 109, 15);margin-right: 10wh;background-color:rgb(242, 247, 245)">
-           <circle cx="9" cy="193" r="8" /> 
+        <svg id="an" height="212" width="100%" style="border:2px solid rgb(29, 109, 15);margin-right: 10wh;background-color:rgb(242, 247, 245)">
+           <circle cx="9" cy="202" r="8" /> 
     </svg>
     
     </div>
@@ -67,10 +67,6 @@ const slider1 = document.getElementById('beeg');
         const slider1Value = document.getElementById('beeg1');
         slider1.addEventListener('input', () => {
         txt = document.getElementById("txt").style;
-        var abc = slider1.value;
-        if(abc > 80){ txt.display = 'block';
-        }
-        else{txt.display="none";}
             slider1Value.textContent = slider1.value;
         });
 
@@ -97,13 +93,13 @@ const slider1 = document.getElementById('beeg');
         let xk;
         let xd;
         function rpt() {
-            if (xk >190) { clearInterval(id); btn.innerHTML='<i class=\"fa-solid fa-play\"></i>';
+            if (xk >200) { clearInterval(id); btn.innerHTML='<i class=\"fa-solid fa-play\"></i>';
             }
             else {
-                 xd = vel * i * Math.cos(a)+10;
-               xk = 190 - (vel * i * Math.sin(a) - 0.16 * i * i);           svg1.innerHTML+='<circle cx=\"'+ xd +'\" cy=\"'+ xk +'\" r=\"1.5\" \/>';
+                 xd = vel * i * Math.cos(a)+9;
+               xk = 200 - (vel * i * Math.sin(a) - 0.16 * i * i);           svg1.innerHTML+='<circle cx=\"'+ xd +'\" cy=\"'+ xk +'\" r=\"1.5\" \/>';
              
-                i += 0.6;
+                i += 0.5;
             }
         }
     }
