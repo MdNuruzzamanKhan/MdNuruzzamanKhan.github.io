@@ -146,6 +146,24 @@
 }</style>
     </head>
     <body>
+         <audio id="myAudio" autoplay loop>
+    <source src="https://mdnuruzzamankhan.github.io/sound/gametheme.mp3" type="audio/mp3">
+</audio>
+<audio id="shot" autoplay>
+    <source src="https://mdnuruzzamankhan.github.io/sound/shot.mp3" type="audio/mp3">
+</audio>
+<script>
+    function fn1(){
+      var  music = document.getElementById('myAudio');
+       music.play();
+       music.volume = 0.1;
+    }
+    function fn(){
+      var  shoot = document.getElementById('shot');
+       shoot.play();
+       shoot.volume = 0.2;
+    }
+</script>
         <div id="mainContainer">
         <canvas id="myCanvas"></canvas>
         <canvas id="animCanvas"></canvas>
@@ -157,7 +175,7 @@
         </div>
         <div id="startMenu">
             <h1 id="title"><span style="font-size:50px">A</span>RCHERY<br><span style="font-size:50px">G</span>AME</h1>
-            <button>TAP TO START</button>
+            <button onclick="fn1()">TAP TO START</button>
             <h2>Your best = <i><span id="best"></span></i></h2>
            <h2>Highest = <i><span>933</span></i></h2>
         </div>
@@ -233,6 +251,7 @@ function loadGame(){
     }
 
     function animateScore(scr,arrNum){
+        fn();
         if(scr >= 7) uScore.innerHTML = "&uarr; +"+scr;
         else uScore.innerHTML = "+"+scr;
         updArr(arrNum);
@@ -586,6 +605,7 @@ function loadGame(){
 
     function shoot(){
           if(arrow1.vis && arrow2.vis && arrows != -1){
+              fn();
             moveArrowCheck = true;
             clearTimeout(countTimeOut);
     countTime();
