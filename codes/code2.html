@@ -146,11 +146,14 @@
 }</style>
     </head>
     <body>
-         <audio id="myAudio" loop>
+         <audio id="myAudio" autoplay loop>
     <source src="https://mdnuruzzamankhan.github.io/sound/gametheme.mp3" type="audio/mp3">
 </audio>
 <audio id="shot">
     <source src="https://mdnuruzzamankhan.github.io/sound/shot.mp3" type="audio/mp3">
+</audio>
+<audio id="trgt">
+    <source src="https://mdnuruzzamankhan.github.io/sound/trgt.mp3" type="audio/mp3">
 </audio>
 <script>
     function fn1(){
@@ -162,6 +165,11 @@
       var  shoot = document.getElementById('shot');
        shoot.play();
        shoot.volume = 0.2;
+    }
+    function fn2(){
+      var  shoot = document.getElementById('trgt');
+       shoot.play();
+       shoot.volume = 0.4;
     }
 </script>
         <div id="mainContainer">
@@ -175,7 +183,7 @@
         </div>
         <div id="startMenu">
             <h1 id="title"><span style="font-size:50px">A</span>RCHERY<br><span style="font-size:50px">G</span>AME</h1>
-            <button onclick="fn1()">TAP TO START</button>
+            <button>TAP TO START</button>
             <h2>Your best = <i><span id="best"></span></i></h2>
            <h2>Highest = <i><span>933</span></i></h2>
         </div>
@@ -196,6 +204,7 @@ var asrcd = "toky";
 var startPage = document.getElementById("startMenu");
 startPage.addEventListener("click",startGame)
 function startGame(){
+    fn1();
     startPage.style.display = "none";
     loadGame();
     
@@ -252,7 +261,9 @@ function loadGame(){
 
     function animateScore(scr,arrNum){
         fn();
-        if(scr >= 7) uScore.innerHTML = "&uarr; +"+scr;
+        if(scr >= 7) {
+            uScore.innerHTML = "&uarr; +"+scr;
+        fn2();}
         else uScore.innerHTML = "+"+scr;
         updArr(arrNum);
         var t = 50, l = 70, o = 1;
