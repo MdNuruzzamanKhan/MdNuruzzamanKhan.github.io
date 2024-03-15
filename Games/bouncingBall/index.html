@@ -114,8 +114,8 @@
 
         function moveCar(event) {
             const rect = canvas.getBoundingClientRect();
-            //console.log(event);
             car.x = event.touches[0].clientX - rect.left - car.width / 2;
+            console.log(event.touches[0]);
             // car.y = event.touches[0].clientY - rect.top - car.height / 2;
             //updateCanvas();
         }
@@ -145,20 +145,20 @@
         function drawCanvas() {
             c.beginPath();
             c.arc(x, y, r, 0, Math.PI*2, false);
-            c.fillStyle = "#345";
+            c.fillStyle = "#2F4F4F";
             c.fill();
 
-            if (x+r > canvas.width || x-r < 0) {
+            if (x+r >= canvas.width || x-r <= 0) {
                 dx = -dx;
             }
-            if ((y+r > car.y1 && y+r < canvas.height && x > car.x && x < car.x+car.width) || y-r < 0) {
+            if ((y+r >= car.y1 && y+r <= canvas.height && x >= car.x && x <= car.x+car.width) || y-r <= 0) {
                 dy = -dy;
             }
-            if (y-r > canvas.height) {
+            if (y-r >= canvas.height) {
                 clearInterval(game);
                 gameOver();
             }
-            if ((x+r-coin.wh/5 > coin.ix && x-r+coin.wh/5 < coin.ix+coin.wh) && (y+r-coin.wh/5 > coin.iy && y-r+coin.wh/5 < coin.iy+coin.wh)) {
+            if ((x+r-coin.wh/5 >= coin.ix && x-r+coin.wh/5 <= coin.ix+coin.wh) && (y+r-coin.wh/5 >= coin.iy && y-r+coin.wh/5 <= coin.iy+coin.wh)) {
 
                 coinf();
                 //console.log(time);
