@@ -135,7 +135,7 @@ function mainGame(){
         if (x+r > canvas.width || x-r < 0) {
             dx = -dx;
         }
-        if ((y+r > car.y1 && y+r < car.y1+car.height && x > car.x && x < car.x+car.width) || y-r < 0) {
+        if ((y+r > car.y1 && y+r < canvas.height && x > car.x && x < car.x+car.width) || y-r < 0) {
             dy = -dy;
         }
         if (y-r > canvas.height) {
