@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74B5JE8ZZK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-74B5JE8ZZK');
+    </script>
     <title>Bouncing Ball</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
@@ -15,19 +26,24 @@
         canvas {
             border: 1px solid black;
         }
-        div{
+        div {
             text-align: center;
         }
-        div h1{ font-size: 2.7em; color:#6A5ACD}
-        div h2{ color:olive;}
+        div h1 {
+            font-size: 2.7em;
+            color: #6A5ACD
+        }
+        div h2 {
+            color: olive;
+        }
     </style>
     <script>
-        function bgsound(){
+        function bgsound() {
             var bgsound = document.getElementById('myAudio');
             bgsound.play();
             bgsound.volume = 0.8;
         }
-        function csound(){
+        function csound() {
             var trgt = document.getElementById('trgt');
             trgt.play();
             trgt.volume = 0.8;
@@ -35,145 +51,145 @@
     </script>
 </head>
 <body>
-        <audio id="myAudio" loop>
+    <audio id="myAudio" loop>
         <source src="bounce.mp3" type="audio/mp3">
     </audio>
-      <audio id="trgt">
+    <audio id="trgt">
         <source src="https://mdnuruzzamankhan.github.io/sound/trgt.mp3" type="audio/mp3">
     </audio>
-   <div onclick="mainGame()">
-       <h1>BOUNCING BALL</h1><br>
-       
-       <h2>Tap to start</h2>
-                   <p style="margin-top:45vh">
-                Author: Md. Nuruzzaman Khan
-            </p>
-   </div>
-    
+    <div onclick="mainGame()">
+        <h1>BOUNCING BALL</h1><br>
+
+        <h2 style="font-size:1.8em">Tap to start</h2>
+        <p style="margin-top:45vh">
+            Author: Md. Nuruzzaman Khan
+        </p>
+    </div>
+
     <img src="coin.png" style="display:none" />
 <script>
-function mainGame(){
-    bgsound();
-    var img = document.querySelector("img");
-    var div = document.querySelector("div");
-    div.style.display = 'none';
-    var canvas = document.createElement("canvas");
-    document.body.appendChild(canvas);
-    canvas.style.backgroundColor = "#FFFAFA";
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    var c = canvas.getContext("2d");
-    var score = 0;
+    function mainGame() {
+        bgsound();
+        var img = document.querySelector("img");
+        var div = document.querySelector("div");
+        div.style.display = 'none';
+        var canvas = document.createElement("canvas");
+        document.body.appendChild(canvas);
+        canvas.style.backgroundColor = "#FFFAFA";
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        var c = canvas.getContext("2d");
+        var score = 0;
 
-    function clearCanvas() {
-        
-        c.clearRect(0, 0, canvas.width, canvas.height);
-    }
+        function clearCanvas() {
 
-    let car = {
-        x: 50,
-        y1: canvas.height-20,
-        width: canvas.width/4,
-        height: 20,
-        speed: 0
-    };
-    let coin = {
-        ix: 100,
-        iy: 100,
-        wh: 50
-    };
-
-    function coinf() {
-        csound();
-        score += 5;
-        coin.ix = Math.random()*(canvas.width-coin.wh*2)+coin.wh;
-        coin.iy = Math.random()*((canvas.height/1.2)-coin.wh*2)+coin.wh;
-        dx *= 1.02;
-        dy *= 1.02;
-        // console.log(dx,dy);
-    }
-    function drawCoin() {
-        c.drawImage(img, coin.ix, coin.iy, coin.wh, coin.wh);
-    }
-
-    function moveCar(event) {
-        const rect = canvas.getBoundingClientRect();
-        //console.log(event);
-        car.x = event.touches[0].clientX - rect.left - car.width / 2;
-        // car.y = event.touches[0].clientY - rect.top - car.height / 2;
-        //updateCanvas();
-    }
-
-    function drawCar() {
-        c.fillStyle = '#008B8B';
-        c.fillRect(car.x, car.y1, car.width, car.height);
-        //c.arc(car.x,car.y1+car.height/2, Math.PI/2,Math.PI*3/2)
-    }
-
-    function drawScore() {
-        // ctx = canvas.getContext('2d');
-
-        c.font = 'italic bolder 33px sarif';
-        c.strokeStyle = '#6A5ACD';
-        c.textAlign = 'center';
-        c.strokeText('Score = '+ score, canvas.width/2, 50);
-    }
-
-    let x = Math.random()*(canvas.width-30)+15;
-    let y = Math.random()*(canvas.height/2)+15;;
-
-    // console.log(x,y);
-    var dx = 3.5;
-    var dy = 3.5;
-    var r = 12;
-    function drawCanvas() {
-        c.beginPath();
-        c.arc(x, y, r, 0, Math.PI*2, false);
-        c.fillStyle = "#345";
-        c.fill();
-
-        if (x+r > canvas.width || x-r < 0) {
-            dx = -dx;
+            c.clearRect(0, 0, canvas.width, canvas.height);
         }
-        if ((y+r > car.y1 && y+r < canvas.height && x > car.x && x < car.x+car.width) || y-r < 0) {
-            dy = -dy;
+
+        let car = {
+            x: 50,
+            y1: canvas.height-20,
+            width: canvas.width/4,
+            height: 20,
+            speed: 0
+        };
+        let coin = {
+            ix: 100,
+            iy: 100,
+            wh: 50
+        };
+
+        function coinf() {
+            csound();
+            score += 5;
+            coin.ix = Math.random()*(canvas.width-coin.wh*2)+coin.wh;
+            coin.iy = Math.random()*((canvas.height/1.2)-coin.wh*2)+coin.wh;
+            dx *= 1.015;
+            dy *= 1.015;
+            // console.log(dx,dy);
         }
-        if (y-r > canvas.height) {
-            clearInterval(game);
-            gameOver();
+        function drawCoin() {
+            c.drawImage(img, coin.ix, coin.iy, coin.wh, coin.wh);
         }
-        if ((x+r > coin.ix && x-r < coin.ix+coin.wh) && (y+r > coin.iy && y-r < coin.iy+coin.wh)) {
 
-            coinf();
-            //console.log(time);
-            // clearTimeout(ghj);
+        function moveCar(event) {
+            const rect = canvas.getBoundingClientRect();
+            //console.log(event);
+            car.x = event.touches[0].clientX - rect.left - car.width / 2;
+            // car.y = event.touches[0].clientY - rect.top - car.height / 2;
+            //updateCanvas();
         }
-        x += dx;
-        y += dy;
+
+        function drawCar() {
+            c.fillStyle = '#008B8B';
+            c.fillRect(car.x, car.y1, car.width, car.height);
+            //c.arc(car.x,car.y1+car.height/2, Math.PI/2,Math.PI*3/2)
+        }
+
+        function drawScore() {
+            // ctx = canvas.getContext('2d');
+
+            c.font = 'italic bolder 33px sarif';
+            c.strokeStyle = '#6A5ACD';
+            c.textAlign = 'center';
+            c.strokeText('Score = '+ score, canvas.width/2, 50);
+        }
+
+        let x = Math.random()*(canvas.width-30)+15;
+        let y = Math.random()*(canvas.height/2)+15;;
+
+        // console.log(x,y);
+        var dx = 3.5;
+        var dy = 3.5;
+        var r = 12;
+        function drawCanvas() {
+            c.beginPath();
+            c.arc(x, y, r, 0, Math.PI*2, false);
+            c.fillStyle = "#345";
+            c.fill();
+
+            if (x+r > canvas.width || x-r < 0) {
+                dx = -dx;
+            }
+            if ((y+r > car.y1 && y+r < canvas.height && x > car.x && x < car.x+car.width) || y-r < 0) {
+                dy = -dy;
+            }
+            if (y-r > canvas.height) {
+                clearInterval(game);
+                gameOver();
+            }
+            if ((x+r-coin.wh/5 > coin.ix && x-r+coin.wh/5 < coin.ix+coin.wh) && (y+r-coin.wh/5 > coin.iy && y-r+coin.wh/5 < coin.iy+coin.wh)) {
+
+                coinf();
+                //console.log(time);
+                // clearTimeout(ghj);
+            }
+            x += dx;
+            y += dy;
+        }
+
+        function gameOver() {
+            div.innerHTML = '<h1>Game Over</h1><p style=\"font-size:1.8em\">Your score = '+score +'</p><br><h2>Tap to play again</h2>';
+            div.innerHTML += '<p style=\"margin-top:45vh\">Author: Md. Nuruzzaman Khan</p>'
+            canvas.style.display = 'none';
+            div.style.display = 'block';
+        }
+
+
+        var game = setInterval(loop, 15);
+        function loop() {
+            clearCanvas();
+            drawCanvas();
+            drawCar();
+            drawScore();
+            drawCoin();
+            //requestAnimationFrame(loop);
+
+        }
+
+        canvas.addEventListener('touchmove', moveCar);
     }
-        
-    function gameOver(){
-        div.innerHTML = '<h1>Game Over</h1><br><p style=\"font-size:1.8em\">Your score = '+score +'</p><br><h2>Tap to play again</h2>';
-       div.innerHTML += '<p style=\"margin-top:38vh\">Author: Md. Nuruzzaman Khan</p>'
-        canvas.style.display = 'none';
-        div.style.display = 'block';
-    }
-
-
-    var game = setInterval(loop, 15);
-    function loop() {
-        clearCanvas();
-        drawCanvas();
-        drawCar();
-        drawScore();
-        drawCoin();
-        //requestAnimationFrame(loop);
-
-    }
-
-    canvas.addEventListener('touchmove', moveCar);
-}
-//mainGame();
+    //mainGame();
 </script>
 </body>
 </html>
