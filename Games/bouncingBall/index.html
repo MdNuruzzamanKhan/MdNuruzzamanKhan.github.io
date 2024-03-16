@@ -89,7 +89,7 @@
 
         let car = {
             x: 50,
-            y1: canvas.height-20,
+            y1: canvas.height-25,
             width: canvas.width/4,
             height: 20,
             speed: 0
@@ -122,8 +122,11 @@
         }
 
         function drawCar() {
+            c.beginPath();
             c.fillStyle = '#008B8B';
-            c.fillRect(car.x, car.y1, car.width, car.height);
+            c.roundRect(car.x, car.y1, car.width, car.height, 3);
+            c.fill();
+            c.closePath();
             //c.arc(car.x,car.y1+car.height/2, Math.PI/2,Math.PI*3/2)
         }
 
