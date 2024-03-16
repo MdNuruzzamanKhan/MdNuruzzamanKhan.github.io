@@ -78,6 +78,7 @@
         canvas.style.backgroundColor = "#FFFAFA";
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+        console.log(canvas.width,canvas.height);
         var c = canvas.getContext("2d");
         var score = 0;
 
@@ -104,8 +105,8 @@
             score += 5;
             coin.ix = Math.random()*(canvas.width-coin.wh*2)+coin.wh;
             coin.iy = Math.random()*((canvas.height/1.2)-coin.wh*2)+coin.wh;
-            dx *= 1.015;
-            dy *= 1.015;
+            dx *= 1.017;
+            dy *= 1.017;
             // console.log(dx,dy);
         }
         function drawCoin() {
@@ -115,7 +116,7 @@
         function moveCar(event) {
             const rect = canvas.getBoundingClientRect();
             car.x = event.touches[0].clientX - rect.left - car.width / 2;
-            console.log(event.touches[0]);
+           // console.log(event.touches[0]);
             // car.y = event.touches[0].clientY - rect.top - car.height / 2;
             //updateCanvas();
         }
@@ -139,8 +140,8 @@
         let y = Math.random()*(canvas.height/2)+15;;
 
         // console.log(x,y);
-        var dx = 3.5;
-        var dy = 3.5;
+        var dx = canvas.width/90.73;
+        var dy = canvas.height/160.77;
         var r = 12;
         function drawCanvas() {
             c.beginPath();
@@ -156,6 +157,7 @@
             }
             if (y-r >= canvas.height) {
                 clearInterval(game);
+                //removeAnimationFrame(game);
                 gameOver();
             }
             if ((x+r-coin.wh/5 >= coin.ix && x-r+coin.wh/5 <= coin.ix+coin.wh) && (y+r-coin.wh/5 >= coin.iy && y-r+coin.wh/5 <= coin.iy+coin.wh)) {
@@ -183,13 +185,14 @@
             drawCar();
             drawScore();
             drawCoin();
-            //requestAnimationFrame(loop);
+            //var game = requestAnimationFrame(loop);
 
         }
+       // loop();
 
         canvas.addEventListener('touchmove', moveCar);
     }
-    //mainGame();
+    
 </script>
 </body>
 </html>
