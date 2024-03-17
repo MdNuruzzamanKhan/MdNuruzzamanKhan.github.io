@@ -78,12 +78,11 @@
         canvas.style.backgroundColor = "#FFFAFA";
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        console.log(canvas.width,canvas.height);
+        console.log(canvas.width, canvas.height);
         var c = canvas.getContext("2d");
         var score = 0;
 
         function clearCanvas() {
-
             c.clearRect(0, 0, canvas.width, canvas.height);
         }
 
@@ -107,18 +106,19 @@
             coin.iy = Math.random()*((canvas.height/1.2)-coin.wh*2)+coin.wh;
             dx *= 1.017;
             dy *= 1.017;
-            // console.log(dx,dy);
         }
+
         function drawCoin() {
             c.drawImage(img, coin.ix, coin.iy, coin.wh, coin.wh);
         }
 
         function moveCar(event) {
             const rect = canvas.getBoundingClientRect();
-            car.x = event.touches[0].clientX - rect.left - car.width / 2;
-           // console.log(event.touches[0]);
-            // car.y = event.touches[0].clientY - rect.top - car.height / 2;
-            //updateCanvas();
+            if (event.touches[0]) {
+                car.x = event.touches[0].clientX - rect.left - car.width / 2;
+            } else {
+                car.x = event.clientX - rect.left - car.width / 2;
+            }
         }
 
         function drawCar() {
@@ -127,12 +127,9 @@
             c.roundRect(car.x, car.y1, car.width, car.height, 3);
             c.fill();
             c.closePath();
-            //c.arc(car.x,car.y1+car.height/2, Math.PI/2,Math.PI*3/2)
         }
 
         function drawScore() {
-            // ctx = canvas.getContext('2d');
-
             c.font = 'italic bolder 33px sarif';
             c.strokeStyle = '#6A5ACD';
             c.textAlign = 'center';
@@ -142,7 +139,7 @@
         let x = Math.random()*(canvas.width-30)+15;
         let y = Math.random()*(canvas.height/2)+15;;
 
-        // console.log(x,y);
+
         var dx = canvas.width/90.73;
         var dy = canvas.height/160.77;
         var r = 12;
@@ -155,19 +152,15 @@
             if (x+r >= canvas.width || x-r <= 0) {
                 dx = -dx;
             }
-            if ((y+r >= car.y1 && y+r <= canvas.height && x >= car.x && x <= car.x+car.width) || y-r <= 0) {
+            if ((y+r >= car.y1 && y+r <= canvas.height && x+r >= car.x && x-r <= car.x+car.width) || y-r <= 0) {
                 dy = -dy;
             }
             if (y-r >= canvas.height) {
                 clearInterval(game);
-                //removeAnimationFrame(game);
                 gameOver();
             }
             if ((x+r-coin.wh/5 >= coin.ix && x-r+coin.wh/5 <= coin.ix+coin.wh) && (y+r-coin.wh/5 >= coin.iy && y-r+coin.wh/5 <= coin.iy+coin.wh)) {
-
                 coinf();
-                //console.log(time);
-                // clearTimeout(ghj);
             }
             x += dx;
             y += dy;
@@ -180,7 +173,6 @@
             div.style.display = 'block';
         }
 
-
         var game = setInterval(loop, 15);
         function loop() {
             clearCanvas();
@@ -188,14 +180,12 @@
             drawCar();
             drawScore();
             drawCoin();
-            //var game = requestAnimationFrame(loop);
-
         }
-       // loop();
 
         canvas.addEventListener('touchmove', moveCar);
+        canvas.addEventListener('mousemove', moveCar);
     }
-    
+
 </script>
 </body>
 </html>
