@@ -24,7 +24,10 @@
 
         }
         canvas {
-            border: 1px solid black;
+            border: 1px solid black;z-index:1;position: relative;
+        }
+        svg{
+            z-index: 2;position: absolute;
         }
         div {
             text-align: center;
@@ -67,6 +70,10 @@
     </div>
 
     <img src="coin.png" style="display:none" />
+    <svg height="40" width="100vw" xmlns="http://www.w3.org/2000/svg">
+  <text id="txt" x="85vw" y="30" fill="none" stroke="red" font-size="15">Skip!</text>
+  
+</svg>
 <script>
     function mainGame() {
         bgsound();
@@ -107,8 +114,16 @@
             dx *= 1.017;
             dy *= 1.017;
         }
+        function coinf2() {
+            
+            score -= 5;
+            coin.ix = Math.random()*(canvas.width-coin.wh*2)+coin.wh;
+            coin.iy = Math.random()*((canvas.height/1.2)-coin.wh*2)+coin.wh;
+            
+        }
 
         function drawCoin() {
+            //c.imageSmoothingEnabled = true;
             c.drawImage(img, coin.ix, coin.iy, coin.wh, coin.wh);
         }
 
@@ -184,8 +199,10 @@
 
         canvas.addEventListener('touchmove', moveCar);
         canvas.addEventListener('mousemove', moveCar);
+        txt.addEventListener('click', coinf2);
+    
+    
     }
-
 </script>
 </body>
 </html>
