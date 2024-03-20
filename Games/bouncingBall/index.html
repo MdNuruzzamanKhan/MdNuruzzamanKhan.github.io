@@ -24,10 +24,14 @@
 
         }
         canvas {
-            border: 1px solid black;z-index:1;position: relative;
+            border: 1px solid black;
+            z-index: 1;
+            position: relative;
         }
-        svg{
-            z-index: 2;position: absolute;
+        svg {
+            z-index: 2;
+            position: absolute;
+            display: none;
         }
         div {
             text-align: center;
@@ -70,22 +74,27 @@
     </div>
 
     <img src="coin.png" style="display:none" />
-    <svg height="40" width="100vw" xmlns="http://www.w3.org/2000/svg">
-  <text id="txt" x="85vw" y="30" fill="none" stroke="red" font-size="15">Skip!</text>
-  
+<svg id="svg" height="40" width="100vw" xmlns="http://www.w3.org/2000/svg">
+    <text id="txt" x="85vw" y="30" fill="none" stroke="red" font-size="15">Skip!</text>
+
 </svg>
 <script>
     function mainGame() {
         bgsound();
         var img = document.querySelector("img");
         var div = document.querySelector("div");
+
         div.style.display = 'none';
+
         var canvas = document.createElement("canvas");
         document.body.appendChild(canvas);
+
+        svg.style.display = 'block';
+
         canvas.style.backgroundColor = "#FFFAFA";
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        console.log(canvas.width, canvas.height);
+        // console.log(canvas.width, canvas.height);
         var c = canvas.getContext("2d");
         var score = 0;
 
@@ -115,11 +124,11 @@
             dy *= 1.017;
         }
         function coinf2() {
-            
+
             score -= 5;
             coin.ix = Math.random()*(canvas.width-coin.wh*2)+coin.wh;
             coin.iy = Math.random()*((canvas.height/1.2)-coin.wh*2)+coin.wh;
-            
+
         }
 
         function drawCoin() {
@@ -185,6 +194,7 @@
             div.innerHTML = '<h1>Game Over</h1><p style=\"font-size:1.8em\">Your score = '+score +'</p><br><h2>Tap to play again</h2>';
             div.innerHTML += '<p style=\"margin-top:45vh\">Author: Md. Nuruzzaman Khan</p>'
             canvas.style.display = 'none';
+            svg.style.display = 'none';
             div.style.display = 'block';
         }
 
@@ -200,8 +210,8 @@
         canvas.addEventListener('touchmove', moveCar);
         canvas.addEventListener('mousemove', moveCar);
         txt.addEventListener('click', coinf2);
-    
-    
+
+
     }
 </script>
 </body>
