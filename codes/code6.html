@@ -46,7 +46,7 @@
     <div>
     <div>
         <form>
-            <label>Velocity : <input id="beeg" type="range" min="0" max="125" name="velocity" value="90" required> <span id="beeg1">90</span> m/s</label>
+            <label>Velocity : <input id="beeg" type="range" min="0" max="150" name="velocity" value="100" required> <span id="beeg1">100</span> m/s</label>
             <label>Angle : <input id="kone" type="range" min="0" max="90" name="angle" value="60" required> <span id="kone1">60</span><sup> o</sup></label>
         </form>
         <!-- </canvas> -->     
@@ -87,7 +87,7 @@ const slider1 = document.getElementById('beeg');
         var velocity= document.getElementById("beeg").value;
         
         let i = 0;
-        let vel=velocity*0.11;
+        let vel=velocity*0.1;
         let a = kon* Math.PI / 180;
         let id = setInterval(rpt, 3);
         let xk;
