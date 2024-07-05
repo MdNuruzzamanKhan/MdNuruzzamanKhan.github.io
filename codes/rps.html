@@ -27,7 +27,7 @@
 p {
     font-size: 28px;
     color: #af40ff;
-    padding-bottom:5px;
+    padding-bottom:4vh;
     border-bottom: 1px dashed black;
     font-weight:bold;
 }
@@ -39,10 +39,10 @@ p {
 }
 
 button {
-    padding: 8px 16px;
+    padding: 10px 16px;
     font-size: 27px;
     background-color: #3498db;
-    color: white;
+    color: whitesmoke;
     border: none;
     box-shadow:4px 0px 4px #000000b1;
     border-radius: 5px;
@@ -55,11 +55,15 @@ button:hover {
 }
 
 .result {
-    margin-top: 20px;
+    margin-top: 3vh;
     font-size: 1.1em;
+    font-weight: bold;
     color: #333;
 }
-#top{font-style:italic}
+#top{font-style:italic;
+    color:black;
+    font-size: 1.1em;
+}
     </style>
 </head>
 <body>
@@ -75,7 +79,7 @@ button:hover {
         <span><button onclick="playGame('paper')"><i class="fas fa-hand-paper"></i></button><br>Paper</span>
         <span><button onclick="playGame('scissors')"><i class="fas fa-hand-scissors"></i></button><br>Scissors</span>
     </div>
-    <div class="result" id="result"></div>
+    <div class="result" id="result"><br>Choose one ...</div>
 
     <script>
         var s = 0;
@@ -112,7 +116,7 @@ button:hover {
                 div.color = 'red';
             }
             document.getElementById('top').innerText = `Your attempts = ${a}\nYour score = ${s}`;
-            document.getElementById('result').innerText = `\n${result}\nBecause, you chose ${userChoice},\n${str}, computer chose ${computerChoice}.\nScore = ${s1}`;
+            document.getElementById('result').innerText = `\n${result}\nBecause, you chose ${userChoice},\n${str}, computer chose ${computerChoice}.\nScore ${s1}`;
         }
  function capital(word) {
   return word.charAt(0).toUpperCase() + word.slice(1);
