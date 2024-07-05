@@ -1,229 +1,245 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-74B5JE8ZZK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74B5JE8ZZK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
 
-  gtag('config', 'G-74B5JE8ZZK');
-</script>
-  <meta charset="UTF-8">
+        gtag('config', 'G-74B5JE8ZZK');
+    </script>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tic tac toe</title>
-  
-  <style>
-    body {
-    box-sizing: border-box;
-    display: block;
- margin:3px;  
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-family: Oswald;
-    background-color: #eeeeee;
-  }
-  
-  .overlay {
-    display: none;
-    position: absolute;
-    width: 100%;
-    height:250px;
-    top: 0;
-  }
-  .overlay.show {
-    display: block;
-  }
-  
-  .msg {
-    display: none;
-    position: absolute;
-    width: 100%;
-    height: 85vh;
-    top: 0;
-    font-size: 8vh;
-    overflow: hidden;
-  }
-  .msg span {
-    display: none;
-    position: absolute;
-    margin:0;
-    width: 100%;
-    background: rgba(85, 204, 204, 0.8);
-    text-align: center;
-    line-height: 80vh;
-  }
-  .msg span.show {
-    display: block;
-  }
-  
-  .tic-tac-toe {
-    position: relative;
-    display: grid;
-    grid-template-rows: repeat(3, 25vh);
-    grid-template-columns: repeat(3, 33.3%);
-    width: 100%;
-    height: 250px;
-  }
-  .tic-tac-toe .box {
-    display: block;
-    position: relative;
-  }
-  .tic-tac-toe .box:nth-of-type(1), .tic-tac-toe .box:nth-of-type(2), .tic-tac-toe .box:nth-of-type(4), .tic-tac-toe .box:nth-of-type(5), .tic-tac-toe .box:nth-of-type(7), .tic-tac-toe .box:nth-of-type(8) {
-    border-right: 3px solid #111111;
-  }
-  .tic-tac-toe .box:nth-of-type(2), .tic-tac-toe .box:nth-of-type(3), .tic-tac-toe .box:nth-of-type(5), .tic-tac-toe .box:nth-of-type(6), .tic-tac-toe .box:nth-of-type(8), .tic-tac-toe .box:nth-of-type(9) {
-    border-left: 3px solid #111111;
-  }
-  .tic-tac-toe .box:nth-of-type(4), .tic-tac-toe .box:nth-of-type(5), .tic-tac-toe .box:nth-of-type(6), .tic-tac-toe .box:nth-of-type(7), .tic-tac-toe .box:nth-of-type(8), .tic-tac-toe .box:nth-of-type(9) {
-    border-top: 3px solid #111111;
-  }
-  .tic-tac-toe .box:nth-of-type(1), .tic-tac-toe .box:nth-of-type(2), .tic-tac-toe .box:nth-of-type(3), .tic-tac-toe .box:nth-of-type(4), .tic-tac-toe .box:nth-of-type(5), .tic-tac-toe .box:nth-of-type(6) {
-    border-bottom: 3px solid #111111;
-  }
-  .tic-tac-toe .box.show-circle .circle {
-    display: block;
-  }
-  .tic-tac-toe .cross {
-    display: none;
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-  .tic-tac-toe .cross::before,
-  .tic-tac-toe .cross::after{
-      content: "";
-      display: block;
-      position: absolute;
-      width: 80%;
-      height: 6px;
-      top: 50%;
-      left: 50%;
-      margin-top: -3px;
-      margin-left: -40%;
-      background-color: blue;
-  }
-  .tic-tac-toe .cross:before {
-    transform: rotate(45deg);
-  }
-  .tic-tac-toe .cross:after {
-    transform: rotate(135deg);
-  }
-  .tic-tac-toe .circle{
-      display: none;
-      box-sizing: border-box;
-      position: absolute;
-      width: 10vh;
-      height: 10vh;
-      top: 50%;
-      margin-top: -6vh;
-      left: 50%;
-      margin-left:-5vh;
-      border-radius: 50%;
-      border: 6px solid magenta;
-  }
-  .tic-tac-toe input{
-      display: none;
-      position: absolute;
-      top: 0;
-  }
+    <title>Tic tac toe</title>
 
-  .tic-tac-toe input:checked ~ .cross{
-      display: block;
-  }
- button{
-     margin-top:51px;
-      color: white;
-   width:100px;
-   height:40px;
-   text-align:center;
-      background-color: #388;
-      padding: 4px;
-      text-decoration: none;
-      transform: color 0.4s;
-   border-radius:3px;
-  }
- button:hover{
-      background-color: #166;
-  }
-  </style>
+    <style>
+        body {
+            box-sizing: border-box;
+            display: block;
+            margin: 3px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: Oswald;
+            background-color: #eeeeee;
+        }
+
+        .overlay {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 250px;
+            top: 0;
+        }
+        .overlay.show {
+            display: block;
+        }
+
+        .msg {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 85vh;
+            top: 0;
+            font-size: 8vh;
+            overflow: hidden;
+        }
+        .msg span {
+            display: none;
+            position: absolute;
+            margin: 0;
+            width: 100%;
+            background: rgba(85, 204, 204, 0.8);
+            text-align: center;
+            line-height: 80vh;
+        }
+        .msg span.show {
+            display: block;
+        }
+
+        .tic-tac-toe {
+            position: relative;
+            display: grid;
+            grid-template-rows: repeat(3, 25vh);
+            grid-template-columns: repeat(3, 33.3%);
+            width: 100%;
+            height: 250px;
+        }
+        .tic-tac-toe .box {
+            display: block;
+            position: relative;
+        }
+        .tic-tac-toe .box:nth-of-type(1), .tic-tac-toe .box:nth-of-type(2), .tic-tac-toe .box:nth-of-type(4), .tic-tac-toe .box:nth-of-type(5), .tic-tac-toe .box:nth-of-type(7), .tic-tac-toe .box:nth-of-type(8) {
+            border-right: 3px solid #111111;
+        }
+        .tic-tac-toe .box:nth-of-type(2), .tic-tac-toe .box:nth-of-type(3), .tic-tac-toe .box:nth-of-type(5), .tic-tac-toe .box:nth-of-type(6), .tic-tac-toe .box:nth-of-type(8), .tic-tac-toe .box:nth-of-type(9) {
+            border-left: 3px solid #111111;
+        }
+        .tic-tac-toe .box:nth-of-type(4), .tic-tac-toe .box:nth-of-type(5), .tic-tac-toe .box:nth-of-type(6), .tic-tac-toe .box:nth-of-type(7), .tic-tac-toe .box:nth-of-type(8), .tic-tac-toe .box:nth-of-type(9) {
+            border-top: 3px solid #111111;
+        }
+        .tic-tac-toe .box:nth-of-type(1), .tic-tac-toe .box:nth-of-type(2), .tic-tac-toe .box:nth-of-type(3), .tic-tac-toe .box:nth-of-type(4), .tic-tac-toe .box:nth-of-type(5), .tic-tac-toe .box:nth-of-type(6) {
+            border-bottom: 3px solid #111111;
+        }
+        .tic-tac-toe .box.show-circle .circle {
+            display: block;
+        }
+        .tic-tac-toe .cross {
+            display: none;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .tic-tac-toe .cross::before,
+        .tic-tac-toe .cross::after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 80%;
+            height: 6px;
+            top: 50%;
+            left: 50%;
+            margin-top: -3px;
+            margin-left: -40%;
+            background-color: blue;
+        }
+        .tic-tac-toe .cross:before {
+            transform: rotate(45deg);
+        }
+        .tic-tac-toe .cross:after {
+            transform: rotate(135deg);
+        }
+        .tic-tac-toe .circle {
+            display: none;
+            box-sizing: border-box;
+            position: absolute;
+            width: 10vh;
+            height: 10vh;
+            top: 50%;
+            margin-top: -6vh;
+            left: 50%;
+            margin-left: -5vh;
+            border-radius: 50%;
+            border: 6px solid magenta;
+        }
+        .tic-tac-toe input {
+            display: none;
+            position: absolute;
+            top: 0;
+        }
+
+        .tic-tac-toe input:checked ~ .cross {
+            display: block;
+        }
+        button {
+            margin-top: 51px;
+            color: white;
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            background-color: #388;
+            padding: 4px;
+            text-decoration: none;
+            transform: color 0.4s;
+            border-radius: 3px;
+        }
+        button:hover {
+            background-color: #166;
+        }
+    </style>
 </head>
 <body>
-     
-<div class="tic-tac-toe normal">
-    <label class="box box-1">
-      <input type="checkbox" onchange="changed(this)" data-num="1"/>
-      <div class="cross"></div>
-      <div class="circle"></div>
+    <audio id="tap" src="sound/tap.mp3"></audio>
+    <div class="tic-tac-toe normal" id="main">
+        <label class="box box-1">
+            <input type="checkbox" onchange="changed(this)" data-num="1" />
+        <div class="cross"></div>
+        <div class="circle"></div>
     </label>
     <label class="box box-2">
-      <input type="checkbox" onchange="changed(this)" data-num="2"/>
-      <div class="cross"></div>
-      <div class="circle"></div>
-    </label>
-    <label class="box box-3">
-      <input type="checkbox" onchange="changed(this)" data-num="3"/>
-      <div class="cross"></div>
-      <div class="circle"></div>
-    </label>
-    <label class="box box-4">
-      <input type="checkbox" onchange="changed(this)" data-num="4"/>
-      <div class="cross"></div>
-      <div class="circle"></div>
-    </label>
-    <label class="box box-5">
-      <input type="checkbox" onchange="changed(this)" data-num="5"/>
-      <div class="cross"></div>
-      <div class="circle"></div>
-    </label>
-    <label class="box box-6">
-      <input type="checkbox" onchange="changed(this)" data-num="6"/>
-      <div class="cross"></div>
-      <div class="circle"></div>
-    </label>
-    <label class="box box-7">
-      <input type="checkbox" onchange="changed(this)" data-num="7"/>
-      <div class="cross"></div>
-      <div class="circle"></div>
-    </label>
-    <label class="box box-8">
-      <input type="checkbox" onchange="changed(this)" data-num="8"/>
-      <div class="cross"></div>
-      <div class="circle"></div>
-    </label>
-    <label class="box box-9">
-      <input type="checkbox" onchange="changed(this)" data-num="9"/>
-      <div class="cross"></div>
-      <div class="circle"></div>
-    </label>
-   <button class="replay" onclick="replay()">PLAY AGAIN</button>
-  </div>
-  <div class="overlay"></div>
-  <div class="msg">
-      <span class="win">YOU WIN!</span>
-      <span class="lost">YOU LOST!</span>
-      <span class="draw">DRAW!</span></div>
-    
-      <!-- now add javascript code -->
-      <script>
-        const boxes = document.querySelectorAll('.box');
-let seq = { 1: '', 2: '', 3: '', 4: '', 5: '', 6: '', 7: '', 8: '', 9: '' };
+        <input type="checkbox" onchange="changed(this)" data-num="2" />
+    <div class="cross"></div>
+    <div class="circle"></div>
+</label>
+<label class="box box-3">
+    <input type="checkbox" onchange="changed(this)" data-num="3" />
+<div class="cross"></div>
+<div class="circle"></div>
+</label>
+<label class="box box-4">
+<input type="checkbox" onchange="changed(this)" data-num="4" />
+<div class="cross"></div>
+<div class="circle"></div>
+</label>
+<label class="box box-5">
+<input type="checkbox" onchange="changed(this)" data-num="5" />
+<div class="cross"></div>
+<div class="circle"></div>
+</label>
+<label class="box box-6">
+<input type="checkbox" onchange="changed(this)" data-num="6" />
+<div class="cross"></div>
+<div class="circle"></div>
+</label>
+<label class="box box-7">
+<input type="checkbox" onchange="changed(this)" data-num="7" />
+<div class="cross"></div>
+<div class="circle"></div>
+</label>
+<label class="box box-8">
+<input type="checkbox" onchange="changed(this)" data-num="8" />
+<div class="cross"></div>
+<div class="circle"></div>
+</label>
+<label class="box box-9">
+<input type="checkbox" onchange="changed(this)" data-num="9" />
+<div class="cross"></div>
+<div class="circle"></div>
+</label>
+<button class="replay" onclick="replay()">PLAY AGAIN</button>
+</div>
+<div class="overlay"></div>
+<div class="msg">
+<span class="win">YOU WIN!</span>
+<span class="lost">YOU LOST!</span>
+<span class="draw">DRAW!</span>
+</div>
+
+<!-- now add javascript code -->
+<script>
+document.getElementById('main').addEventListener('click', function() {
+document.getElementById('tap').play();
+});
+const boxes = document.querySelectorAll('.box');
+let seq = {
+1: '',
+2: '',
+3: '',
+4: '',
+5: '',
+6: '',
+7: '',
+8: '',
+9: ''
+};
 let gameEnd = false;
 
 const $ = el => document.querySelector(el);
 
 function changed(el) {
-  if (el.checked) {
-    el.disabled = true;
-    let n = parseInt(el.getAttribute('data-num'));
-    seq[n] = 'x';
-    checkWin();
-    if (Object.values(seq).filter(Boolean).length < 9 && !gameEnd) {
-      calculateNextPosition();
-    }
-  }
+if (el.checked) {
+el.disabled = true;
+let n = parseInt(el.getAttribute('data-num'));
+seq[n] = 'x';
+checkWin();
+if (Object.values(seq).filter(Boolean).length < 9 && !gameEnd) {
+calculateNextPosition();
+}
+}
 }
 
 const checkInclude = player => (...indices) => indices.every(i => seq[i] === player);
@@ -231,118 +247,118 @@ const checkIncludeX = checkInclude('x');
 const checkIncludeO = checkInclude('o');
 
 function checkWin() {
-  const gameWon = player => ( checkInclude(player)(1, 2, 3) ||
-                              checkInclude(player)(4, 5, 6) ||
-                              checkInclude(player)(7, 8, 9) ||
-                              checkInclude(player)(1, 4, 7) ||
-                              checkInclude(player)(2, 5, 8) ||
-                              checkInclude(player)(3, 6, 9) ||
-                              checkInclude(player)(1, 5, 9) ||
-                              checkInclude(player)(3, 5, 7) )
+const gameWon = player => (checkInclude(player)(1, 2, 3) ||
+checkInclude(player)(4, 5, 6) ||
+checkInclude(player)(7, 8, 9) ||
+checkInclude(player)(1, 4, 7) ||
+checkInclude(player)(2, 5, 8) ||
+checkInclude(player)(3, 6, 9) ||
+checkInclude(player)(1, 5, 9) ||
+checkInclude(player)(3, 5, 7))
 
-  if (gameWon('x') || gameWon('o')) {
-    const playerWon = gameWon('x') ? '.win' : '.lost';
-    boxes.forEach(box => box.querySelector('input').disabled = true);
-    $('.msg').style.display = 'block';
-    $(playerWon).classList.add('show');
-    gameEnd = true;
-  } else if (Object.values(seq).filter(Boolean).length === 9) {
-    $('.msg').style.display = 'block';
-    $('.draw').classList.add('show');
-  }
+if (gameWon('x') || gameWon('o')) {
+const playerWon = gameWon('x') ? '.win': '.lost';
+boxes.forEach(box => box.querySelector('input').disabled = true);
+$('.msg').style.display = 'block';
+$(playerWon).classList.add('show');
+gameEnd = true;
+} else if (Object.values(seq).filter(Boolean).length === 9) {
+$('.msg').style.display = 'block';
+$('.draw').classList.add('show');
+}
 }
 
 const addCircle = boxNumber => {
-  seq[boxNumber] = 'o';
-  $('.overlay').classList.add('show');
+seq[boxNumber] = 'o';
+$('.overlay').classList.add('show');
 
-  setTimeout(()=> {
-    $('.box-'+boxNumber).classList.add('show-circle');
-    $('.box-'+boxNumber).querySelector('input').disabled = true;
-    $('.overlay').classList.remove('show');
-    checkWin();
-  }, 400);
+setTimeout(()=> {
+$('.box-'+boxNumber).classList.add('show-circle');
+$('.box-'+boxNumber).querySelector('input').disabled = true;
+$('.overlay').classList.remove('show');
+checkWin();
+}, 400);
 }
 
-function calculateNextPosition() {  
-  let tar = Math.ceil(Math.random()*9);
-  const xo_includes = _tar => checkIncludeO(_tar) || checkIncludeX(_tar);
-  const isValidNextPosition = newPos => !xo_includes(newPos) ? tar = newPos : null
+function calculateNextPosition() {
+let tar = Math.ceil(Math.random()*9);
+const xo_includes = _tar => checkIncludeO(_tar) || checkIncludeX(_tar);
+const isValidNextPosition = newPos => !xo_includes(newPos) ? tar = newPos: null
 
-  while (checkIncludeO(tar) || checkIncludeX(tar)) {
-    tar = Math.ceil(Math.random()*9);
-  }
-  
-    for (let x = 1; x < 10; x++) {
-      if (checkIncludeX(x) && x != 5) {
-          // x _ _ / _ x _ / _ _ x
-          // _ _ _ / _ _ _ / _ _ _
-          // x _ _ / _ x _ / _ _ x
-          isValidNextPosition(5);
-        }   
-      if (checkIncludeX(x, x+1)) {
-        // x x _ / _ x x
-        if ([1, 4, 7].includes(x)) {
-          isValidNextPosition(x+2);
-        } else if ([2, 5, 8].includes(x)) {
-          isValidNextPosition(x-1)
-        }
-      }
-      if (checkIncludeX(x, x+2) && [1, 4, 7].includes(x)) {
-        // x _ x
-        isValidNextPosition(x+1)
-      }
-      if (checkIncludeX(x, x+3) && x <= 6) {
-        // x _ _ / _ x _ / _ _ x
-        // x _ _ / _ x _ / _ _ x
-        const _tar = (x+6 > 9) ? x-3 : x+6;
-        isValidNextPosition(_tar)
-      }
-      if ( [1, 3].includes(x) && checkIncludeX(x, 5) ) {
-        // x _ _ / _ _ x
-        // _ x _ / _ x _
-        // _ _ _ / _ _ _
-        const _tar = (x == 1) ? 9 : 7;
-        isValidNextPosition(_tar)
-      }
-      if ( [7, 9].includes(x) && checkIncludeX(x, 5) ) {
-        // _ _ _ / _ _ _
-        // _ x _ / _ x _
-        // _ _ x / x _ _
-        const _tar = (x == 7) ? 3 : 1;
-        isValidNextPosition(_tar)
-      }   
-        if (checkIncludeX(x, x+6) && x <= 3) {
-          // x _ _ / _ x _ / _ _ x
-          // _ _ _ / _ _ _ / _ _ _
-          // x _ _ / _ x _ / _ _ x
-          isValidNextPosition(x+3)
-        }   
-        if ( (x == 1 && checkIncludeX(x, x+8)) || (x == 3 && checkIncludeX(x, x+4)) ) {
-          // x _ _ / _ _ x
-          // _ _ _ / _ _ _
-          // _ _ x / x _ _
-          isValidNextPosition(5)
-        }
-      
-  
-  }
-  addCircle(tar);
+while (checkIncludeO(tar) || checkIncludeX(tar)) {
+tar = Math.ceil(Math.random()*9);
+}
+
+for (let x = 1; x < 10; x++) {
+if (checkIncludeX(x) && x != 5) {
+// x _ _ / _ x _ / _ _ x
+// _ _ _ / _ _ _ / _ _ _
+// x _ _ / _ x _ / _ _ x
+isValidNextPosition(5);
+}
+if (checkIncludeX(x, x+1)) {
+// x x _ / _ x x
+if ([1, 4, 7].includes(x)) {
+isValidNextPosition(x+2);
+} else if ([2, 5, 8].includes(x)) {
+isValidNextPosition(x-1)
+}
+}
+if (checkIncludeX(x, x+2) && [1, 4, 7].includes(x)) {
+// x _ x
+isValidNextPosition(x+1)
+}
+if (checkIncludeX(x, x+3) && x <= 6) {
+// x _ _ / _ x _ / _ _ x
+// x _ _ / _ x _ / _ _ x
+const _tar = (x+6 > 9) ? x-3: x+6;
+isValidNextPosition(_tar)
+}
+if ([1, 3].includes(x) && checkIncludeX(x, 5)) {
+// x _ _ / _ _ x
+// _ x _ / _ x _
+// _ _ _ / _ _ _
+const _tar = (x == 1) ? 9: 7;
+isValidNextPosition(_tar)
+}
+if ([7, 9].includes(x) && checkIncludeX(x, 5)) {
+// _ _ _ / _ _ _
+// _ x _ / _ x _
+// _ _ x / x _ _
+const _tar = (x == 7) ? 3: 1;
+isValidNextPosition(_tar)
+}
+if (checkIncludeX(x, x+6) && x <= 3) {
+// x _ _ / _ x _ / _ _ x
+// _ _ _ / _ _ _ / _ _ _
+// x _ _ / _ x _ / _ _ x
+isValidNextPosition(x+3)
+}
+if ((x == 1 && checkIncludeX(x, x+8)) || (x == 3 && checkIncludeX(x, x+4))) {
+// x _ _ / _ _ x
+// _ _ _ / _ _ _
+// _ _ x / x _ _
+isValidNextPosition(5)
+}
+
+
+}
+addCircle(tar);
 }
 
 function replay() {
-  seq = {};
-  boxes.forEach(box => {
-    box.querySelector('input').disabled = false;
-    box.querySelector('input').checked = false;
-    box.classList.remove('show-circle');
-  })
-  $('.msg').style.display = "none";
-  $('.win').classList.remove('show');
-  $('.lost').classList.remove('show');
-  $('.draw').classList.remove('show');
-  gameEnd = false;
+seq = {};
+boxes.forEach(box => {
+box.querySelector('input').disabled = false;
+box.querySelector('input').checked = false;
+box.classList.remove('show-circle');
+})
+$('.msg').style.display = "none";
+$('.win').classList.remove('show');
+$('.lost').classList.remove('show');
+$('.draw').classList.remove('show');
+gameEnd = false;
 }
-      </script>
+</script>
 </body>
 </html>
