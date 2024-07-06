@@ -24,7 +24,7 @@
     padding: 0;
 }
 
-p {
+#p {
     font-size: 28px;
     color: #af40ff;
     padding-bottom:4vh;
@@ -67,8 +67,11 @@ button:hover {
     </style>
 </head>
 <body>
-    <audio id="pop" src="https://mdnuruzzamankhan.github.io/sound/pop.mp3"></audio>
-    <p>Rock Paper Scissors</p>
+    <audio id="pop">
+    <source src="https://mdnuruzzamankhan.github.io/sound/pop.mp3">
+    <source src="sound/pop.mp3">
+    </audio>
+    <p id="p">Rock Paper Scissors</p>
     <div id="top">Your attempts = 0<br>Your score = 0</div>
     <h3>Computer :</h3>
     <span id="co"><button><i class="fas fa-handshake"></i></button><br>.....</span>
@@ -80,7 +83,7 @@ button:hover {
         <span><button onclick="playGame('scissors')"><i class="fas fa-hand-scissors"></i></button><br>Scissors</span>
     </div>
     <div class="result" id="result"><br>Choose one ...</div>
-
+    <p style="margin-top:30vh;text-align:center;font-family:Arial,sans-serif;position:relative">@ <a href="https://mdnuruzzamankhan.github.io/">Codes by Nuruzzaman</a></p>
     <script>
         var s = 0;
         var a = 0;
