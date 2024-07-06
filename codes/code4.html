@@ -45,9 +45,10 @@
             display: none;
             position: absolute;
             width: 100%;
-            height: 79vh;
+            height: 78vh;
             top: 0;
-            font-size: 8vh;
+            font-size: 15vw;
+            font-weight: bold;
             overflow: hidden;
         }
         .msg span {
@@ -55,7 +56,7 @@
             position: absolute;
             margin: 0;
             width: 100%;
-            background: rgba(205, 205, 205, 0.8);
+            background: rgba(230, 250, 250, 0.8);
             text-align: center;
             line-height: 80vh;
         }
@@ -152,6 +153,7 @@
 </head>
 <body>
     <audio id="tap" src="https://mdnuruzzamankhan.github.io/sound/tap.mp3"></audio>
+    <audio id="coin" src="sound/short-success.mp3"></audio>
     <div class="tic-tac-toe normal" id="main">
         <label class="box box-1">
             <input type="checkbox" onchange="changed(this)" data-num="1" />
@@ -202,9 +204,9 @@
 </div>
 <div class="overlay"></div>
 <div class="msg">
-<span class="win">YOU WIN!</span>
-<span class="lost">YOU LOST!</span>
-<span class="draw">DRAW!</span>
+<span class="win" style="color:green">YOU WIN!</span>
+<span class="draw" style="color:black">DRAW!</span>
+<span class="lost" style="color:red">YOU LOSE!</span>
 </div>
 
 <!-- now add javascript code -->
@@ -258,10 +260,12 @@ if (gameWon('x') || gameWon('o')) {
 const playerWon = gameWon('x') ? '.win': '.lost';
 boxes.forEach(box => box.querySelector('input').disabled = true);
 $('.msg').style.display = 'block';
+document.getElementById('coin').play();
 $(playerWon).classList.add('show');
 gameEnd = true;
 } else if (Object.values(seq).filter(Boolean).length === 9) {
 $('.msg').style.display = 'block';
+document.getElementById('coin').play();
 $('.draw').classList.add('show');
 }
 }
