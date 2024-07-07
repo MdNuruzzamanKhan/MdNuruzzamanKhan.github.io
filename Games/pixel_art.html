@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74B5JE8ZZK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-74B5JE8ZZK');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<title>Pixel Art</title>
+<style>
+    html,body {
+        margin: 0;
+        padding: 0;
+    }
+    #main {
+        display: grid;
+        grid-template-columns: repeat(20, 1fr);
+    }
+    .box {
+        background-color: white;
+        height: 5vw;
+        width: 5vw;
+    }
+</style>
+</head>
+<body>
+<div id="main">
+</div>
+<script>
+let cont = document.querySelector('#main');
+console.time("Time");
+for (let i = 0; i < 13; i++) {
+cont.innerHTML += " \
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
+                ";
+}
+console.timeEnd("Time");
+document.querySelectorAll('.box').forEach(box => {
+box.onclick = () => {
+if (box.style.backgroundColor != 'black')
+box.style.backgroundColor = 'black';
+else
+box.style.backgroundColor = 'white';
+
+}
+});
+</script>
+</body>
