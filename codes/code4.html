@@ -47,8 +47,6 @@
         width: 100%;
         height: 70vh;
         top: 0;
-        font-size: 15vw;
-        font-weight: bold;
         overflow: hidden;
     }
     .msg span {
@@ -56,8 +54,10 @@
         position: absolute;
         margin: 0;
         width: 100%;
-        background: rgba(240, 250, 250, 0.8);
+        background-color: rgba(240, 250, 250, 0.8);
         text-align: center;
+        font-size: 15vw;
+        font-weight: bold;
         line-height: 70vh;
     }
     .msg span.show {
@@ -236,7 +236,6 @@ let seq = {
 let gameEnd = false;
 
 const $ = el => document.querySelector(el);
-
 function changed(el) {
 if (el.checked) {
 el.disabled = true;
@@ -291,24 +290,23 @@ checkWin();
 
 function calculateNextPosition() {
 let tar = Math.ceil(Math.random()*9);
-let temp = tar;
+let temp = 0;
 const xo_includes = _tar => checkIncludeO(_tar) || checkIncludeX(_tar);
 const isValidNextPosition = newPos => !xo_includes(newPos) ? tar = newPos: null
 
 while (checkIncludeO(tar) || checkIncludeX(tar)) {
 tar = Math.ceil(Math.random()*9);
 }
-
 for (let i = 1; i < 10; i++) {
 
 // for X
-if (checkIncludeX(i) && i != 5) {
+//if (checkIncludeX(i) && i != 5) {
 // x _ _ / _ x _ / _ _ x
 // _ _ _ / _ _ _ / _ _ _
 // x _ _ / _ x _ / _ _ x
-isValidNextPosition(5);
-console.log(9, tar);
-}
+//isValidNextPosition(5);
+//console.log(9, tar);
+//}
 if (checkIncludeX(i, i+1)) {
 // x x _ / _ x x
 if ([1, 4, 7].includes(i)) {
@@ -362,6 +360,7 @@ isValidNextPosition(5)
 console.log(17, tar);
 }
 temp = tar;
+tar = 0;
 // for O
 if ((i == 1 && checkIncludeO(i, i+8)) || (i == 3 && checkIncludeO(i, i+4))) {
 // o _ _ / _ _ o
@@ -415,8 +414,10 @@ isValidNextPosition(i-1)
 console.log(2, tar);
 }
 }
-if (tar != temp)
-break;
+if(tar == 0)
+    tar = temp;
+else
+    break;
 }
 console.log(18, tar);
 console.log('Complete');
