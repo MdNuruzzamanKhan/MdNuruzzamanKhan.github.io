@@ -26,22 +26,52 @@
     #main {
         display: grid;
         grid-template-columns: repeat(20, 1fr);
-    }
+        }
     .box {
         background-color: white;
         height: 5vw;
-        width: 5vw;
     }
-</style>
+    #colors{
+        display:flex;
+        position:fixed;
+    }
+    #colors button{
+        width:10vw;
+        height:10vw;
+        border: 1px solid black;
+    }
+    </style>
 </head>
 <body>
-<div id="main">
-</div>
-<script>
-let cont = document.querySelector('#main');
-console.time("Time");
-for (let i = 0; i < 20; i++) {
-cont.innerHTML += " \
+    <audio id="tap">
+        <source src="https://mdnuruzzamankhan.github.io/sound/tap.mp3">
+        <source src="sound/tap.mp3">
+    </audio>
+    <div id="colors">
+        <button style="background-color:white" onclick="clr('white')"></button>
+        <button style="background-color:blueviolet" onclick="clr('blueviolet')"></button>
+        <button style="background-color:blue" onclick="clr('blue')"></button>
+        <button style="background-color:cyan" onclick="clr('cyan')"></button>
+        <button style="background-color:green" onclick="clr('green')"></button>
+        <button style="background-color:yellow" onclick="clr('yellow')"></button>
+        <button style="background-color:orange" onclick="clr('orange')"></button>
+        <button style="background-color:red" onclick="clr('red')"></button>
+        <button style="background-color:pink" onclick="clr('pink')"></button>
+        <button style="background-color:black" onclick="clr('black')"></button>
+    </div>
+    <div id="main">
+    </div>
+    <script>
+        let color = 'black';
+        function clr(x) {
+            document.getElementById('tap').play();
+            color = x;
+            // console.log(color);
+        }
+        let cont = document.querySelector('#main');
+        console.time("Time");
+        for (let i = 0; i < 20; i++) {
+            cont.innerHTML += " \
                 <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
                 <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
                 <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
@@ -73,16 +103,12 @@ cont.innerHTML += " \
                 <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
                 <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
                 ";
-}
-console.timeEnd("Time");
-document.querySelectorAll('.box').forEach(box => {
-box.onclick = () => {
-if (box.style.backgroundColor != 'black')
-box.style.backgroundColor = 'black';
-else
-box.style.backgroundColor = 'white';
-
-}
-});
-</script>
+        }
+        console.timeEnd("Time");
+        document.querySelectorAll('.box').forEach(box => {
+            box.onclick = () => {
+                box.style.backgroundColor = color;
+            }
+        });
+    </script>
 </body>
