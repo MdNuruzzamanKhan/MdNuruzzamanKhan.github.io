@@ -40,6 +40,11 @@
         height:10vw;
         border: 1px solid black;
     }
+    #colors input {
+        width:15vw;
+        height:10vw;
+        border: 1px solid black;
+    }
     </style>
 </head>
 <body>
@@ -48,29 +53,36 @@
         <source src="sound/tap.mp3">
     </audio>
     <div id="colors">
-        <button style="background-color:black" onclick="clr('black')"></button>
-        <button style="background-color:blueviolet" onclick="clr('blueviolet')"></button>
-        <button style="background-color:blue" onclick="clr('blue')"></button>
-        <button style="background-color:cyan" onclick="clr('cyan')"></button>
-        <button style="background-color:green" onclick="clr('green')"></button>
-        <button style="background-color:yellow" onclick="clr('yellow')"></button>
-        <button style="background-color:orange" onclick="clr('orange')"></button>
-        <button style="background-color:red" onclick="clr('red')"></button>
-        <button style="background-color:pink" onclick="clr('pink')"></button>
-        <button style="background-color:white" onclick="clr('white')"></button>
+        <button style="background-color:black" onclick="clr('#000000')"></button>
+        <button style="background-color:#AB02FF" onclick="clr('#AB02FF')"></button>
+        <button style="background-color:blue" onclick="clr('#0000ff')"></button>
+        <button style="background-color:#08B611" onclick="clr('#08B611')"></button>
+        <button style="background-color:yellow" onclick="clr('#ffff00')"></button>
+        <button style="background-color:red" onclick="clr('#ff0000')"></button>
+        <input type="color" id="colorPicker" value="#000000">
+        <!--<button style="background-color:pink" onclick="clr('pink')"></button>-->
+        <button style="background-color:white; width:15vw" onclick="clr('#ffffff')"></button>
+        <button style="background-color:rgba(200,200,200)" id="clearbutton"><b>C</b></button>
     </div>
     <div id="main">
     </div>
+    <p style="margin-top:2vh;text-align:center;font-family:Arial,sans-serif;position:relative">
+@ <a href="https://mdnuruzzamankhan.github.io/">Codes by Nuruzzaman</a>
     <script>
-        let color = 'black';
+        let color = '#000000';
+        let tap = document.getElementById('tap');
+        let colorPicker = document.getElementById('colorPicker');
         function clr(x) {
-            document.getElementById('tap').play();
+            tap.play();
             color = x;
-            // console.log(color);
+            colorPicker.value = color;
+        }
+        colorPicker.onchange = () => {
+            color = colorPicker.value;
         }
         let cont = document.querySelector('#main');
         console.time("Time");
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 15; i++) {
             cont.innerHTML += " \
                 <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
                 <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
@@ -110,5 +122,15 @@
                 box.style.backgroundColor = color;
             }
         });
+        
+        clearbutton.ondblclick = () => {
+            tap.play();
+            console.log('clear');
+            document.querySelectorAll('.box').forEach(box => {
+            {
+                box.style.backgroundColor = '#ffffff';
+            }
+        });
+        }
     </script>
 </body>
