@@ -41,6 +41,7 @@
             color: #6A5ACD
         }
         div h2 {
+            margin-top:20vh ;
             color: olive;
         }
     </style>
@@ -68,9 +69,12 @@
         <h1>BOUNCING BALL</h1><br>
 
         <h2 style="font-size:1.8em">Tap to start</h2>
-        <p style="margin-top:45vh">
+        <!-- <p style="margin-top:45vh">
             Author: Md. Nuruzzaman Khan
-        </p>
+        </p> -->
+        <p style="margin-top:35vh;text-align:center;font-family:Arial,sans-serif;position:relative">
+@ <a href="https://mdnuruzzamankhan.github.io/">Codes by Nuruzzaman</a>
+</p>
     </div>
 
     <img src="coin.png" style="display:none" />
@@ -192,7 +196,9 @@
 
         function gameOver() {
             div.innerHTML = '<h1>Game Over</h1><p style=\"font-size:1.8em\">Your score = '+score +'</p><br><h2>Tap to play again</h2>';
-            div.innerHTML += '<p style=\"margin-top:45vh\">Author: Md. Nuruzzaman Khan</p>'
+            div.innerHTML += '        <p style="margin-top:35vh;text-align:center;font-family:Arial,sans-serif;position:relative">\
+@ <a href="https://mdnuruzzamankhan.github.io/">Codes by Nuruzzaman</a>\
+</p>'
             canvas.style.display = 'none';
             svg.style.display = 'none';
             div.style.display = 'block';
