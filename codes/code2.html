@@ -39,7 +39,7 @@
     text-align:center;
     font-size:60px;
     font-weight:900;
-    color:blueviolet;
+    color:olive;
 }
 
 #showPoint {
@@ -75,7 +75,7 @@
     position:absolute;
     margin:0;
     top:0;
-    color: gold;
+    color: goldenrod;
     padding-left:10px;
 }
 
@@ -92,8 +92,9 @@
 
 #startMenu h1 {
     font-size:40px;
-    text-shadow:2px 3px #aaa;
+    text-shadow:3px 4px #aaa;
     font-weight:900;
+    color:FireBrick;
 }
 
 #startMenu button {
@@ -114,7 +115,7 @@
 #timerDiv {
    height:8px;
    padding:0px;
-   border:2px solid blue;
+   border:2px solid silver;
    width:50%;
    position:absolute;
    bottom:20px;
@@ -185,8 +186,8 @@
             <h1 id="title"><span style="font-size:50px">A</span>RCHERY<br><span style="font-size:50px">G</span>AME</h1>
             <button>TAP TO START</button>
             <h2>Your best = <i><span id="best"></span></i></h2>
-            <div>
-           <h3 style="font-size:1.7em">Highest = <i><span>1630</span></i></h3>
+            <div style="border:2px dashed DimGrey; margin:0 15vw;">
+           <h3 style="font-size:1.2em">Highest = <i><span>1630</span></i></h3>
            <h5>by Md. Mahiyan Zishan Chowdhury</h5>
            </div>
            <p style="margin-top:50vw">Author: Md. Nuruzzaman Khan</p>
@@ -315,7 +316,7 @@ function loadGame(){
     fwBuilder.prototype.draw = function(){
         for(var i = 0; i < this.n; i++){
             ctx2.beginPath();
-            ctx2.fillStyle='violet'
+            ctx2.fillStyle='#ff9f7c'
             ctx2.arc(this.balls[i].x,this.balls[i].y,7,0,Math.PI*2);
             ctx2.fill();
             ctx2.closePath();
@@ -372,7 +373,7 @@ function loadGame(){
         y:100,
         dy:3,
           r:50,
-          color:"gold",
+          color:"goldenrod",
           lw:3,
           start:Math.PI+Math.PI/2,
           end:Math.PI-Math.PI/2
@@ -382,7 +383,7 @@ function loadGame(){
         h:arc.r*2,
           lw:1,
           x:arc.x-25,
-          color:"gold",
+          color:"goldenrod",
           status:true
     }
 
@@ -401,7 +402,7 @@ function loadGame(){
 
     function drawBoard() {
         ctx.beginPath();
-        ctx.fillStyle='green'
+        ctx.fillStyle='DarkSlateBlue'
         ctx.fillRect(board.x,board.y-5,20,board.width+3);
         ctx.fillRect(board.x,board.y-board.height/2,board.width,board.height);
 
@@ -411,7 +412,7 @@ function loadGame(){
         ctx.fillStyle = "#36e";
         ctx.fill();
         ctx.closePath();
-        ctx.fillStyle = "gold";
+        ctx.fillStyle = "goldenrod";
     
         if(board.y >= h || board.y <= 0){
             board.dy *= -1;
@@ -461,7 +462,7 @@ function loadGame(){
                 ctx.fillRect(this.x,this.fy-3,10,6);
                 ctx.fillRect(this.x,this.fy-1,this.w,2);
                 ctx.beginPath();
-                ctx.fillStyle='gold';
+                ctx.fillStyle='goldenrod';
                 ctx.moveTo(this.x+this.w,this.fy-4);
                 ctx.lineTo(this.x+this.w+12,this.fy);
                 ctx.lineTo(this.x+this.w,this.fy+4);
@@ -550,7 +551,7 @@ function loadGame(){
                 ctx.fillRect(rope.x,arc.y-3,10,6);
                 ctx.fillRect(rope.x,arc.y-1,this.w,2);
                 ctx.beginPath();
-                ctx.fillStyle='gold'
+                ctx.fillStyle='goldenrod'
                 ctx.moveTo(rope.x+this.w,arc.y-4);
                 ctx.lineTo(rope.x+this.w+12,arc.y);
                 ctx.lineTo(rope.x+this.w,arc.y+4);
@@ -584,7 +585,7 @@ function loadGame(){
 
     function drawArc() {
         ctx.beginPath();
-        ctx.fillStyle='gold'
+        ctx.fillStyle='goldenrod'
           ctx.arc(arc.x,arc.y,arc.r,arc.start,arc.end);
           ctx.fillStyle = arc.color;
           ctx.lineWidth = arc.lw;
@@ -594,7 +595,7 @@ function loadGame(){
 
     function drawRope() {
         ctx.beginPath();
-        ctx.fillStyle='gold'
+        ctx.fillStyle='goldenrod'
           ctx.moveTo(arc.x,arc.y-arc.r);
           if(arrow1.vis && arrow2.vis){
             ctx.lineTo(rope.x,arc.y);
