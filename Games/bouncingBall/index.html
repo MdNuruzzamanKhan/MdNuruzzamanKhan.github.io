@@ -31,19 +31,20 @@
 
         div {
             text-align: center;
+            height: 100vh;
         }
 
         div h1 {
-            font-size: 2.7em;
+            font-size: 2.5em;
             color: #6A5ACD; /* Vibrant Purple for the title */
         }
 
         div h2 {
-            margin-top: 20vh;
+            margin: 30vh 0;
             color: olive;
             font-size: 1.8em;
         }
-
+        
         p {
             font-family: Arial, sans-serif;
         }
@@ -76,9 +77,7 @@
     <div id="gameScreen" style="display: none;" onclick="mainGame()">
         <h1>BOUNCING BALL</h1>
         <h2>Tap to start</h2>
-        <p style="margin-top:35vh;text-align:center;">
-            @ <a href="https://mdnuruzzamankhan.github.io/" style="color: #6A5ACD;">Codes by Nuruzzaman</a>
-        </p>
+        <p>Autor: Md. Nuruzzaman Khan</p>
     </div>
 
     <img src="coin.png" style="display:none" alt="Coin Image" />
@@ -136,8 +135,6 @@
         // Function to play the coin collection sound
         function playCoinSound() {
                 trgt.play();
-                trgt.volume = 0.8;
-            
         }
 
             // Hide the game start screen
@@ -146,7 +143,6 @@
 
             // Play background sound
             bgsound.play();
-            bgsound.volume = 0.8;
 
             const canvas = document.createElement("canvas");
             document.body.appendChild(canvas);
@@ -225,7 +221,7 @@
             const r = 12;
 
             function drawCanvas() {
-                c.fillStyle = "orangered";
+                c.fillStyle = "firebrick";
                 c.beginPath();
                 c.arc(x, y, r, 0, Math.PI * 2, false);
                 c.fill();
@@ -250,7 +246,7 @@
             }
 
             function gameOver() {
-                div.innerHTML = '<h1>Game Over</h1><p style="font-size:1.8em">Your score = ' + score + '</p><h2>Tap to play again</h2>';
+                div.innerHTML = '<h1>Your score = ' + score + '</h1><h2>Tap to play again</h2><p>Author: Md. Nuruzzaman Khan</p>';
                 div.style.display = 'block';
                 canvas.style.display = 'none';
                 svg.style.display = 'none';
