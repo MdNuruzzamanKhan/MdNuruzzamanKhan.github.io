@@ -1,17 +1,7 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74B5JE8ZZK"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
+<html lang="en">
 
-        gtag('config', 'G-74B5JE8ZZK');
-    </script>
+<head>
     <title>Bouncing Ball</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
@@ -19,206 +9,266 @@
         html, body {
             margin: 0;
             width: 100%;
-            overflow-x: hidden;
-            overflow-y: hidden;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
 
-        }
         canvas {
+            background-color: #E6F7FF; /* Light Blue background */
             border: 1px solid black;
-            z-index: 1;
             position: relative;
+            z-index: 1;
         }
+
         svg {
-            z-index: 2;
             position: absolute;
-            display: none;
+            top: 10px;
+            right: 10px;
+            z-index: 2;
+            display: none; /* Initially hidden */
         }
+
         div {
             text-align: center;
         }
+
         div h1 {
             font-size: 2.7em;
-            color: #6A5ACD
+            color: #6A5ACD; /* Vibrant Purple for the title */
         }
+
         div h2 {
-            margin-top:20vh ;
+            margin-top: 20vh;
             color: olive;
+            font-size: 1.8em;
+        }
+
+        p {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Loading message */
+        #loadingScreen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            color: cadetblue; 
+            font-size: 2em;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10; /* Display on top */
         }
     </style>
-    <script>
-        function bgsound() {
-            var bgsound = document.getElementById('myAudio');
-            bgsound.play();
-            bgsound.volume = 0.8;
-        }
-        function csound() {
-            var trgt = document.getElementById('trgt');
-            trgt.play();
-            trgt.volume = 0.8;
-        }
-    </script>
 </head>
-<body>
-    <audio id="myAudio" loop>
-        <source src="bounce.mp3" type="audio/mp3">
-    </audio>
-    <audio id="trgt">
-        <source src="https://mdnuruzzamankhan.github.io/sound/trgt.mp3" type="audio/mp3">
-    </audio>
-    <div onclick="mainGame()">
-        <h1>BOUNCING BALL</h1><br>
 
-        <h2 style="font-size:1.8em">Tap to start</h2>
-        <!-- <p style="margin-top:45vh">
-            Author: Md. Nuruzzaman Khan
-        </p> -->
-        <p style="margin-top:35vh;text-align:center;font-family:Arial,sans-serif;position:relative">
-@ <a href="https://mdnuruzzamankhan.github.io/">Codes by Nuruzzaman</a>
-</p>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <b>Game Loading...</b>
     </div>
 
-    <img src="coin.png" style="display:none" />
-<svg id="svg" height="40" width="100vw" xmlns="http://www.w3.org/2000/svg">
-    <text id="txt" x="85vw" y="30" fill="none" stroke="red" font-size="15">Skip!</text>
+    <!-- Game Screen -->
+    <div id="gameScreen" style="display: none;" onclick="mainGame()">
+        <h1>BOUNCING BALL</h1>
+        <h2>Tap to start</h2>
+        <p style="margin-top:35vh;text-align:center;">
+            @ <a href="https://mdnuruzzamankhan.github.io/" style="color: #6A5ACD;">Codes by Nuruzzaman</a>
+        </p>
+    </div>
 
-</svg>
-<script>
-    function mainGame() {
-        bgsound();
-        var img = document.querySelector("img");
-        var div = document.querySelector("div");
+    <img src="coin.png" style="display:none" alt="Coin Image" />
 
-        div.style.display = 'none';
+    <svg id="svg" height="40" width="100vw" xmlns="http://www.w3.org/2000/svg">
+        <text id="txt" x="85vw" y="30" fill="none" stroke="red" font-size="15" cursor="pointer">Skip!</text>
+    </svg>
 
-        var canvas = document.createElement("canvas");
-        document.body.appendChild(canvas);
+    <!-- Preload audio elements -->
+    <audio id="myAudio" preload="auto" loop>
+        <source src="bounce.mp3" type="audio/mp3">
+    </audio>
 
-        svg.style.display = 'block';
+    <audio id="trgt" preload="auto">
+        <source src="trgt.mp3" type="audio/mp3">
+    </audio>
 
-        canvas.style.backgroundColor = "#FFFAFA";
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        // console.log(canvas.width, canvas.height);
-        var c = canvas.getContext("2d");
-        var score = 0;
+    <script>
+        // Preload audio files using JavaScript
+        function preloadAudio() {
+            const myAudio = document.getElementById('myAudio');
+            const trgtAudio = document.getElementById('trgt');
 
-        function clearCanvas() {
-            c.clearRect(0, 0, canvas.width, canvas.height);
+            // Create promises to load audio
+            const loadMyAudio = new Promise((resolve, reject) => {
+                myAudio.addEventListener('canplaythrough', resolve, { once: true });
+                myAudio.addEventListener('error', reject, { once: true });
+            });
+
+            const loadTrgtAudio = new Promise((resolve, reject) => {
+                trgtAudio.addEventListener('canplaythrough', resolve, { once: true });
+                trgtAudio.addEventListener('error', reject, { once: true });
+            });
+
+            // Wait for both audios to preload
+            return Promise.all([loadMyAudio, loadTrgtAudio]);
         }
 
-        let car = {
-            x: 50,
-            y1: canvas.height-25,
-            width: canvas.width/4,
-            height: 20,
-            speed: 0
-        };
-        let coin = {
-            ix: 100,
-            iy: 100,
-            wh: 50
-        };
+        // Show loading screen until audio is loaded
+        preloadAudio().then(() => {
+            // Hide loading screen and show game screen when audio is preloaded
+            document.getElementById('loadingScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+        }).catch((error) => {
+            console.error("Error loading audio files:", error);
+            document.getElementById('loadingScreen').innerHTML = 'Error loading resources. Please try again.';
+        });
 
-        function coinf() {
-            csound();
-            score += 5;
-            coin.ix = Math.random()*(canvas.width-coin.wh*2)+coin.wh;
-            coin.iy = Math.random()*((canvas.height/1.2)-coin.wh*2)+coin.wh;
-            dx *= 1.017;
-            dy *= 1.017;
-        }
-        function coinf2() {
-
-            score -= 5;
-            coin.ix = Math.random()*(canvas.width-coin.wh*2)+coin.wh;
-            coin.iy = Math.random()*((canvas.height/1.2)-coin.wh*2)+coin.wh;
-
+        function mainGame() {
+            const bgsound = document.getElementById('myAudio');
+            const img = document.querySelector("img");
+            const div = document.getElementById('gameScreen');
+            const svg = document.getElementById("svg");
+            var trgt = document.getElementById('trgt');
+        // Function to play the coin collection sound
+        function playCoinSound() {
+                trgt.play();
+                trgt.volume = 0.8;
+            
         }
 
-        function drawCoin() {
-            //c.imageSmoothingEnabled = true;
-            c.drawImage(img, coin.ix, coin.iy, coin.wh, coin.wh);
-        }
+            // Hide the game start screen
+            div.style.display = 'none';
+            svg.style.display = 'block';  // Show SVG when the game starts
 
-        function moveCar(event) {
-            const rect = canvas.getBoundingClientRect();
-            if (event.touches[0]) {
-                car.x = event.touches[0].clientX - rect.left - car.width / 2;
-            } else {
-                car.x = event.clientX - rect.left - car.width / 2;
+            // Play background sound
+            bgsound.play();
+
+            const canvas = document.createElement("canvas");
+            document.body.appendChild(canvas);
+
+            canvas.style.backgroundColor = "#E6F7FF";  // Light Blue background for the game
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const c = canvas.getContext("2d");
+            let score = 0;
+
+            function clearCanvas() {
+                c.clearRect(0, 0, canvas.width, canvas.height);
             }
-        }
 
-        function drawCar() {
-            c.beginPath();
-            c.fillStyle = '#008B8B';
-            c.roundRect(car.x, car.y1, car.width, car.height, 3);
-            c.fill();
-            c.closePath();
-        }
+            let car = {
+                x: 50,
+                y1: canvas.height - 25,
+                width: canvas.width / 4,
+                height: 20
+            };
+            let coin = {
+                ix: 100,
+                iy: 100,
+                wh: 50
+            };
 
-        function drawScore() {
-            c.font = 'italic bolder 33px sarif';
-            c.strokeStyle = '#6A5ACD';
-            c.textAlign = 'center';
-            c.strokeText('Score = '+ score, canvas.width/2, 50);
-        }
-
-        let x = Math.random()*(canvas.width-30)+15;
-        let y = Math.random()*(canvas.height/2)+15;;
-
-
-        var dx = canvas.width/90.73;
-        var dy = canvas.height/160.77;
-        var r = 12;
-        function drawCanvas() {
-            c.beginPath();
-            c.arc(x, y, r, 0, Math.PI*2, false);
-            c.fillStyle = "#2F4F4F";
-            c.fill();
-
-            if (x+r >= canvas.width || x-r <= 0) {
-                dx = -dx;
+            function coinf() {
+                playCoinSound();  // Play the coin collection sound
+                score += 5;
+                coin.ix = Math.random() * (canvas.width - coin.wh * 2) + coin.wh;
+                coin.iy = Math.random() * ((canvas.height / 1.2) - coin.wh * 2) + coin.wh;
+                dx *= 1.017;
+                dy *= 1.017;
             }
-            if ((y+r >= car.y1 && y+r <= canvas.height && x+r >= car.x && x-r <= car.x+car.width) || y-r <= 0) {
-                dy = -dy;
+
+            function coinf2() {
+                score -= 5;
+                coin.ix = Math.random() * (canvas.width - coin.wh * 2) + coin.wh;
+                coin.iy = Math.random() * ((canvas.height / 1.2) - coin.wh * 2) + coin.wh;
             }
-            if (y-r >= canvas.height) {
-                clearInterval(game);
-                gameOver();
+
+            function drawCoin() {
+                c.drawImage(img, coin.ix, coin.iy, coin.wh, coin.wh);
             }
-            if ((x+r-coin.wh/5 >= coin.ix && x-r+coin.wh/5 <= coin.ix+coin.wh) && (y+r-coin.wh/5 >= coin.iy && y-r+coin.wh/5 <= coin.iy+coin.wh)) {
-                coinf();
+
+            function moveCar(event) {
+                const rect = canvas.getBoundingClientRect();
+                if (event.touches) {
+                    car.x = event.touches[0].clientX - rect.left - car.width / 2;
+                } else {
+                    car.x = event.clientX - rect.left - car.width / 2;
+                }
             }
-            x += dx;
-            y += dy;
+
+            function drawCar() {
+                c.fillStyle = '#006D77';
+                c.beginPath();
+                c.rect(car.x, car.y1, car.width, car.height);
+                c.fill();
+                c.closePath();
+            }
+
+            function drawScore() {
+                c.font = 'italic bold 33px serif';
+                c.strokeStyle = 'indigo';
+                c.textAlign = 'center';
+                c.strokeText('Score = ' + score, canvas.width / 2, 50);
+            }
+
+            let x = Math.random() * (canvas.width - 30) + 15;
+            let y = Math.random() * (canvas.height / 2) + 15;
+
+            let dx = canvas.width / 90.73;
+            let dy = canvas.height / 160.77;
+            const r = 12;
+
+            function drawCanvas() {
+                c.fillStyle = "orangered";
+                c.beginPath();
+                c.arc(x, y, r, 0, Math.PI * 2, false);
+                c.fill();
+                c.closePath();
+
+                if (x + r >= canvas.width || x - r <= 0) {
+                    dx = -dx;
+                }
+                if ((y + r >= car.y1 && x + r >= car.x && x - r <= car.x + car.width) || y - r <= 0) {
+                    dy = -dy;
+                }
+                if (y + r >= canvas.height) {
+                    clearInterval(game);
+                    gameOver();
+                }
+                if ((x + r - coin.wh / 5 >= coin.ix && x - r + coin.wh / 5 <= coin.ix + coin.wh) &&
+                    (y + r - coin.wh / 5 >= coin.iy && y - r + coin.wh / 5 <= coin.iy + coin.wh)) {
+                    coinf();
+                }
+                x += dx;
+                y += dy;
+            }
+
+            function gameOver() {
+                div.innerHTML = '<h1>Game Over</h1><p style="font-size:1.8em">Your score = ' + score + '</p><h2>Tap to play again</h2>';
+                div.style.display = 'block';
+                canvas.style.display = 'none';
+                svg.style.display = 'none';
+            }
+
+            const game = setInterval(function() {
+                clearCanvas();
+                drawCanvas();
+                drawCar();
+                drawScore();
+                drawCoin();
+            }, 15);
+
+            canvas.addEventListener('touchmove', moveCar);
+            canvas.addEventListener('mousemove', moveCar);
+            document.getElementById("txt").addEventListener('click', coinf2);
+
         }
-
-        function gameOver() {
-            div.innerHTML = '<h1>Game Over</h1><p style=\"font-size:1.8em\">Your score = '+score +'</p><br><h2>Tap to play again</h2>';
-            div.innerHTML += '        <p style="margin-top:35vh;text-align:center;font-family:Arial,sans-serif;position:relative">\
-@ <a href="https://mdnuruzzamankhan.github.io/">Codes by Nuruzzaman</a>\
-</p>'
-            canvas.style.display = 'none';
-            svg.style.display = 'none';
-            div.style.display = 'block';
-        }
-
-        var game = setInterval(loop, 15);
-        function loop() {
-            clearCanvas();
-            drawCanvas();
-            drawCar();
-            drawScore();
-            drawCoin();
-        }
-
-        canvas.addEventListener('touchmove', moveCar);
-        canvas.addEventListener('mousemove', moveCar);
-        txt.addEventListener('click', coinf2);
-
-
-    }
-</script>
+    </script>
 </body>
+
 </html>
