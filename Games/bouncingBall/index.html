@@ -156,6 +156,8 @@
 
             const c = canvas.getContext("2d");
             let score = 0;
+            let fsiz = '45px';
+            let fclr = 'indigo';
 
             function clearCanvas() {
                 c.clearRect(0, 0, canvas.width, canvas.height);
@@ -174,6 +176,8 @@
             };
 
             function coinf() {
+                fsiz = '60px';
+                fclr = 'green';
                 playCoinSound();  // Play the coin collection sound
                 score += 5;
                 coin.ix = Math.random() * (canvas.width - coin.wh * 2) + coin.wh;
@@ -183,6 +187,8 @@
             }
 
             function coinf2() {
+                fsiz = '60px';
+                fclr = 'red';
                 score -= 5;
                 coin.ix = Math.random() * (canvas.width - coin.wh * 2) + coin.wh;
                 coin.iy = Math.random() * ((canvas.height / 1.2) - coin.wh * 2) + coin.wh;
@@ -210,10 +216,12 @@
             }
 
             function drawScore() {
-                c.font = 'italic bold 33px serif';
-                c.strokeStyle = 'indigo';
+                c.font = 'italic bold '+ fsiz +' serif';
+                c.fillStyle = fclr;
                 c.textAlign = 'center';
-                c.strokeText('Score = ' + score, canvas.width / 2, 50);
+                c.fillText(score, canvas.width / 2, 50);
+                fsiz = '45px';
+                fclr = 'indigo';
             }
 
             let x = Math.random() * (canvas.width - 30) + 15;
