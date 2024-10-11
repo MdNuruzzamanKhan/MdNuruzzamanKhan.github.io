@@ -152,6 +152,7 @@
         <button class="levelButton" data-level="18">level 6</button>
         <button class="levelButton" data-level="21">level 7</button>
         <button class="levelButton" data-level="24">level 8</button>
+        <button class="levelButton" data-level="27">level 9</button>
     </div>
     <div id="timer">
         Time: <span id="time">0</span> s
@@ -217,7 +218,7 @@
         }
 
         function generateCards(numPairs) {
-            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').slice(0, numPairs);
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ$'.split('').slice(0, numPairs);
             return [...letters,
                 ...letters]; // Create pairs
         }
