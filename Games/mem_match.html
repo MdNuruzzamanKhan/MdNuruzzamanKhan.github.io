@@ -114,7 +114,15 @@
     </style>
 </head>
 <body>
+    <!-- Preload audio elements -->
+    <audio id="bgMusic" preload="auto" loop>
+        <source src='https://mdnuruzzamankhan.github.io/sound/soothing-piano-harmony-224434.mp3' type="audio/mp3">
+    </audio>
 
+    <audio id="winSound" preload="auto">
+        <source src='https://mdnuruzzamankhan.github.io/sound/cute-level-up-2-189851.mp3' type="audio/mp3">
+    </audio>
+    
     <div id="startScreen">
         <h1>Memory Match Game</h1>
         <button id="startButton"><b>Start !!!</b></button>
@@ -162,6 +170,7 @@
         document.getElementById('restartButton').addEventListener('click', restartGame);
 
         function showLevelSelection() {
+            bgMusic.play();
             document.getElementById('startScreen').style.display = 'none'; // Hide start screen
             document.getElementById('levelScreen').style.display = 'flex'; // Show level selection
         }
@@ -249,6 +258,7 @@
         }
 
         function showResult(message) {
+            winSound.play();
             const result = document.getElementById('result');
             result.innerText = message;
             resultScreen.style.display = 'block';
