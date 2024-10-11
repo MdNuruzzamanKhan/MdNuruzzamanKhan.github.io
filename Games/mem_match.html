@@ -122,6 +122,9 @@
     <audio id="winSound" preload="auto">
         <source src='https://mdnuruzzamankhan.github.io/sound/cute-level-up-2-189851.mp3' type="audio/mp3">
     </audio>
+    <audio id="matchSound" preload="auto">
+        <source src='https://mdnuruzzamankhan.github.io/sound/complete_sound-98972.mp3' type="audio/mp3">
+    </audio>
     
     <div id="startScreen">
         <h1>Memory Match Game</h1>
@@ -239,6 +242,8 @@
             const [card1,
                 card2] = flippedCards;
             if (card1.innerText === card2.innerText) {
+                matchSound.play();
+                matchSound.volume= 0.5;
                 card1.classList.add('matched');
                 card2.classList.add('matched');
                 matchedCards += 2;
