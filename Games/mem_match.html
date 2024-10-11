@@ -21,7 +21,8 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background-color: darkolivegreen; /* Green background */
+            background-color: darkolivegreen;
+            /* Green background */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -42,7 +43,8 @@
             margin-top: 10px;
         }
         #levelScreen {
-            display: none; /* Initially hidden */
+            display: none;
+            /* Initially hidden */
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -71,7 +73,8 @@
             width: 90vw;
             max-width: 600px;
             max-height: 90vh;
-            display: none; /* Hide grid initially */
+            display: none;
+            /* Hide grid initially */
         }
         .card {
             background-color: #eee;
@@ -96,149 +99,159 @@
             position: absolute;
             font-size: 24px;
             font-weight: bolder;
-            background-color: #eeffff99;
+            background-color: #eeffff50;
             height: 100vh;
             width: 100vw;
             text-align: center;
             padding-top: 65vh;
         }
+        #resultDiv{
+            background-color: #eeffff;
+            padding: 2vh 0;
+        }
     </style>
 </head>
 <body>
 
-<div id="startScreen">
-    <h1>Memory Match Game</h1>
-    <button id="startButton"><b>Start !!!</b></button>
-</div>
+    <div id="startScreen">
+        <h1>Memory Match Game</h1>
+        <button id="startButton"><b>Start !!!</b></button>
+    </div>
 
-<div id="levelScreen">
-    <h2>Select Level :</h2>
-    <button class="levelButton" data-level="3">level 1</button>
-    <button class="levelButton" data-level="6">level 2</button>
-    <button class="levelButton" data-level="9">level 3</button>
-    <button class="levelButton" data-level="12">level 4</button>
-    <button class="levelButton" data-level="15">level 5</button>
-    <button class="levelButton" data-level="18">level 6</button>
-    <button class="levelButton" data-level="21">level 7</button>
-    <button class="levelButton" data-level="24">level 8</button>
-</div>
-<div id="timer">Time: <span id="time">0</span> s</div>
-<div class="grid" id="grid"></div>
+    <div id="levelScreen">
+        <h2>Select Level :</h2>
+        <button class="levelButton" data-level="3">level 1</button>
+        <button class="levelButton" data-level="6">level 2</button>
+        <button class="levelButton" data-level="9">level 3</button>
+        <button class="levelButton" data-level="12">level 4</button>
+        <button class="levelButton" data-level="15">level 5</button>
+        <button class="levelButton" data-level="18">level 6</button>
+        <button class="levelButton" data-level="21">level 7</button>
+        <button class="levelButton" data-level="24">level 8</button>
+    </div>
+    <div id="timer">
+        Time: <span id="time">0</span> s
+    </div>
+    <div class="grid" id="grid"></div>
 
-<div id="resultScreen">
-<div id="result"></div>
-<button id="restartButton" style="display:block;margin:5vh auto">New Game</button>
-</div>
-<script>
-    let selectedLevel = 12; // Default to Easy level
-    let cardsArray = [];
-    let flippedCards = [];
-    let matchedCards = 0;
-    let timer;
-    let timeElapsed = 0;
+    <div id="resultScreen">
+        <div id="resultDiv">
+        <div id="result"></div>
+        <button id="restartButton" style="display:block;margin:2vh auto 0 auto">New Game</button>
+        </div>
+    </div>
+    <script>
+        let selectedLevel = 12; // Default to Easy level
+        let cardsArray = [];
+        let flippedCards = [];
+        let matchedCards = 0;
+        let timer;
+        let timeElapsed = 0;
 
-    // Start the game
-    document.getElementById('startButton').addEventListener('click', showLevelSelection);
-    document.querySelectorAll('.levelButton').forEach(button => {
-        button.addEventListener('click', (e) => {
-            selectedLevel = parseInt(e.target.dataset.level);
-            startGame();
+        // Start the game
+        document.getElementById('startButton').addEventListener('click', showLevelSelection);
+        document.querySelectorAll('.levelButton').forEach(button => {
+            button.addEventListener('click', (e) => {
+                selectedLevel = parseInt(e.target.dataset.level);
+                startGame();
+            });
         });
-    });
 
-    document.getElementById('restartButton').addEventListener('click', restartGame);
+        document.getElementById('restartButton').addEventListener('click', restartGame);
 
-    function showLevelSelection() {
-        document.getElementById('startScreen').style.display = 'none'; // Hide start screen
-        document.getElementById('levelScreen').style.display = 'flex'; // Show level selection
-    }
-
-    function startGame() {
-        document.getElementById('levelScreen').style.display = 'none'; // Hide level screen
-        createGrid(); // Create the grid
-        document.getElementById('grid').style.display = 'grid'; // Show grid
-        startTimer(); // Start the timer
-        document.getElementById('timer').style.display = 'block'; // Hide restart button
-    }
-
-    function restartGame() {
-        timeElapsed = 0; // Reset the timer
-        document.getElementById('time').innerText = timeElapsed; // Reset timer display
-        matchedCards = 0; // Reset matched cards count
-        cardsArray = []; // Clear card array
-        flippedCards = []; // Clear flipped cards
-        document.getElementById('grid').style.display = 'none'; // Hide grid
-        document.getElementById('timer').style.display = 'none'; // Hide timer
-        document.getElementById('resultScreen').style.display = 'none'; // Hide result message
-        document.getElementById('levelScreen').style.display = 'flex'; // Show level selection
-    }
-
-    function startTimer() {
-        timer = setInterval(() => {
-            timeElapsed++;
-            document.getElementById('time').innerText = timeElapsed; // Update timer display
-        }, 1000);
-    }
-
-    function generateCards(numPairs) {
-        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').slice(0, numPairs);
-        return [...letters, ...letters]; // Create pairs
-    }
-
-    function shuffle(array) {
-        return array.sort(() => 0.5 - Math.random());
-    }
-
-    function createGrid() {
-        const grid = document.getElementById('grid');
-        cardsArray = shuffle(generateCards(selectedLevel)); // Generate and shuffle cards
-        grid.innerHTML = ''; // Clear previous cards
-        cardsArray.forEach((text) => {
-            const card = document.createElement('div');
-            card.classList.add('card');
-            card.innerText = text;
-            card.addEventListener('click', () => flipCard(card));
-            grid.appendChild(card);
-        });
-    }
-
-    function flipCard(card) {
-        if (flippedCards.length < 2 && !card.classList.contains('flipped') && !card.classList.contains('matched')) {
-            card.classList.add('flipped');
-            flippedCards.push(card);
-            if (flippedCards.length === 2) {
-                checkMatch();
-            }
+        function showLevelSelection() {
+            document.getElementById('startScreen').style.display = 'none'; // Hide start screen
+            document.getElementById('levelScreen').style.display = 'flex'; // Show level selection
         }
-    }
 
-    function checkMatch() {
-        const [card1, card2] = flippedCards;
-        if (card1.innerText === card2.innerText) {
-            card1.classList.add('matched');
-            card2.classList.add('matched');
-            matchedCards += 2;
-            if (matchedCards === cardsArray.length) {
-                clearInterval(timer); // Stop the timer
-                document.getElementById('restartButton').style.display = 'block'; // Show restart button
-                setTimeout(() => showResult('Level completed!!!\nTime elapsed: ' + timeElapsed + ' s'), 300);
-            }
-            flippedCards = [];
-        } else {
-            setTimeout(() => {
-                card1.classList.remove('flipped');
-                card2.classList.remove('flipped');
-                flippedCards = [];
+        function startGame() {
+            document.getElementById('levelScreen').style.display = 'none'; // Hide level screen
+            createGrid(); // Create the grid
+            document.getElementById('grid').style.display = 'grid'; // Show grid
+            startTimer(); // Start the timer
+            document.getElementById('timer').style.display = 'block'; // Hide restart button
+        }
+
+        function restartGame() {
+            timeElapsed = 0; // Reset the timer
+            document.getElementById('time').innerText = timeElapsed; // Reset timer display
+            matchedCards = 0; // Reset matched cards count
+            cardsArray = []; // Clear card array
+            flippedCards = []; // Clear flipped cards
+            document.getElementById('grid').style.display = 'none'; // Hide grid
+            document.getElementById('timer').style.display = 'none'; // Hide timer
+            document.getElementById('resultScreen').style.display = 'none'; // Hide result message
+            document.getElementById('levelScreen').style.display = 'flex'; // Show level selection
+        }
+
+        function startTimer() {
+            timer = setInterval(() => {
+                timeElapsed++;
+                document.getElementById('time').innerText = timeElapsed; // Update timer display
             }, 1000);
         }
-    }
 
-    function showResult(message) {
-        const result = document.getElementById('result');
-        result.innerText = message;
-        resultScreen.style.display = 'block';
-    }
-</script>
+        function generateCards(numPairs) {
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').slice(0, numPairs);
+            return [...letters,
+                ...letters]; // Create pairs
+        }
+
+        function shuffle(array) {
+            return array.sort(() => 0.5 - Math.random());
+        }
+
+        function createGrid() {
+            const grid = document.getElementById('grid');
+            cardsArray = shuffle(generateCards(selectedLevel)); // Generate and shuffle cards
+            grid.innerHTML = ''; // Clear previous cards
+            cardsArray.forEach((text) => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.innerText = text;
+                card.addEventListener('click', () => flipCard(card));
+                grid.appendChild(card);
+            });
+        }
+
+        function flipCard(card) {
+            if (flippedCards.length < 2 && !card.classList.contains('flipped') && !card.classList.contains('matched')) {
+                card.classList.add('flipped');
+                flippedCards.push(card);
+                if (flippedCards.length === 2) {
+                    checkMatch();
+                }
+            }
+        }
+
+        function checkMatch() {
+            const [card1,
+                card2] = flippedCards;
+            if (card1.innerText === card2.innerText) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matchedCards += 2;
+                if (matchedCards === cardsArray.length) {
+                    clearInterval(timer); // Stop the timer
+                    document.getElementById('restartButton').style.display = 'block'; // Show restart button
+                    setTimeout(() => showResult('Level completed !!!\nTime elapsed: ' + timeElapsed + ' s'), 300);
+                }
+                flippedCards = [];
+            } else {
+                setTimeout(() => {
+                    card1.classList.remove('flipped');
+                    card2.classList.remove('flipped');
+                    flippedCards = [];
+                }, 1000);
+            }
+        }
+
+        function showResult(message) {
+            const result = document.getElementById('result');
+            result.innerText = message;
+            resultScreen.style.display = 'block';
+        }
+    </script>
 
 </body>
 </html>
