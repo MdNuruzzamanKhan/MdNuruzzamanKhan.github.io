@@ -300,34 +300,31 @@ tar = Math.ceil(Math.random()*9);
 for (let i = 1; i < 10; i++) {
 
 // for X
-//if (checkIncludeX(i) && i != 5) {
-// x _ _ / _ x _ / _ _ x
-// _ _ _ / _ _ _ / _ _ _
-// x _ _ / _ x _ / _ _ x
-//isValidNextPosition(5);
-//console.log(9, tar);
-//}
+if (checkIncludeX(i) && i != 5) {
+isValidNextPosition(5);
+// console.log(9, tar);
+}
 if (checkIncludeX(i, i+1)) {
 // x x _ / _ x x
 if ([1, 4, 7].includes(i)) {
 isValidNextPosition(i+2);
-console.log(10, tar);
+// console.log(10, tar);
 } else if ([2, 5, 8].includes(i)) {
 isValidNextPosition(i-1)
-console.log(11, tar);
+// console.log(11, tar);
 }
 }
 if (checkIncludeX(i, i+2) && [1, 4, 7].includes(i)) {
 // x _ x
 isValidNextPosition(i+1)
-console.log(12, tar);
+// console.log(12, tar);
 }
 if (checkIncludeX(i, i+3) && i <= 6) {
 // x _ _ / _ x _ / _ _ x
 // x _ _ / _ x _ / _ _ x
 const _tar = (i+6 > 9) ? i-3: i+6;
 isValidNextPosition(_tar)
-console.log(13, tar);
+// console.log(13, tar);
 }
 if ([1, 3].includes(i) && checkIncludeX(i, 5)) {
 // x _ _ / _ _ x
@@ -335,7 +332,7 @@ if ([1, 3].includes(i) && checkIncludeX(i, 5)) {
 // _ _ _ / _ _ _
 const _tar = (i == 1) ? 9: 7;
 isValidNextPosition(_tar)
-console.log(14, tar);
+// console.log(14, tar);
 }
 if ([7, 9].includes(i) && checkIncludeX(i, 5)) {
 // _ _ _ / _ _ _
@@ -343,21 +340,21 @@ if ([7, 9].includes(i) && checkIncludeX(i, 5)) {
 // _ _ x / x _ _
 const _tar = (i == 7) ? 3: 1;
 isValidNextPosition(_tar)
-console.log(15, tar);
+// console.log(15, tar);
 }
 if (checkIncludeX(i, i+6) && i <= 3) {
 // x _ _ / _ x _ / _ _ x
 // _ _ _ / _ _ _ / _ _ _
 // x _ _ / _ x _ / _ _ x
 isValidNextPosition(i+3)
-console.log(16, tar);
+// console.log(16, tar);
 }
 if ((i == 1 && checkIncludeX(i, i+8)) || (i == 3 && checkIncludeX(i, i+4))) {
 // x _ _ / _ _ x
 // _ _ _ / _ _ _
 // _ _ x / x _ _
 isValidNextPosition(5)
-console.log(17, tar);
+// console.log(17, tar);
 }
 temp = tar;
 tar = 0;
@@ -367,14 +364,14 @@ if ((i == 1 && checkIncludeO(i, i+8)) || (i == 3 && checkIncludeO(i, i+4))) {
 // _ _ _ / _ _ _
 // _ _ o / o _ _
 isValidNextPosition(5)
-console.log(8, tar);
+// console.log(8, tar);
 }
 if (checkIncludeO(i, i+6) && i <= 3) {
 // o _ _ / _ o _ / _ _ o
 // _ _ _ / _ _ _ / _ _ _
 // o _ _ / _ o _ / _ _ o
 isValidNextPosition(i+3)
-console.log(7, tar);
+// console.log(7, tar);
 }
 if ([7, 9].includes(i) && checkIncludeO(i, 5)) {
 // _ _ _ / _ _ _
@@ -382,7 +379,7 @@ if ([7, 9].includes(i) && checkIncludeO(i, 5)) {
 // _ _ o / o _ _
 const _tar = (i == 7) ? 3: 1;
 isValidNextPosition(_tar)
-console.log(6, tar);
+// console.log(6, tar);
 }
 if ([1, 3].includes(i) && checkIncludeO(i, 5)) {
 // o _ _ / _ _ o
@@ -390,28 +387,28 @@ if ([1, 3].includes(i) && checkIncludeO(i, 5)) {
 // _ _ _ / _ _ _
 const _tar = (i == 1) ? 9: 7;
 isValidNextPosition(_tar)
-console.log(5, tar);
+// console.log(5, tar);
 }
 if (checkIncludeO(i, i+3) && i <= 6) {
 // o _ _ / _ o _ / _ _ o
 // o _ _ / _ o _ / _ _ o
 const _tar = (i+6 > 9) ? i-3: i+6;
 isValidNextPosition(_tar)
-console.log(4, tar);
+// console.log(4, tar);
 }
 if (checkIncludeO(i, i+2) && [1, 4, 7].includes(i)) {
 // o _ o
 isValidNextPosition(i+1)
-console.log(3, tar);
+// console.log(3, tar);
 }
 if (checkIncludeO(i, i+1)) {
 // o o _ / _ o o
 if ([1, 4, 7].includes(i)) {
 isValidNextPosition(i+2);
-console.log(1, tar);
+// console.log(1, tar);
 } else if ([2, 5, 8].includes(i)) {
 isValidNextPosition(i-1)
-console.log(2, tar);
+// console.log(2, tar);
 }
 }
 if(tar == 0)
@@ -419,8 +416,8 @@ if(tar == 0)
 else
     break;
 }
-console.log(18, tar);
-console.log('Complete');
+// console.log(18, tar);
+// console.log('Complete');
 addCircle(tar);
 }
 
