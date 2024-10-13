@@ -1,117 +1,132 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-74B5JE8ZZK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74B5JE8ZZK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
 
-  gtag('config', 'G-74B5JE8ZZK');
-</script>
-	<meta charset="UTF-8">
+        gtag('config', 'G-74B5JE8ZZK');
+    </script>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Age Calculator</title>
-	<style>
-		body {
-			background-color: #f2f2f2;
-			font-family: Arial, sans-serif;
-			color: #333;
-			margin: 0;
-			padding: 0;
-			height:500px;
-		}
-		h1 {
-			background-color: #008080;
-			color: white;
-			padding: 20px;
-			margin-top: 0;
-		}
-		form {
-			background-color: white;
-			padding: 20px;
-			margin: 20px;
-			border-radius: 5px;
-			box-shadow: 0 0 10px rgba(0,0,0,0.2);
-		}
-		label {
-			display: block;
-			margin-bottom: 10px;
-			font-weight: bold;
-		}
-		input[type="date"], input[type="text"] {
-			padding: 10px;
-			border: 1px solid #ccc;
-			border-radius: 5px;
-			font-size: 16px;
-			margin-bottom: 20px;
-			width: 100%;
-			box-sizing: border-box;
-		}
-		input[type="button"] {
-			background-color: #008080;
-			color: white;
-			padding: 10px 20px;
-			border: none;
-			border-radius: 5px;
-			font-size: 16px;
-			cursor: pointer;
-			margin-bottom: 20px;
-			transition: background-color 0.2s ease;
-		}
-		input[type="button"]:hover {
-			background-color: #005757;
-		}
-		.follow-button {
-			display: inline-block;
-			background-color: #3b5998;
-			color: white;
-			padding: 10px 20px;
-			border: none;
-			border-radius: 5px;
-			font-size: 16px;
-			cursor: pointer;
-			transition: background-color 0.2s ease;
-			text-decoration: none;
-		}
-		.follow-button:hover {
-			background-color: #2f477a;
-		}
-	</style>
+    <title>Age Calculator</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            height: 500px;
+        }
+        h1 {
+            background-color: #008080;
+            color: white;
+            padding: 20px;
+            margin-top: 0;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="date"], input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input[type="button"] {
+            background-color: #008080;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background-color 0.2s ease;
+        }
+        input[type="button"]:hover {
+            background-color: #005757;
+        }
+        .follow-button {
+            display: inline-block;
+            background-color: #3b5998;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+        }
+        .follow-button:hover {
+            background-color: #2f477a;
+        }
+    </style>
 </head>
 <body>
-	<h1>Age Calculator</h1>
-	<form>
-		<label for="dob">Date of Birth:</label>
-		<input type="date" id="dob" name="dob" required>
-		<input type="button" id="calc" name="calc" value="Calculate Age">
-		<label for="age">Your Age:</label>
-		<input type="text" id="age" name="age" readonly>
-	
-	</form>
-	
+    <h1>Age Calculator</h1>
+    <form>
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required>
+        <input type="button" id="calc" name="calc" value="Calculate Age">
+        <label for="age">Your Age:</label>
+        <input type="text" id="age" name="age" readonly>
 
-	<script>
-		document.getElementById("calc").onclick = function() {
-			var dob = document.getElementById("dob").value;
-			var today = new Date();
-			var birthDate = new Date(dob);
-            var day = today.getDate() - birthDate.getDate();
-			var age = today.getFullYear() - birthDate.getFullYear();
-            var yr = today.getFullYear();
-            var mn = today.getMonth() + 1;
-			var monthDiff = today.getMonth() - birthDate.getMonth();
-            if(mn==5||mn==7||mn==10||mn==12){ dy = 30}
-            else if(mn==3){dy = 28}
-            else {dy = 31}
-            if (day <0){day +=dy; monthDiff--;}
-			if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-				age--;
-			}
-            if (monthDiff < 0){monthDiff +=12;}
-			document.getElementById("age").value = age +" Year "+ monthDiff +" Month "+ day +" Day";
-		}
-	</script>
+    </form>
+
+
+    <script>
+        document.getElementById("calc").onclick = function() {
+            var dob = document.getElementById("dob").value;
+            var today = new Date();
+            var birthDate = new Date(dob);
+
+            // Calculate the difference in milliseconds
+            var ageDiff = today - birthDate;
+
+            // Convert milliseconds to years
+            var age = new Date(ageDiff).getUTCFullYear() - 1970; // Subtract 1970 for UTC years
+
+            // Calculate months and days
+            var monthDiff = today.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0) {
+                monthDiff += 12;
+                age--; // Decrease age if the current month is before the birth month
+            }
+
+            var dayDiff = today.getDate() - birthDate.getDate();
+            if (dayDiff < 0) {
+                var lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+                dayDiff += lastMonth.getDate(); // Get last day of the previous month
+                monthDiff--; // Decrease month difference if day difference is negative
+                if (monthDiff < 0) {
+                    monthDiff += 12; // Adjust month if necessary
+                    age--; // Decrease age if the last month was a year
+                }
+            }
+
+            // Output the result
+            document.getElementById("age").value = age + " Year " + monthDiff + " Month " + dayDiff + " Day";
+        }
+    </script>
 </body>
 </html>
