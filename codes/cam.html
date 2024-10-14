@@ -72,6 +72,7 @@
             display: none;  
             text-decoration: none;
             text-align: center;
+            width: 100px;
         } 
 
         #captureButton {
@@ -82,7 +83,19 @@
             background-color: #218838;
         }
         #canvas {
+            position: relative;
             border: 5px solid #bbb;
+        }
+        #preview{
+            position: absolute;
+            background-color: #eeeeee95;
+            width: 100vw;
+            height: 150vh;
+            padding-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         /* Small devices styling */
@@ -110,21 +123,26 @@
     <a id="switchCameraButton" href="#cameraFeed"><i class="fa-solid fa-rotate"></i></a>
     
     <!-- a to capture the photo -->
-    <a id="captureButton" href="#canvas"><i class="fa-solid fa-camera"></i></a>
+    <a id="captureButton" href="#preview"><i class="fa-solid fa-camera"></i></a>
+    </div>
+    <div id="preview" style="display:none;">
+    <!-- Canvas to display the captured image (hidden) -->
+    <canvas id="canvas" style="display:block;"></canvas>
     <!-- a to save the photo -->
     <a id="saveButton" download="captured_photo.png"><i class="fa-solid fa-download"></i></a>
     </div>
-    
-    <!-- Canvas to display the captured image (hidden) -->
-    <canvas id="canvas" style="display:none;"></canvas>
-    
     <script>
         const video = document.getElementById('cameraFeed');
         const canvas = document.getElementById('canvas');
+        const preview = document.getElementById('preview');
         const context = canvas.getContext('2d');
         const captureButton = document.getElementById('captureButton');
         const saveButton = document.getElementById('saveButton');
         const switchCameraButton = document.getElementById('switchCameraButton');
+        
+        preview.addEventListener('click', ()=>{
+            preview.style.display = 'none';
+        });
 
         let currentStream;
         let currentCamera = 'environment'; // Start with the back camera
@@ -159,7 +177,7 @@
             // Set canvas size to match the video dimensions
             canvas.width = video.videoWidth/2;
             canvas.height = video.videoHeight/2;
-            canvas.style.display = 'block';
+            preview.style.display = 'flex';
 
             // Draw the current frame from the video to the canvas
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
