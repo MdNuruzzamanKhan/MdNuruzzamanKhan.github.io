@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74B5JE8ZZK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-74B5JE8ZZK');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Camera !!!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 15px;
+        }
+
+        /* h1 {
+            color: #4a4a4a;
+            font-size: 24px;
+            margin-bottom: 20px;
+        } */
+
+        #cameraFeed {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 2px solid #dddddd;
+            background-color: #ffffff;
+        }
+        #control {
+            display: flex;
+            gap: 50px;
+        }
+
+        a, #saveButton {
+            margin: 10px 0;
+            font-size: 36px;
+            padding:14px 16px ;
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            background-color: #007bff;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            /* width: 50vw; */
+            transition: background-color 0.3s ease;
+        }
+
+        a:active, #saveButton:active {
+            background-color: #0056b3;
+        }
+
+         #saveButton {
+            background-color: blueviolet;
+            display: none;  
+            text-decoration: none;
+            text-align: center;
+        } 
+
+        #captureButton {
+            background-color: #28a745;
+        }
+
+        #captureButton:active {
+            background-color: #218838;
+        }
+
+        /* Small devices styling */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 20px;
+            }
+
+            a, #saveButton {
+                font-size: 32px;
+                /* width: 80vw; */
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- <h1>Capture and Save Photo</h1> -->
+    
+    <!-- Video element for the camera feed -->
+    <video id="cameraFeed" autoplay playsinline></video>
+    
+    <div id="control">
+    <!-- a to switch camera -->
+    <a id="switchCameraButton" href="#cameraFeed"><i class="fa-solid fa-rotate"></i></a>
+    
+    <!-- a to capture the photo -->
+    <a id="captureButton" href="#canvas"><i class="fa-solid fa-camera"></i></a>
+    <!-- a to save the photo -->
+    <a id="saveButton" download="captured_photo.png"><i class="fa-solid fa-download"></i></a>
+    </div>
+    
+    <!-- Canvas to display the captured image (hidden) -->
+    <canvas id="canvas" style="display:none;"></canvas>
+    
+    <script>
+        const video = document.getElementById('cameraFeed');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const captureButton = document.getElementById('captureButton');
+        const saveButton = document.getElementById('saveButton');
+        const switchCameraButton = document.getElementById('switchCameraButton');
+
+        let currentStream;
+        let currentCamera = 'environment'; // Start with the back camera
+
+        // Function to start the video stream
+        function startCamera(camera) {
+            const constraints = {
+                video: { facingMode: camera } // Use specified camera
+            };
+
+            // Stop the current stream if it exists
+            if (currentStream) {
+                currentStream.getTracks().forEach(track => track.stop());
+            }
+
+            // Request access to the webcam
+            navigator.mediaDevices.getUserMedia(constraints)
+                .then(function(stream) {
+                    currentStream = stream;
+                    video.srcObject = stream;
+                })
+                .catch(function(err) {
+                    console.log("Error: " + err);
+                });
+        }
+
+        // Start the back camera on load
+        startCamera(currentCamera);
+
+        // Capture the image when the a is clicked
+        captureButton.addEventListener('click', function() {
+            // Set canvas size to match the video dimensions
+            canvas.width = video.videoWidth/3;
+            canvas.height = video.videoHeight/3;
+            canvas.style.display = 'block';
+
+            // Draw the current frame from the video to the canvas
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Convert the canvas content to a data URL (base64 image string)
+            const imageDataURL = canvas.toDataURL('image/png');
+
+            // Set the download link href to the image data URL
+            saveButton.href = imageDataURL;
+            
+            saveButton.download = (new Date()).toLocaleString() + ".png";
+
+            // Display the save a
+            saveButton.style.display = 'inline-block';
+        });
+
+        // Switch camera when the a is clicked
+        switchCameraButton.addEventListener('click', function() {
+            currentCamera = currentCamera === 'environment' ? 'user' : 'environment'; // Toggle camera
+            startCamera(currentCamera); // Restart camera with the new facing mode
+        });
+    </script>
+</body>
+</html>
