@@ -30,6 +30,7 @@
 
         #cameraFeed {
             width: 100%;
+            max-width: 400px;
             height: auto;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -71,6 +72,8 @@
 
         #canvas {
             position: relative;
+            width: 50%;
+            height: auto;
             border: 5px solid #bbb;
         }
 
@@ -136,9 +139,8 @@ function startCamera(camera) {
     const constraints = {
         video: {
             facingMode: camera,
-            aspectRatio: { ideal: 1.333333333},
-            width: { ideal: 1280 },
-            //height: { ideal: 720 }
+            width: { ideal: 1920 },
+            height: { ideal: 1080 }
         }
     };
 
@@ -165,8 +167,8 @@ startCamera(currentCamera);
 // Capture the image when the button is clicked
 captureButton.addEventListener('click', function() {
     // Set canvas size to match the video dimensions
-    canvas.width = video.videoWidth/4;
-    canvas.height = video.videoHeight/4;
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
     preview.style.display = 'flex';
 
     // Draw the current frame from the video to the canvas
