@@ -180,8 +180,8 @@ captureButton.addEventListener('click', function() {
     // Set the download link href to the image data URL
     saveButton.href = imageDataURL;
 
-    saveButton.download = `photo_${(new Date()).toLocaleString()}.png`;
 
+    saveButton.download = `photo_${(new Date()).toLocaleString()}.jpeg`;
     // Display the save button
     saveButton.style.display = 'inline-block';
 });
