@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-74B5JE8ZZK"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -28,65 +28,52 @@
             padding: 15px;
         }
 
-        /* h1 {
-            color: #4a4a4a;
-            font-size: 24px;
-            margin-bottom: 20px;
-        } */
-
         #cameraFeed {
             width: 100%;
-            max-width: 400px;
             height: auto;
             border-radius: 15px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             border: 2px solid #dddddd;
             background-color: #ffffff;
         }
+
         #control {
             display: flex;
             gap: 50px;
+            margin-top: 10px;
         }
 
-        a, #saveButton {
-            margin: 10px 0;
+        a {
             font-size: 36px;
-            padding:14px 16px ;
+            padding: 14px 16px;
             border: none;
             border-radius: 8px;
             color: #ffffff;
-            background-color: #007bff;
+            background-color: dodgerblue;
             cursor: pointer;
             text-align: center;
             text-decoration: none;
-            /* width: 50vw; */
             transition: background-color 0.3s ease;
         }
 
-        a:active, #saveButton:active {
-            background-color: #0056b3;
+        #captureButton {
+            background-color: green;
         }
 
-         #saveButton {
+        #saveButton {
+            margin-top: 10px;
             background-color: blueviolet;
-            display: none;  
-            text-decoration: none;
+            display: none;
             text-align: center;
             width: 100px;
-        } 
-
-        #captureButton {
-            background-color: #28a745;
         }
 
-        #captureButton:active {
-            background-color: #218838;
-        }
         #canvas {
             position: relative;
             border: 5px solid #bbb;
         }
-        #preview{
+
+        #preview {
             position: absolute;
             background-color: #eeeeee95;
             width: 100vw;
@@ -98,107 +85,109 @@
             justify-content: center;
         }
 
-        /* Small devices styling */
         @media (max-width: 600px) {
-            h1 {
-                font-size: 20px;
-            }
-
-            a, #saveButton {
+            a {
                 font-size: 32px;
-                /* width: 80vw; */
                 padding: 10px 12px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- <h1>Capture and Save Photo</h1> -->
-    
-    <!-- Video element for the camera feed -->
-    <video id="cameraFeed" autoplay playsinline></video>
-    
-    <div id="control">
-    <!-- a to switch camera -->
+
+<!-- Video element for the camera feed -->
+<video id="cameraFeed" autoplay playsinline></video>
+
+<div id="control">
+    <!-- Button to switch camera -->
     <a id="switchCameraButton" href="#cameraFeed"><i class="fa-solid fa-rotate"></i></a>
-    
-    <!-- a to capture the photo -->
+
+    <!-- Button to capture the photo -->
     <a id="captureButton" href="#preview"><i class="fa-solid fa-camera"></i></a>
-    </div>
-    <div id="preview" style="display:none;">
+</div>
+
+<div id="preview" style="display:none;">
     <!-- Canvas to display the captured image (hidden) -->
     <canvas id="canvas" style="display:block;"></canvas>
-    <!-- a to save the photo -->
+
+    <!-- Button to save the photo -->
     <a id="saveButton" download="captured_photo.png"><i class="fa-solid fa-download"></i></a>
-    </div>
-    <script>
-        const video = document.getElementById('cameraFeed');
-        const canvas = document.getElementById('canvas');
-        const preview = document.getElementById('preview');
-        const context = canvas.getContext('2d');
-        const captureButton = document.getElementById('captureButton');
-        const saveButton = document.getElementById('saveButton');
-        const switchCameraButton = document.getElementById('switchCameraButton');
-        
-        preview.addEventListener('click', ()=>{
-            preview.style.display = 'none';
-        });
+</div>
 
-        let currentStream;
-        let currentCamera = 'environment'; // Start with the back camera
+<script>
+const video = document.getElementById('cameraFeed');
+const canvas = document.getElementById('canvas');
+const preview = document.getElementById('preview');
+const context = canvas.getContext('2d');
+const captureButton = document.getElementById('captureButton');
+const saveButton = document.getElementById('saveButton');
+const switchCameraButton = document.getElementById('switchCameraButton');
 
-        // Function to start the video stream
-        function startCamera(camera) {
-            const constraints = {
-                video: { facingMode: camera } // Use specified camera
-            };
+preview.addEventListener('click', () => {
+    preview.style.display = 'none';
+});
 
-            // Stop the current stream if it exists
-            if (currentStream) {
-                currentStream.getTracks().forEach(track => track.stop());
-            }
+let currentStream;
+let currentCamera = 'user'; // Start with the front camera
 
-            // Request access to the webcam
-            navigator.mediaDevices.getUserMedia(constraints)
-                .then(function(stream) {
-                    currentStream = stream;
-                    video.srcObject = stream;
-                })
-                .catch(function(err) {
-                    console.log("Error: " + err);
-                });
+// Function to start the video stream
+function startCamera(camera) {
+    const constraints = {
+        video: {
+            facingMode: camera,
+            aspectRatio: { ideal: 1.777777778 },
+            width: { ideal: 1280 },
+            height: { ideal: 720 }
         }
+    };
 
-        // Start the back camera on load
-        startCamera(currentCamera);
+    // Stop the current stream if it exists
+    if (currentStream) {
+        currentStream.getTracks().forEach(track => track.stop());
+    }
 
-        // Capture the image when the a is clicked
-        captureButton.addEventListener('click', function() {
-            // Set canvas size to match the video dimensions
-            canvas.width = video.videoWidth/2;
-            canvas.height = video.videoHeight/2;
-            preview.style.display = 'flex';
+    // Request access to the webcam
+    navigator.mediaDevices.getUserMedia(constraints)
+    .then(function(stream) {
+        currentStream = stream;
+        video.srcObject = stream;
+    })
+    .catch(function(err) {
+        alert("Camera access denied or not available.");
+        console.error("Error: " + err);
+    });
+}
 
-            // Draw the current frame from the video to the canvas
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+// Start the back camera on load
+startCamera(currentCamera);
 
-            // Convert the canvas content to a data URL (base64 image string)
-            const imageDataURL = canvas.toDataURL('image/png');
+// Capture the image when the button is clicked
+captureButton.addEventListener('click', function() {
+    // Set canvas size to match the video dimensions
+    canvas.width = video.videoWidth/3;
+    canvas.height = video.videoHeight/3;
+    preview.style.display = 'flex';
 
-            // Set the download link href to the image data URL
-            saveButton.href = imageDataURL;
-            
-            saveButton.download = (new Date()).toLocaleString() + ".png";
+    // Draw the current frame from the video to the canvas
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-            // Display the save a
-            saveButton.style.display = 'inline-block';
-        });
+    // Convert the canvas content to a data URL (base64 image string)
+    const imageDataURL = canvas.toDataURL('image/png');
 
-        // Switch camera when the a is clicked
-        switchCameraButton.addEventListener('click', function() {
-            currentCamera = currentCamera === 'environment' ? 'user' : 'environment'; // Toggle camera
-            startCamera(currentCamera); // Restart camera with the new facing mode
-        });
-    </script>
+    // Set the download link href to the image data URL
+    saveButton.href = imageDataURL;
+
+    saveButton.download = `photo_${(new Date()).toLocaleString()}.png`;
+
+    // Display the save button
+    saveButton.style.display = 'inline-block';
+});
+
+// Switch camera when the button is clicked
+switchCameraButton.addEventListener('click', function() {
+    currentCamera = currentCamera === 'environment' ? 'user' : 'environment'; // Toggle camera
+    startCamera(currentCamera); // Restart camera with the new facing mode
+});
+</script>
 </body>
 </html>
