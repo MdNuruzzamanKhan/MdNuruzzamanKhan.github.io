@@ -29,7 +29,7 @@
         }
 
         #cameraFeed {
-            width: 100%;
+            width: calc(100vw - 30px);
             max-width: 400px;
             height: auto;
             border-radius: 15px;
@@ -72,16 +72,16 @@
 
         #canvas {
             position: relative;
-            width: 50%;
+            width: min(50%, 200px);
             height: auto;
-            border: 5px solid #bbb;
+            border: 5px solid #aaa;
         }
 
         #preview {
             position: absolute;
             background-color: #eeeeee95;
             width: 100vw;
-            height: 150vh;
+            height: 100vh;
             padding-top: 30px;
             display: flex;
             flex-direction: column;
