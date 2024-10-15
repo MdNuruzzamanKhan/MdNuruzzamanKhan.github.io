@@ -115,7 +115,7 @@
     <canvas id="canvas" style="display:block;"></canvas>
 
     <!-- Button to save the photo -->
-    <a id="saveButton" download="captured_photo.png"><i class="fa-solid fa-download"></i></a>
+    <a id="saveButton" download="captured_photo.jpeg"><i class="fa-solid fa-download"></i></a>
 </div>
 
 <script>
@@ -175,7 +175,7 @@ captureButton.addEventListener('click', function() {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
     // Convert the canvas content to a data URL (base64 image string)
-    const imageDataURL = canvas.toDataURL('image/png');
+    const imageDataURL = canvas.toDataURL('image/jpeg', 1.0);
 
     // Set the download link href to the image data URL
     saveButton.href = imageDataURL;
