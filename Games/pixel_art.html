@@ -25,7 +25,7 @@
     }
     #main {
         display: grid;
-        grid-template-columns: repeat(20, 1fr);
+        grid-template-columns: repeat(40, 5vw);
         }
     .box {
         background-color: white;
@@ -82,7 +82,7 @@
         }
         let cont = document.querySelector('#main');
         console.time("Time");
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 30; i++) {
             cont.innerHTML += " \
                 <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
                 <div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div><div class=\"box\" ></div>\
