@@ -15,107 +15,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Camera !!!</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f6f9;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin: 0;
-            padding: 15px;
-        }
+<title>Camera !!!</title>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f6f9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 15px;
+    }
 
-        #cameraFeed {
-            width: calc(100vw - 30px);
-            max-width: 400px;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border: 2px solid #ccc;
-            background-color: #ffffff;
-        }
+    #cameraFeed {
+        width: calc(100vw - 30px);
+        max-width: 400px;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border: 2px solid #ccc;
+        background-color: #ffffff;
+    }
 
-        #control {
-            display: flex;
-            gap: 50px;
-            margin-top: 10px;
-        }
+    #control {
+        display: flex;
+        gap: 50px;
+        margin-top: 10px;
+    }
 
+    a {
+        font-size: 36px;
+        padding: 14px 16px;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0px 3px 10px #0006;
+        color: #ffffff;
+        background-color: dodgerblue;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    #captureButton {
+        background-color: green;
+    }
+
+    #saveButton {
+        margin-top: 10px;
+        background-color: blueviolet;
+        display: none;
+        text-align: center;
+        width: 70px;
+    }
+
+    #canvas {
+        position: relative;
+        width: min(50%, 200px);
+        height: auto;
+        border: 5px solid #aaa;
+    }
+
+    #preview {
+        position: absolute;
+        background-color: #eeeeee95;
+        width: 100vw;
+        height: 100vh;
+        padding-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media (max-width: 600px) {
         a {
-            font-size: 36px;
-            padding: 14px 16px;
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0px 3px 10px #0006;
-            color: #ffffff;
-            background-color: dodgerblue;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
+            font-size: 32px;
+            padding: 10px 12px;
         }
-
-        #captureButton {
-            background-color: green;
-        }
-
-        #saveButton {
-            margin-top: 10px;
-            background-color: blueviolet;
-            display: none;
-            text-align: center;
-            width: 70px;
-        }
-
-        #canvas {
-            position: relative;
-            width: min(50%, 200px);
-            height: auto;
-            border: 5px solid #aaa;
-        }
-
-        #preview {
-            position: absolute;
-            background-color: #eeeeee95;
-            width: 100vw;
-            height: 100vh;
-            padding-top: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        @media (max-width: 600px) {
-            a {
-                font-size: 32px;
-                padding: 10px 12px;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
-
+<audio id="shutter" preload="auto">
+<source src="https://mdnuruzzamankhan.github.io/sound/click-151673.mp3" type="audio/mp3">
+</audio>
 <!-- Video element for the camera feed -->
 <video id="cameraFeed" autoplay playsinline></video>
 
 <div id="control">
-    <!-- Button to switch camera -->
-    <a id="switchCameraButton" href="#cameraFeed"><i class="fa-solid fa-rotate"></i></a>
+<!-- Button to switch camera -->
+<a id="switchCameraButton" href="#cameraFeed"><i class="fa-solid fa-rotate"></i></a>
 
-    <!-- Button to capture the photo -->
-    <a id="captureButton" href="#preview"><i class="fa-solid fa-camera"></i></a>
+<!-- Button to capture the photo -->
+<a id="captureButton" href="#preview"><i class="fa-solid fa-camera"></i></a>
 </div>
 
 <div id="preview" style="display:none;">
-    <!-- Canvas to display the captured image (hidden) -->
-    <canvas id="canvas" style="display:block;"></canvas>
+<!-- Canvas to display the captured image (hidden) -->
+<canvas id="canvas" style="display:block;"></canvas>
 
-    <!-- Button to save the photo -->
-    <a id="saveButton" download="captured_photo.jpeg"><i class="fa-solid fa-download"></i></a>
+<!-- Button to save the photo -->
+<a id="saveButton" download="captured_photo.jpeg"><i class="fa-solid fa-download"></i></a>
 </div>
 
 <script>
@@ -128,7 +130,7 @@ const saveButton = document.getElementById('saveButton');
 const switchCameraButton = document.getElementById('switchCameraButton');
 
 preview.addEventListener('click', () => {
-    preview.style.display = 'none';
+preview.style.display = 'none';
 });
 
 let currentStream;
@@ -136,29 +138,33 @@ let currentCamera = 'user'; // Start with the front camera
 
 // Function to start the video stream
 function startCamera(camera) {
-    const constraints = {
-        video: {
-            facingMode: camera,
-            width: { ideal: 1920 },
-            height: { ideal: 1080 }
-        }
-    };
+const constraints = {
+video: {
+facingMode: camera,
+width: {
+ideal: 1920
+},
+height: {
+ideal: 1080
+}
+}
+};
 
-    // Stop the current stream if it exists
-    if (currentStream) {
-        currentStream.getTracks().forEach(track => track.stop());
-    }
+// Stop the current stream if it exists
+if (currentStream) {
+currentStream.getTracks().forEach(track => track.stop());
+}
 
-    // Request access to the webcam
-    navigator.mediaDevices.getUserMedia(constraints)
-    .then(function(stream) {
-        currentStream = stream;
-        video.srcObject = stream;
-    })
-    .catch(function(err) {
-        alert("Camera access denied or not available.");
-        console.error("Error: " + err);
-    });
+// Request access to the webcam
+navigator.mediaDevices.getUserMedia(constraints)
+.then(function(stream) {
+currentStream = stream;
+video.srcObject = stream;
+})
+.catch(function(err) {
+alert("Camera access denied or not available.");
+console.error("Error: " + err);
+});
 }
 
 // Start the back camera on load
@@ -166,30 +172,31 @@ startCamera(currentCamera);
 
 // Capture the image when the button is clicked
 captureButton.addEventListener('click', function() {
-    // Set canvas size to match the video dimensions
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    preview.style.display = 'flex';
+shutter.play();
+// Set canvas size to match the video dimensions
+canvas.width = video.videoWidth;
+canvas.height = video.videoHeight;
+preview.style.display = 'flex';
 
-    // Draw the current frame from the video to the canvas
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+// Draw the current frame from the video to the canvas
+context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    // Convert the canvas content to a data URL (base64 image string)
-    const imageDataURL = canvas.toDataURL('image/jpeg', 1.0);
+// Convert the canvas content to a data URL (base64 image string)
+const imageDataURL = canvas.toDataURL('image/jpeg', 1.0);
 
-    // Set the download link href to the image data URL
-    saveButton.href = imageDataURL;
+// Set the download link href to the image data URL
+saveButton.href = imageDataURL;
 
 
-    saveButton.download = `photo_${(new Date()).toLocaleString()}.jpeg`;
-    // Display the save button
-    saveButton.style.display = 'inline-block';
+saveButton.download = `photo_${(new Date()).toLocaleString()}.jpeg`;
+// Display the save button
+saveButton.style.display = 'inline-block';
 });
 
 // Switch camera when the button is clicked
 switchCameraButton.addEventListener('click', function() {
-    currentCamera = currentCamera === 'environment' ? 'user' : 'environment'; // Toggle camera
-    startCamera(currentCamera); // Restart camera with the new facing mode
+currentCamera = currentCamera === 'environment' ? 'user': 'environment'; // Toggle camera
+startCamera(currentCamera); // Restart camera with the new facing mode
 });
 </script>
 </body>
