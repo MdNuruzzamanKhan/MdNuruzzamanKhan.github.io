@@ -145,7 +145,7 @@ positionY = 200 - (velocityScaled * timeStep * Math.sin(angleInRadians) - 0.16 *
 const projectileCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 projectileCircle.setAttribute("cx", positionX);
 projectileCircle.setAttribute("cy", positionY);
-projectileCircle.setAttribute("r", "1.5");
+projectileCircle.setAttribute("r", "1");
 animationCanvas.appendChild(projectileCircle); // Append the new circle to SVG
 
 timeStep += 0.5; // Increased increment value for faster movement
