@@ -1,21 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74B5JE8ZZK"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'G-74B5JE8ZZK');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<title>Camera !!!</title>
+<title>Camera with Filter Control</title>
 <style>
     body {
         font-family: 'Arial', sans-serif;
@@ -36,6 +25,7 @@
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         border: 2px solid #ccc;
         background-color: #ffffff;
+        transition: filter 0.3s ease-in-out;
     }
 
     #control {
@@ -89,6 +79,35 @@
         justify-content: center;
     }
 
+    .slider-container {
+        margin-top: 20px;
+        text-align: center;
+        width: 90%;
+        max-width: 400px;
+        padding: 20px;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .slider {
+        width: 100%;
+        margin: 10px 0;
+        height: 8px;
+        border-radius: 5px;
+    }
+
+    .slider-container label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    .slider-container input[type="range"] {
+        margin-top: 5px;
+    }
+    
     @media (max-width: 600px) {
         a {
             font-size: 32px;
@@ -120,6 +139,24 @@
 <a id="saveButton" download="captured_photo.jpeg"><i class="fa-solid fa-download"></i></a>
 </div>
 
+<!-- Slider Controls for filter adjustments -->
+<div class="slider-container">
+<label for="brightness">Brightness:</label>
+<input type="range" id="brightness" class="slider" min="0" max="2" step="0.01" value="1">
+
+<label for="contrast">Contrast:</label>
+<input type="range" id="contrast" class="slider" min="0" max="2" step="0.01" value="1">
+
+<label for="saturation">Saturation:</label>
+<input type="range" id="saturation" class="slider" min="0" max="2" step="0.01" value="1">
+
+<label for="sepia">Sepia:</label>
+<input type="range" id="sepia" class="slider" min="0" max="1" step="0.01" value="0">
+
+<label for="hue">Hue Rotate:</label>
+<input type="range" id="hue" class="slider" min="0" max="360" step="1" value="0">
+</div>
+
 <script>
 const video = document.getElementById('cameraFeed');
 const canvas = document.getElementById('canvas');
@@ -128,6 +165,13 @@ const context = canvas.getContext('2d');
 const captureButton = document.getElementById('captureButton');
 const saveButton = document.getElementById('saveButton');
 const switchCameraButton = document.getElementById('switchCameraButton');
+
+// Get filter control elements
+const brightnessSlider = document.getElementById('brightness');
+const contrastSlider = document.getElementById('contrast');
+const saturationSlider = document.getElementById('saturation');
+const sepiaSlider = document.getElementById('sepia');
+const hueSlider = document.getElementById('hue');
 
 preview.addEventListener('click', () => {
 preview.style.display = 'none';
@@ -170,6 +214,25 @@ console.error("Error: " + err);
 // Start the back camera on load
 startCamera(currentCamera);
 
+// Function to update the camera feed filter based on slider values
+function updateFilter() {
+const brightness = brightnessSlider.value;
+const contrast = contrastSlider.value;
+const saturation = saturationSlider.value;
+const sepia = sepiaSlider.value;
+const hue = hueSlider.value;
+
+// Apply the filters to the video feed
+video.style.filter = `brightness(${brightness}) contrast(${contrast}) saturate(${saturation}) sepia(${sepia}) hue-rotate(${hue}deg)`;
+}
+
+// Event listeners for the sliders to update the filter in real-time
+brightnessSlider.addEventListener('input', updateFilter);
+contrastSlider.addEventListener('input', updateFilter);
+saturationSlider.addEventListener('input', updateFilter);
+sepiaSlider.addEventListener('input', updateFilter);
+hueSlider.addEventListener('input', updateFilter);
+
 // Capture the image when the button is clicked
 captureButton.addEventListener('click', function() {
 shutter.play();
@@ -178,7 +241,17 @@ canvas.width = video.videoWidth;
 canvas.height = video.videoHeight;
 preview.style.display = 'flex';
 
-// Draw the current frame from the video to the canvas
+// Get the filter values from the sliders
+const brightness = brightnessSlider.value;
+const contrast = contrastSlider.value;
+const saturation = saturationSlider.value;
+const sepia = sepiaSlider.value;
+const hue = hueSlider.value;
+
+// Apply the filter to the canvas before drawing the image
+context.filter = `brightness(${brightness}) contrast(${contrast}) saturate(${saturation}) sepia(${sepia}) hue-rotate(${hue}deg)`;
+
+// Draw the current frame from the video to the canvas with the applied filters
 context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
 // Convert the canvas content to a data URL (base64 image string)
@@ -186,8 +259,6 @@ const imageDataURL = canvas.toDataURL('image/jpeg', 1.0);
 
 // Set the download link href to the image data URL
 saveButton.href = imageDataURL;
-
-
 saveButton.download = `photo_${(new Date()).toLocaleString()}.jpeg`;
 // Display the save button
 saveButton.style.display = 'inline-block';
@@ -195,7 +266,7 @@ saveButton.style.display = 'inline-block';
 
 // Switch camera when the button is clicked
 switchCameraButton.addEventListener('click', function() {
-currentCamera = currentCamera === 'environment' ? 'user': 'environment'; // Toggle camera
+currentCamera = currentCamera === 'environment' ? 'user': 'environment';
 startCamera(currentCamera); // Restart camera with the new facing mode
 });
 </script>
