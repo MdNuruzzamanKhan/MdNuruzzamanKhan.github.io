@@ -97,7 +97,6 @@
 <p id="ResultY">You may need to rotate your screen and device to see the object.</p>
 
 <script>
-function startAnimation() {
 const velocitySlider = document.getElementById('velocitySlider');
 const velocityValue = document.getElementById('velocityValue');
 velocitySlider.addEventListener('input', () => {
@@ -110,6 +109,7 @@ angleSlider.addEventListener('input', () => {
 angleValue.textContent = angleSlider.value;
 });
 
+function startAnimation() {
 let animationInterval; // To store the interval ID
 
 const animationCanvas = document.getElementById("animationCanvas");
