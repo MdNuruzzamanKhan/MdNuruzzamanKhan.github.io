@@ -93,9 +93,8 @@
 
 <button id="startButton" onclick="startAnimation()"><i class="fa-solid fa-play"></i></button>
 
-<p id="instructionText">
-You may need to rotate your device and screen to see the object.
-</p>
+<p id="ResultX"></p>
+<p id="ResultY">You may need to rotate your screen and device to see the object.</p>
 
 <script>
 function startAnimation() {
@@ -139,8 +138,9 @@ startButton.innerHTML = '<i class="fa-solid fa-play"></i>'; // Reset button text
 return;
 } else {
 positionX = velocityScaled * timeStep * Math.cos(angleInRadians) + 9;
+ResultX.innerText = "R = " + (initialVelocity * initialVelocity * Math.sin(2 * angleInRadians) / 9.8).toFixed(2) + " m";
 positionY = 200 - (velocityScaled * timeStep * Math.sin(angleInRadians) - 0.16 * timeStep * timeStep);
-
+ResultY.innerText = "H = " + (initialVelocity * initialVelocity * Math.sin(angleInRadians) * Math.sin(angleInRadians) / (2 * 9.8)).toFixed(2) + " m";
 // Create a new circle element for the projectile
 const projectileCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 projectileCircle.setAttribute("cx", positionX);
