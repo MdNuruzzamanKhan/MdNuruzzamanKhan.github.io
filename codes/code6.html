@@ -17,6 +17,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <title>Projectile Motion</title>
 <style>
+    html, body {
+        margin: 0;
+        padding: 1vw;
+    }
     div {
         position: relative;
         display: block;
@@ -35,36 +39,38 @@
     }
 
     input {
-        width: 45%;
+        width: 50vw;
     }
 
     @media only screen and (orientation: landscape) {
         input {
-            width: 60%;
-        }
-
-        p {
-            display: none;
+            width: 65vw;
         }
     }
 
+    #animationCanvas {
+        border: 2px solid rgb(29, 109, 15);
+        background-color: rgb(245, 247, 245);
+        border-radius: 3px;
+    }
     button {
-        width: 50px;
+        width: 60px;
         margin-top: 3px;
-        margin-bottom: 3px;
-        height: 45px;
+        height: 50px;
         display: block;
-        font-size: 1.3em;
+        font-size: 1.5em;
         border-radius: 10%;
         background-color: #5a5;
         color: white;
     }
 
     p {
-        color: purple;
+        color: orangered;
         text-align: center;
         font-family: monospace;
         font-size: 1.25em;
+        font-weight: bold;
+        font-style: italic;
     }
 
     circle {
@@ -72,7 +78,7 @@
     }
 
     circle:last-child {
-        r: 8 !important;
+        r: 9 !important;
         fill: black !important;
     }
 </style>
@@ -82,19 +88,23 @@
 <h1 style="text-align: center;border-bottom: 1px solid rgb(145, 129, 129); font-family:fantasy; padding-bottom:8px">Projectile Motion</h1>
 <div>
 <form>
-<label>Velocity : <input id="velocitySlider" type="range" min="0" max="150" name="velocity" value="100" required> <span id="velocityValue">100</span> m/s</label>
-<label>Angle : <input id="angleSlider" type="range" min="0" max="90" name="angle" value="60" required> <span id="angleValue">60</span><sup> o</sup></label>
+<label><i>v</i> : <input id="velocitySlider" type="range" min="0" max="150" name="velocity" value="100" required> <span id="velocityValue">100</span> m/s</label>
+<label><i>θ</i> : <input id="angleSlider" type="range" min="0" max="90" name="angle" value="60" required> <span id="angleValue">60</span><sup> o</sup></label>
+<label><i>g</i> : <input id="gSlider" type="range" min="0" max="15" name="g" value="9.8" step="0.1" required> <span id="gValue">9.8</span> m/s<sup>2</sup></label>
 </form>
 </div>
 
-<svg id="animationCanvas" height="212" width="100%" style="border:2px solid rgb(29, 109, 15);margin-right: 10wh;background-color:rgb(242, 247, 245)">
-<circle cx="9" cy="202" r="8" />
+<svg id="animationCanvas" height="212" width="100%">
+<circle cx="10" cy="201" r="9" />
 </svg>
 
-<button id="startButton" onclick="startAnimation()"><i class="fa-solid fa-play"></i></button>
+<button id="startButton"><i class="fa-solid fa-play"></i></button>
 
+<p id="ResultT">
+<br>You may need to rotate your screen and device to see the object.
+</p>
+<p id="ResultY"></p>
 <p id="ResultX"></p>
-<p id="ResultY">You may need to rotate your screen and device to see the object.</p>
 
 <script>
 const velocitySlider = document.getElementById('velocitySlider');
@@ -109,47 +119,67 @@ angleSlider.addEventListener('input', () => {
 angleValue.textContent = angleSlider.value;
 });
 
+const gSlider = document.getElementById('gSlider');
+const gValue = document.getElementById('gValue');
+gSlider.addEventListener('input', () => {
+gValue.textContent = gSlider.value;
+});
+
+const play = document.getElementById('startButton');
+play.addEventListener('click', startAnimation);
+
 function startAnimation() {
+play.removeEventListener('click', startAnimation);
+play.addEventListener('click', stopAnimation);
 let animationInterval; // To store the interval ID
 
 const animationCanvas = document.getElementById("animationCanvas");
 animationCanvas.innerHTML = ''; // Clear previous circles
 const angleInput = document.getElementById("angleSlider");
 const initialVelocity = document.getElementById("velocitySlider").value;
+const g = document.getElementById("gSlider").value;
 
 let timeStep = 0; // Represents the time in the animation
 const velocityScaled = initialVelocity * 0.1; // Scale down velocity for simulation
+const gScaled = g * 0.03; // Scale down g for simulation
 const angleInRadians = angleInput.value * Math.PI / 180; // Convert angle to radians
 let positionY = 0; // Initialize Y position
 let positionX;
 
 // Change button to indicate animation is running
 const startButton = document.getElementById("startButton");
-startButton.innerHTML = '<i class="fa-solid fa-rotate-right"></i>';
+startButton.innerHTML = '<i class="fa-solid fa-pause"></i>';
 
 // Start the animation with a reduced interval for increased speed
 animationInterval = setInterval(updateAnimation, 5); // Reduced interval to 10ms
 
 function updateAnimation() {
-if (positionY > 200) {
-// Stop condition
-clearInterval(animationInterval);
-startButton.innerHTML = '<i class="fa-solid fa-play"></i>'; // Reset button text
+if (positionY > 200 || positionX > window.innerWidth || positionY < -2 * window.innerHeight) {
+stopAnimation();
 return;
 } else {
 positionX = velocityScaled * timeStep * Math.cos(angleInRadians) + 9;
-ResultX.innerText = "R = " + (initialVelocity * initialVelocity * Math.sin(2 * angleInRadians) / 9.8).toFixed(2) + " m";
-positionY = 200 - (velocityScaled * timeStep * Math.sin(angleInRadians) - 0.16 * timeStep * timeStep);
-ResultY.innerText = "H = " + (initialVelocity * initialVelocity * Math.sin(angleInRadians) * Math.sin(angleInRadians) / (2 * 9.8)).toFixed(2) + " m";
+ResultX.innerText = "R = " + (initialVelocity * initialVelocity * Math.sin(2 * angleInRadians) / g).toFixed(2) + " m";
+positionY = 200 - (velocityScaled * timeStep * Math.sin(angleInRadians) - 0.5 * gScaled * timeStep * timeStep);
+ResultY.innerText = "H = " + (initialVelocity * initialVelocity * Math.sin(angleInRadians) * Math.sin(angleInRadians) / (2 * g)).toFixed(2) + " m";
+ResultT.innerText = "T = " + (2 * initialVelocity * Math.sin(angleInRadians) / g).toFixed(2) + " s";
 // Create a new circle element for the projectile
 const projectileCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 projectileCircle.setAttribute("cx", positionX);
 projectileCircle.setAttribute("cy", positionY);
-projectileCircle.setAttribute("r", "1");
+projectileCircle.setAttribute("r", "1.2");
 animationCanvas.appendChild(projectileCircle); // Append the new circle to SVG
 
 timeStep += 0.5; // Increased increment value for faster movement
 }
+}
+
+function stopAnimation() {
+// Stop condition
+clearInterval(animationInterval);
+startButton.innerHTML = '<i class="fa-solid fa-rotate-right"></i>'; // Reset button text
+play.addEventListener('click', startAnimation);
+
 }
 }
 </script>
