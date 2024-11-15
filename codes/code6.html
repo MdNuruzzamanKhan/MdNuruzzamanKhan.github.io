@@ -150,7 +150,7 @@ const startButton = document.getElementById("startButton");
 startButton.innerHTML = '<i class="fa-solid fa-pause"></i>';
 
 // Start the animation with a reduced interval for increased speed
-animationInterval = setInterval(updateAnimation, 5); // Reduced interval to 10ms
+animationInterval = setInterval(updateAnimation, 10); // Reduced interval to 10ms
 
 function updateAnimation() {
 if (positionY > 200 || positionX > window.innerWidth || positionY < -2 * window.innerHeight) {
