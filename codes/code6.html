@@ -79,7 +79,7 @@
     }
     .Result {
         display: flex;
-        width: 100vw;
+        width: 98vw;
     }
     .Result div {
         padding: 3vw;
@@ -175,7 +175,7 @@ startButton.innerHTML = '<i class="fa-solid fa-pause"></i>';
 animationInterval = setInterval(updateAnimation, 10); // Reduced interval to 10ms
 
 function updateAnimation() {
-if (positionY > 200 || timeStep > 300) {
+if (positionY > 200 || timeStep > 500) {
 stopAnimation();
 return;
 } else {
