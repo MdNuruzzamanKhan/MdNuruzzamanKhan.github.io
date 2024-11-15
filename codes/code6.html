@@ -187,8 +187,8 @@ var Vy = initialVelocity * Math.sin(angleInRadians) - g * timeStep * 0.299491525
 
 Resultt.innerText = "t ≈ " + (timeStep * 0.29949152542).toFixed(2) + " s";
 ResultVx.innerHTML = "v<sub>x</sub> ≈ " + Vx.toFixed(2) + " m/s";
-ResultVy.innerHTML = "V<sub>y</sub> ≈ " + Vy.toFixed(2) + " m/s";
-ResultV.innerText = "V ≈ " + (Math.sqrt(Vx * Vx + Vy * Vy)).toFixed(2) + " m/s";
+ResultVy.innerHTML = "v<sub>y</sub> ≈ " + Vy.toFixed(2) + " m/s";
+ResultV.innerText = "v ≈ " + (Math.sqrt(Vx * Vx + Vy * Vy)).toFixed(2) + " m/s";
 Resultx.innerText = "x ≈ " + (velocityScaled * 10 * timeStep * 0.29949152542 * Math.cos(angleInRadians)).toFixed(2) + " m";
 Resulty.innerText = "y ≈ " + (velocityScaled * 10 * timeStep * 0.29949152542 * Math.sin(angleInRadians) - 0.5 * g * timeStep * 0.29949152542 * 0.29949152542 * timeStep).toFixed(2) + " m";
 ResultA.innerHTML = "θ ≈ " + (Math.atan(Vy / Vx) * 180 / Math.PI).toFixed(2) + "<sup>o</sup>";
