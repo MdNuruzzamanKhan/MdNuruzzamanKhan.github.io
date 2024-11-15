@@ -153,7 +153,7 @@ startButton.innerHTML = '<i class="fa-solid fa-pause"></i>';
 animationInterval = setInterval(updateAnimation, 10); // Reduced interval to 10ms
 
 function updateAnimation() {
-if (positionY > 200 || positionX > window.innerWidth || positionY < -2 * window.innerHeight) {
+if (positionY > 200 || positionX > window.innerWidth || (positionY < -2 * window.innerHeight &&  positionY < -2* window.innerWidth)) {
 stopAnimation();
 return;
 } else {
