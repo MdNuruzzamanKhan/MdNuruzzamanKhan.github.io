@@ -177,7 +177,7 @@ ResultR.innerText = "R = " + (initialVelocity * initialVelocity * Math.sin(2 * a
 ResultH.innerText = "H = " + (initialVelocity * initialVelocity * Math.sin(angleInRadians) * Math.sin(angleInRadians) / (2 * g)).toFixed(2) + " m";
 
 // Start the animation with a reduced interval for increased speed
-animationInterval = setInterval(updateAnimation, 10); // Reduced interval to 10ms
+animationInterval = setInterval(updateAnimation, 20); // Reduced interval to 10ms
 
 function updateAnimation() {
 if (positionY > 200 || timeStep > 500) {
