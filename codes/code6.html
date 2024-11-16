@@ -171,6 +171,10 @@ let positionX;
 const startButton = document.getElementById("startButton");
 startButton.innerHTML = '<i class="fa-solid fa-pause"></i>';
 
+ResultT.innerText = "T = " + (2 * initialVelocity * Math.sin(angleInRadians) / g).toFixed(2) + " s";
+ResultR.innerText = "R = " + (initialVelocity * initialVelocity * Math.sin(2 * angleInRadians) / g).toFixed(2) + " m";
+ResultH.innerText = "H = " + (initialVelocity * initialVelocity * Math.sin(angleInRadians) * Math.sin(angleInRadians) / (2 * g)).toFixed(2) + " m";
+
 // Start the animation with a reduced interval for increased speed
 animationInterval = setInterval(updateAnimation, 10); // Reduced interval to 10ms
 
@@ -189,12 +193,9 @@ Resultt.innerText = "t ≈ " + (timeStep * 0.29949152542).toFixed(2) + " s";
 ResultVx.innerHTML = "v<sub>x</sub> ≈ " + Vx.toFixed(2) + " m/s";
 ResultVy.innerHTML = "v<sub>y</sub> ≈ " + Vy.toFixed(2) + " m/s";
 ResultV.innerText = "v ≈ " + (Math.sqrt(Vx * Vx + Vy * Vy)).toFixed(2) + " m/s";
-Resultx.innerText = "x ≈ " + (velocityScaled * 10 * timeStep * 0.29949152542 * Math.cos(angleInRadians)).toFixed(2) + " m";
-Resulty.innerText = "y ≈ " + (velocityScaled * 10 * timeStep * 0.29949152542 * Math.sin(angleInRadians) - 0.5 * g * timeStep * 0.29949152542 * 0.29949152542 * timeStep).toFixed(2) + " m";
+Resultx.innerText = "x ≈ " + (initialVelocity * timeStep * 0.29949152542 * Math.cos(angleInRadians)).toFixed(2) + " m";
+Resulty.innerText = "y ≈ " + (initialVelocity * timeStep * 0.29949152542 * Math.sin(angleInRadians) - 0.5 * g * timeStep * 0.29949152542 * 0.29949152542 * timeStep).toFixed(2) + " m";
 ResultA.innerHTML = "θ ≈ " + (Math.atan(Vy / Vx) * 180 / Math.PI).toFixed(2) + "<sup>o</sup>";
-ResultT.innerText = "T = " + (2 * initialVelocity * Math.sin(angleInRadians) / g).toFixed(2) + " s";
-ResultR.innerText = "R = " + (initialVelocity * initialVelocity * Math.sin(2 * angleInRadians) / g).toFixed(2) + " m";
-ResultH.innerText = "H = " + (initialVelocity * initialVelocity * Math.sin(angleInRadians) * Math.sin(angleInRadians) / (2 * g)).toFixed(2) + " m";
 // Create a new circle element for the projectile
 const projectileCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 projectileCircle.setAttribute("cx", positionX);
