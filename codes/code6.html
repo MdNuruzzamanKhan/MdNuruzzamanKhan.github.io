@@ -18,8 +18,8 @@
 <title>Projectile Motion</title>
 <style>
     html, body {
-        margin: 0;
-        padding: 1vw;
+        margin: 1.5vw;
+        
     }
 
     form {
@@ -48,6 +48,7 @@
         border: 2px solid rgb(29, 109, 15);
         background-color: rgb(245, 247, 245);
         border-radius: 3px;
+        width: 100%;
     }
     button {
         width: 60px;
@@ -79,7 +80,7 @@
     }
     .Result {
         display: flex;
-        width: 98vw;
+        width: 100%;
     }
     .Result div {
         padding: 2vh;
@@ -100,8 +101,8 @@
 </div>
 
 <p id="Resultt" style="float:right">t = 0 s</p>
-<svg id="animationCanvas" height="212" width="100%">
-<circle cx="10" cy="201" r="9" />
+<svg id="animationCanvas">
+<circle id="obj" />
 </svg>
 
 <button id="startButton"><i class="fa-solid fa-play"></i></button>
@@ -127,6 +128,14 @@
 
 <p id="instraction">You may need to rotate your device and screen to see the object</p>
 <script>
+const h = window.innerHeight * 0.35;
+const r = 9;
+obj.setAttribute("cx", r);
+obj.setAttribute("cy", (h - r));
+
+const animationCanvas = document.getElementById("animationCanvas");
+animationCanvas.setAttribute("height", h);
+
 const velocitySlider = document.getElementById('velocitySlider');
 const velocityValue = document.getElementById('velocityValue');
 velocitySlider.addEventListener('input', () => {
@@ -155,7 +164,6 @@ play.removeEventListener('click', startAnimation);
 play.addEventListener('click', stopAnimation);
 let animationInterval; // To store the interval ID
 
-const animationCanvas = document.getElementById("animationCanvas");
 animationCanvas.innerHTML = ''; // Clear previous circles
 const angleInput = document.getElementById("angleSlider");
 const initialVelocity = document.getElementById("velocitySlider").value;
@@ -172,7 +180,8 @@ let positionX;
 const startButton = document.getElementById("startButton");
 startButton.innerHTML = '<i class="fa-solid fa-pause"></i>';
 
-ResultT.innerText = "T = " + (2 * initialVelocity * Math.sin(angleInRadians) / g).toFixed(2) + " s";
+let timeOfFlight = 2 * initialVelocity * Math.sin(angleInRadians) / g;
+ResultT.innerText = "T = " + timeOfFlight.toFixed(2) + " s";
 ResultR.innerText = "R = " + (initialVelocity * initialVelocity * Math.sin(2 * angleInRadians) / g).toFixed(2) + " m";
 ResultH.innerText = "H = " + (initialVelocity * initialVelocity * Math.sin(angleInRadians) * Math.sin(angleInRadians) / (2 * g)).toFixed(2) + " m";
 
@@ -180,22 +189,24 @@ ResultH.innerText = "H = " + (initialVelocity * initialVelocity * Math.sin(angle
 animationInterval = setInterval(updateAnimation, 15); // Reduced interval to 15ms
 
 function updateAnimation() {
-if (positionY > 200 || timeStep > 500) {
+var time = timeStep * 0.29949152542;
+
+if (positionY > (h - r) || timeStep > 500 || time > timeOfFlight) {
 stopAnimation();
 return;
 } else {
-positionX = velocityScaled * timeStep * Math.cos(angleInRadians) + 9;
-positionY = 200 - (velocityScaled * timeStep * Math.sin(angleInRadians) - 0.5 * gScaled * timeStep * timeStep);
+positionX = velocityScaled * timeStep * Math.cos(angleInRadians) + r;
+positionY = (h - r) - (velocityScaled * timeStep * Math.sin(angleInRadians) - 0.5 * gScaled * timeStep * timeStep);
 
 var Vx = initialVelocity * Math.cos(angleInRadians);
-var Vy = initialVelocity * Math.sin(angleInRadians) - g * timeStep * 0.29949152542;
+var Vy = initialVelocity * Math.sin(angleInRadians) - g * time;
 
-Resultt.innerText = "t ≈ " + (timeStep * 0.29949152542).toFixed(2) + " s";
+Resultt.innerText = "t ≈ " + (time).toFixed(2) + " s";
 ResultVx.innerHTML = "v<sub>x</sub> ≈ " + Vx.toFixed(2) + " m/s";
 ResultVy.innerHTML = "v<sub>y</sub> ≈ " + Vy.toFixed(2) + " m/s";
 ResultV.innerText = "v ≈ " + (Math.sqrt(Vx * Vx + Vy * Vy)).toFixed(2) + " m/s";
-Resultx.innerText = "x ≈ " + (initialVelocity * timeStep * 0.29949152542 * Math.cos(angleInRadians)).toFixed(2) + " m";
-Resulty.innerText = "y ≈ " + (initialVelocity * timeStep * 0.29949152542 * Math.sin(angleInRadians) - 0.5 * g * timeStep * 0.29949152542 * 0.29949152542 * timeStep).toFixed(2) + " m";
+Resultx.innerText = "x ≈ " + (initialVelocity * time * Math.cos(angleInRadians)).toFixed(2) + " m";
+Resulty.innerText = "y ≈ " + (initialVelocity * time * Math.sin(angleInRadians) - 0.5 * g * time * time).toFixed(2) + " m";
 ResultA.innerHTML = "θ ≈ " + (Math.atan(Vy / Vx) * 180 / Math.PI).toFixed(2) + "<sup>o</sup>";
 // Create a new circle element for the projectile
 const projectileCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
