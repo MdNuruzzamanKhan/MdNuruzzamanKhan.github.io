@@ -19,7 +19,14 @@
 <style>
     html, body {
         margin: 1.5vw;
-        
+
+    }
+
+    h1 {
+        text-align: center;
+        border-bottom: 1px solid rgb(145, 129, 129);
+        font-family: fantasy;
+        padding-bottom: 8px;
     }
 
     form {
@@ -42,20 +49,24 @@
         input {
             width: 65vw;
         }
+        #instraction {
+            display: none;
+        }
     }
 
     #animationCanvas {
-        border: 2px solid rgb(29, 109, 15);
+        border: 2px solid green;
         background-color: rgb(245, 247, 245);
         border-radius: 3px;
         width: 100%;
     }
+
     button {
         width: 60px;
         margin-top: 3px;
         height: 50px;
         display: block;
-        font-size: 1.5em;
+        font-size: 1.5rem;
         border-radius: 10%;
         background-color: #5a5;
         color: white;
@@ -64,7 +75,7 @@
     p {
         color: #222;
         font-family: monospace;
-        font-size: 1.15em;
+        font-size: 0.9rem;
         text-align: center;
         font-weight: bold;
         margin: 2px;
@@ -86,12 +97,12 @@
         padding: 2vh;
         margin: auto;
     }
-    
+
 </style>
 </head>
 
 <body>
-<h1 style="text-align: center;border-bottom: 1px solid rgb(145, 129, 129); font-family:fantasy; padding-bottom:8px">Projectile Motion</h1>
+<h1>Projectile Motion</h1>
 <div>
 <form>
 <label><i>v<sub>0</sub></i> : <input id="velocitySlider" type="range" min="0" max="150" name="velocity" value="100" required> <span id="velocityValue">100</span> m/s</label>
@@ -100,7 +111,9 @@
 </form>
 </div>
 
-<p id="Resultt" style="float:right">t = 0 s</p>
+<p id="Resultt" style="float:right">
+t = 0 s
+</p>
 <svg id="animationCanvas">
 <circle id="obj" />
 </svg>
@@ -126,7 +139,9 @@
 </div>
 </div>
 
-<p id="instraction">You may need to rotate your device and screen to see the object</p>
+<p id="instraction">
+You may need to rotate your device and screen to see the object
+</p>
 <script>
 const h = window.innerHeight * 0.3;
 const r = 9;
