@@ -143,9 +143,9 @@ t = 0 s
 You may need to rotate your device and screen to see the object
 </p>
 
-<audio id="projection" preload="auto">
+<!-- <audio id="projection" preload="auto">
 <source src="https://mdnuruzzamankhan.github.io/sound/near-miss-swing-whoosh-2-233427.mp3" type="audio/mp3">
-</audio>
+</audio> -->
 <script>
 const h = window.innerHeight * 0.3;
 const r = 9;
@@ -177,7 +177,7 @@ const play = document.getElementById('startButton');
 play.addEventListener('click', startAnimation);
 
 function startAnimation() {
-projection.play();
+//projection.play();
 //console.time("A");
 instraction.innerText = '';
 play.removeEventListener('click', startAnimation);
