@@ -149,6 +149,7 @@ const play = document.getElementById('startButton');
 play.addEventListener('click', startAnimation);
 
 function startAnimation() {
+//console.time("A");
 instraction.innerText = '';
 play.removeEventListener('click', startAnimation);
 play.addEventListener('click', stopAnimation);
@@ -208,7 +209,8 @@ timeStep += 0.5; // Increased increment value for faster movement
 }
 
 function stopAnimation() {
-console.log(timeStep);
+//console.timeEnd("A");
+//console.log((timeStep - 0.5));
 // Stop condition
 clearInterval(animationInterval);
 //animationCanvas.innerHTML = '';
