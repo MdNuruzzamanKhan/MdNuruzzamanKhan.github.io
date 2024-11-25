@@ -1,682 +1,679 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-74B5JE8ZZK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-74B5JE8ZZK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
 
-  gtag('config', 'G-74B5JE8ZZK');
-</script>
-       <title>Archery Game</title>
-           <meta name="viewport" content="width=device-width, initial-scale=1" >
-       <meta charset="utf-8">
-       <style>
+        gtag('config', 'G-74B5JE8ZZK');
+    </script>
+    <title>Archery Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <style>
         body {
-    margin: 0;
-    font-family:monospace;
-    text-align:center;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-}
+            margin: 0;
+            font-family: monospace;
+            text-align: center;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
 
-#mainContainer {
-    transform-origin:0% 0%;
-    position:absolute;
-    width:100%;
-    top:0;
-    left:0;
-}
+        #mainContainer {
+            transform-origin: 0% 0%;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
 
-#score {
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    text-align:center;
-    font-size:60px;
-    font-weight:900;
-    color: DarkOliveGreen;
-}
+        #score {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 60px;
+            font-weight: 900;
+            color: DarkOliveGreen;
+        }
 
-#showPoint {
-    position:absolute;
-    top:0;
-    left:0;
-    background:transparent;
-    margin:0;
-}
+        #showPoint {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: transparent;
+            margin: 0;
+        }
 
-#showPoint .u{
-    position:absolute;
-    display:inline-block;
-    top:50%;
-    left:70%;
-    font-size:30px;
-    font-family:arial;
-    opacity:0;
-    transition:top 0.1s linear,left 0.1s linear
-}
+        #showPoint .u {
+            position: absolute;
+            display: inline-block;
+            top: 50%;
+            left: 70%;
+            font-size: 30px;
+            font-family: arial;
+            opacity: 0;
+            transition: top 0.1s linear,left 0.1s linear
+        }
 
-#animCanvas {
-    position:absolute;
-    top:0;
-    left:0;
-    z-index:100;
-    border-bottom:1px solid blue;
-}
-#myCanvas,#startMenu{
-    background: linear-gradient(to right, #eef, #efe) !important;
-}
+        #animCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            border-bottom: 1px solid blue;
+        }
+        #myCanvas,#startMenu {
+            background: linear-gradient(to right, #eef, #efe) !important;
+        }
 
-#arrs {
-    font-size:30px;
-    text-align:left;
-    position:absolute;
-    margin:0;
-    top:0;
-    color: goldenrod;
-    padding-left:10px;
-}
+        #arrs {
+            font-size: 30px;
+            text-align: left;
+            position: absolute;
+            margin: 0;
+            top: 0;
+            color: goldenrod;
+            padding-left: 10px;
+        }
 
-#startMenu {
-    position:absolute;
-    top:0;
-    left:0;
-    z-index:1000;
-    width:100%;
-    height:100%;
-    
-}
+        #startMenu {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            width: 100%;
+            height: 100%;
 
-#startMenu h1 {
-    font-size:40px;
-    text-shadow:3px 4px #aaa;
-    font-weight:900;
-    color:indigo;
-}
+        }
 
-#startMenu button {
-    font-size:22px;
-    border:none;
-    border-top:3px solid blueviolet;
-    border-bottom:3px solid blueviolet;
-    padding:10px 30px 5px;
-    line-height:20px;
-    outline:none;
-}
+        #startMenu h1 {
+            font-size: 40px;
+            text-shadow: 3px 4px #aaa;
+            font-weight: 900;
+            color: indigo;
+        }
 
-#startMenu h2 {
-    font-size:25px;
-}
-html,body,#startMenu *{
-    background: linear-gradient(to right, #eef, #efe) !important;
-}
-#timerDiv {
-   height:8px;
-   padding:0px;
-   border:2px solid silver;
-   width:50%;
-   position:absolute;
-   bottom:20px;
-   left:25%;
-   border-radius:20px;
-}
-           
-.timer {
-   height:8px;
-   width:0%;
-   background:red;
-   animation: countTime 4.5s linear 1;
-   animation-delay:0.5s;
-   border-radius:20px;
-}
-           
-@keyframes countTime {
-   0% {
-       width: 100%;
-       background-color: lime;
-   }
-   50% {
-       background-color:yellow;
-   }
-   100% {
-       width: 0%;
-       background-color: red;
-   }
-}</style>
-    </head>
-    <body>
-         <audio id="myAudio" loop>
-    <source src="https://mdnuruzzamankhan.github.io/sound/gametheme.mp3" type="audio/mp3">
-</audio>
-<audio id="shot">
-    <source src="https://mdnuruzzamankhan.github.io/sound/shot.mp3" type="audio/mp3">
-</audio>
-<audio id="trgt">
-    <source src="https://mdnuruzzamankhan.github.io/sound/trgt.mp3" type="audio/mp3">
-</audio>
-<script>
-    function fn1(){
-      var  music = document.getElementById('myAudio');
-       music.play();
-       music.volume = 0.3;
-    }
-    function fn(){
-      var  shoot = document.getElementById('shot');
-       shoot.play();
-       shoot.volume = 0.4;
-    }
-    function fn2(){
-      var  shoot = document.getElementById('trgt');
-       shoot.play();
-       shoot.volume = 0.8;
-    }
-</script>
-        <div id="mainContainer">
+        #startMenu button {
+            font-size: 22px;
+            border: none;
+            border-top: 3px solid blueviolet;
+            border-bottom: 3px solid blueviolet;
+            padding: 10px 30px 5px;
+            line-height: 20px;
+            outline: none;
+        }
+
+        #startMenu h2 {
+            font-size: 25px;
+        }
+        html,body,#startMenu * {
+            background: linear-gradient(to right, #eef, #efe) !important;
+        }
+        #timerDiv {
+            height: 8px;
+            padding: 0px;
+            border: 2px solid silver;
+            width: 50%;
+            position: absolute;
+            bottom: 20px;
+            left: 25%;
+            border-radius: 20px;
+        }
+
+        .timer {
+            height: 8px;
+            width: 0%;
+            background: red;
+            animation: countTime 4.5s linear 1;
+            animation-delay: 0.5s;
+            border-radius: 20px;
+        }
+
+        @keyframes countTime {
+            0% {
+                width: 100%;
+                background-color: lime;
+            }
+            50% {
+                background-color: yellow;
+            }
+            100% {
+                width: 0%;
+                background-color: red;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio id="myAudio" loop>
+        <source src="https://mdnuruzzamankhan.github.io/sound/gametheme.mp3" type="audio/mp3">
+    </audio>
+    <audio id="shot">
+        <source src="https://mdnuruzzamankhan.github.io/sound/shot.mp3" type="audio/mp3">
+    </audio>
+    <audio id="trgt">
+        <source src="https://mdnuruzzamankhan.github.io/sound/trgt.mp3" type="audio/mp3">
+    </audio>
+    <script>
+        function fn1() {
+            var music = document.getElementById('myAudio');
+            music.play();
+            music.volume = 0.3;
+        }
+        function fn() {
+            var shoot = document.getElementById('shot');
+            shoot.play();
+            shoot.volume = 0.4;
+        }
+        function fn2() {
+            var shoot = document.getElementById('trgt');
+            shoot.play();
+            shoot.volume = 0.8;
+        }
+    </script>
+    <div id="mainContainer">
         <canvas id="myCanvas"></canvas>
         <canvas id="animCanvas"></canvas>
         <h1 id="score">0</h1>
         <div id="showPoint">
             <div id="timerDiv"></div>
-            <p id="arrs">&uarr;</p><span class="u">&uarr; +4</span>
-            
+            <p id="arrs">
+                &uarr;
+            </p>
+            <span class="u">&uarr; +4</span>
+
         </div>
         <div id="startMenu">
             <h1 id="title"><span style="font-size:50px">A</span>RCHERY<br><span style="font-size:50px">G</span>AME</h1>
             <button>TAP TO START</button>
             <h2>Your best = <i><span id="best"></span></i></h2>
             <div style="border:2px dashed DimGrey; margin:0 15vw;">
-           <h3 style="font-size:1.2em">Highest = <i><span>1630</span></i></h3>
-           <h5>by Md. Mahiyan Zishan Chowdhury</h5>
-           </div>
-           <p style="margin-top:50vw">Author: Md. Nuruzzaman Khan</p>
+                <h3 style="font-size:1.2em">Highest = <i><span>1630</span></i></h3>
+                <h5>by Md. Mahiyan Zishan Chowdhury</h5>
+            </div>
+            <p style="margin-top:50vw">
+                Author: Md. Nuruzzaman Khan
+            </p>
         </div>
     </div>
-    </body>
-    <script>
-        window.onload = function(){
+</body>
+<script>
+    window.onload = function() {
 
-String.prototype.repeat =  String.prototype.repeat ||
-  function(c){
-    var r= '';
-    for(var i=0; i<c; ++i);
-        r += this;
-    return r;
-}
-var startPage = document.getElementById("startMenu");
-startPage.addEventListener("click",startGame)
-function startGame(){
-    fn1();
-    startPage.style.display = "none";
-    loadGame();
-    
-}
-        
-var bestScore = getBestScoreCookie();
-var runCount = 0;
-document.getElementById("best").innerHTML = bestScore;        
+        String.prototype.repeat = String.prototype.repeat ||
+        function(c) {
+            var r = '';
+            for (var i = 0; i < c; ++i);
+            r += this;
+            return r;
+        }
+        var startPage = document.getElementById("startMenu");
+        startPage.addEventListener("click", startGame)
+        function startGame() {
+            fn1();
+            startPage.style.display = "none";
+            loadGame();
 
-        
+        }
 
-function loadGame(){
-"use strict";
-
-    
-    var countTimeOut;
-    function countTime(){
-    var container = document.getElementById("timerDiv");
-    container.innerHTML = "<div class='timer'></div>";
-    countTimeOut = setTimeout(shoot,5500);
-    }
-    countTime();
-    
-
-    var gameScore = document.getElementById("score");
-    var totalScore = 0;
-    var autoMove = false;
+        var bestScore = getBestScoreCookie();
+        var runCount = 0;
+        document.getElementById("best").innerHTML = bestScore;
 
 
-    var w = window.innerWidth;
-    var h = window.innerHeight;
 
-    if(h > w){
-        document.getElementById("mainContainer").style.transform = "translateX("+(w)+"px) rotate(90deg)";
-        document.getElementById("mainContainer").style.width = h+"px";
-        var nh = h;
-        h = w;
-        w = nh;
-        
-    }
-    
-
-    var updatePointArea = document.getElementById("showPoint");
-    updatePointArea.style.height = h+"px";
-    updatePointArea.style.width = w+"px";
-    var uScore = document.querySelector("#showPoint .u");
-    var arrs = document.getElementById("arrs");
-
-    function updArr(arrNum){
-        var arr = "&uarr;";
-        arr = arr.repeat(arrNum);
-        arrs.innerHTML = arr;
-    }
-
-    function animateScore(scr,arrNum){
-        fn();
-        if(scr >= 7) {
-            uScore.innerHTML = "&uarr; +"+scr;
-        fn2();}
-        else uScore.innerHTML = "+"+scr;
-        updArr(arrNum);
-        var t = 50, l = 70, o = 1;
-        var animIntv = setInterval(function(){
-            uScore.style.top = t + "%";
-            uScore.style.left = l + "%";
-            uScore.style.opacity = o;
-            t-=4;
-            l-=3;
-            o-=0.1;
-        },100)
-        setTimeout(function(){
-            clearInterval(animIntv);
-            uScore.style.opacity = 0;
-            uScore.style.top = "50%";
-            uScore.style.left = "70%";
-        },1000);
-    }
+        function loadGame() {
+            "use strict";
 
 
-    var c2 = document.getElementById("animCanvas");
-    c2.height = h;
-    c2.width = w;
-    var ctx2 = c2.getContext("2d");
-
-    var fwBuilder = function(n,x,y,speed){
-        this.n = n;
-        this.x = x;
-        this.y = y;
-        this.speed = speed;
-        this.balls = [];
-    }
-
-    fwBuilder.prototype.ready = function(){
-        for(var i = 0; i < this.n; i++){
-            this.balls[i] = {
-                x:this.x,
-                y:this.y,
-                dx:this.speed*Math.sin(i*Math.PI*2/this.n),
-                dy:this.speed*Math.cos(i*Math.PI*2/this.n),
-                u:this.speed*Math.cos(i*Math.PI*2/this.n),
-                t:0
+            var countTimeOut;
+            function countTime() {
+                var container = document.getElementById("timerDiv");
+                container.innerHTML = "<div class='timer'></div>";
+                countTimeOut = setTimeout(shoot, 5500);
             }
-        }
-    }
+            countTime();
 
-    fwBuilder.prototype.draw = function(){
-        for(var i = 0; i < this.n; i++){
-            ctx2.beginPath();
-            ctx2.fillStyle='#FF7F5060'
-            ctx2.arc(this.balls[i].x,this.balls[i].y,7,0,Math.PI*2);
-            ctx2.fill();
-            ctx2.closePath();
-            this.balls[i].x += this.balls[i].dx;
-            this.balls[i].y += this.balls[i].dy;
-        
-            this.balls[i].dy += .02;
-        }
-    
-        if(this.balls[Math.round(this.n/2)].y > h){
-            clearInterval(intvA);
-            running = false;
-            ctx2.clearRect(0,0,w,h);
-        }
-    }
 
-    var fw1 = new fwBuilder(40,w/5,h,3);
-    var fw2 = new fwBuilder(40,4*w/5,h,3);
+            var gameScore = document.getElementById("score");
+            var totalScore = 0;
+            var autoMove = false;
 
-    var intvA;
-    var running = false;
 
-    function newF(){
-        if(!running){
-            fw1.ready();
-            fw2.ready();
-            running = true;
-            intvA = setInterval(function(){
-                ctx2.clearRect(0,0,w,h);
-                fw1.draw();
-                fw2.draw();
-            },15)
-        }
-    }
+            var w = window.innerWidth;
+            var h = window.innerHeight;
 
-    newF();
-    //c2.addEventListener("click",newF)
-    
+            if (h > w) {
+                document.getElementById("mainContainer").style.transform = "translateX("+(w)+"px) rotate(90deg)";
+                document.getElementById("mainContainer").style.width = h+"px";
+                var nh = h;
+                h = w;
+                w = nh;
 
-    var c = document.getElementById("myCanvas");
-
-    c.height = h;
-    c.width = w;
-
-    var ctx = c.getContext("2d");
-
-    var checkArrowMoveWithBoard1 = false;
-    var checkArrowMoveWithBoard2 = false;
-
-    // Objects...
-
-    var arc = {
-        x:30,
-        y:100,
-        dy:3,
-          r:50,
-          color:"goldenrod",
-          lw:3,
-          start:Math.PI+Math.PI/2,
-          end:Math.PI-Math.PI/2
-    }
-
-    var rope = {
-        h:arc.r*2,
-          lw:1,
-          x:arc.x-25,
-          color:"goldenrod",
-          status:true
-    }
-
-    var board = {
-        x:w-20,
-        y:h/2,
-        dy:4,
-        height:150,
-        width:7
-    }
-
-    var boardY;
-    var boardMove = false;
-    var totalArr = 10;
-    updArr(totalArr);
-
-    function drawBoard() {
-        ctx.beginPath();
-        ctx.fillStyle='DarkSlateBlue'
-        ctx.fillRect(board.x,board.y-5,20,board.width+3);
-        ctx.fillRect(board.x,board.y-board.height/2,board.width,board.height);
-
-        ctx.moveTo(board.x,board.y-15);
-        ctx.quadraticCurveTo(board.x-10,board.y,board.x,board.y+15);
-        //ctx.lineTo(10,6);
-        ctx.fillStyle = "#36e";
-        ctx.fill();
-        ctx.closePath();
-        ctx.fillStyle = "goldenrod";
-    
-        if(board.y >= h || board.y <= 0){
-            board.dy *= -1;
-        }
-    
-    
-        if(autoMove){
-            board.y += board.dy;
-            if(checkArrowMoveWithBoard1){
-                arrow1.moveArrowWithBoard(1);
             }
-            else if(checkArrowMoveWithBoard2){
-                arrow2.moveArrowWithBoard(1);
+
+
+            var updatePointArea = document.getElementById("showPoint");
+            updatePointArea.style.height = h+"px";
+            updatePointArea.style.width = w+"px";
+            var uScore = document.querySelector("#showPoint .u");
+            var arrs = document.getElementById("arrs");
+
+            function updArr(arrNum) {
+                var arr = "&uarr;";
+                arr = arr.repeat(arrNum);
+                arrs.innerHTML = arr;
             }
-        }
-        else{
-    
-            if(boardMove){
-                if(Math.abs(board.y - boardY) > 5){
+
+            function animateScore(scr, arrNum) {
+                fn();
+                if (scr >= 7) {
+                    uScore.innerHTML = "&uarr; +"+scr;
+                    fn2();
+                } else uScore.innerHTML = "+"+scr;
+                updArr(arrNum);
+                var t = 50,
+                l = 70,
+                o = 1;
+                var animIntv = setInterval(function() {
+                    uScore.style.top = t + "%";
+                    uScore.style.left = l + "%";
+                    uScore.style.opacity = o;
+                    t -= 4;
+                    l -= 3;
+                    o -= 0.1;
+                }, 100)
+                setTimeout(function() {
+                    clearInterval(animIntv);
+                    uScore.style.opacity = 0;
+                    uScore.style.top = "50%";
+                    uScore.style.left = "70%";
+                }, 1000);
+            }
+
+
+            var c2 = document.getElementById("animCanvas");
+            c2.height = h;
+            c2.width = w;
+            var ctx2 = c2.getContext("2d");
+
+            var fwBuilder = function(n, x, y, speed) {
+                this.n = n;
+                this.x = x;
+                this.y = y;
+                this.speed = speed;
+                this.balls = [];
+            }
+
+            fwBuilder.prototype.ready = function() {
+                for (var i = 0; i < this.n; i++) {
+                    this.balls[i] = {
+                        x: this.x,
+                        y: this.y,
+                        dx: this.speed*Math.sin(i*Math.PI*2/this.n),
+                        dy: this.speed*Math.cos(i*Math.PI*2/this.n),
+                        u: this.speed*Math.cos(i*Math.PI*2/this.n),
+                        t: 0
+                    }
+                }
+            }
+
+            fwBuilder.prototype.draw = function() {
+                for (var i = 0; i < this.n; i++) {
+                    ctx2.beginPath();
+                    ctx2.fillStyle = '#FF7F5060'
+                    ctx2.arc(this.balls[i].x, this.balls[i].y, 7, 0, Math.PI*2);
+                    ctx2.fill();
+                    ctx2.closePath();
+                    this.balls[i].x += this.balls[i].dx;
+                    this.balls[i].y += this.balls[i].dy;
+
+                    this.balls[i].dy += .02;
+                }
+
+                if (this.balls[Math.round(this.n/2)].y > h) {
+                    clearInterval(intvA);
+                    running = false;
+                    ctx2.clearRect(0, 0, w, h);
+                }
+            }
+
+            var fw1 = new fwBuilder(40, w/5, h, 3);
+            var fw2 = new fwBuilder(40, 4*w/5, h, 3);
+
+            var intvA;
+            var running = false;
+
+            function newF() {
+                if (!running) {
+                    fw1.ready();
+                    fw2.ready();
+                    running = true;
+                    intvA = setInterval(function() {
+                        ctx2.clearRect(0, 0, w, h);
+                        fw1.draw();
+                        fw2.draw();
+                    }, 15)
+                }
+            }
+
+            newF();
+            //c2.addEventListener("click",newF)
+
+
+            var c = document.getElementById("myCanvas");
+
+            c.height = h;
+            c.width = w;
+
+            var ctx = c.getContext("2d");
+
+            var checkArrowMoveWithBoard1 = false;
+            var checkArrowMoveWithBoard2 = false;
+
+            // Objects...
+
+            var arc = {
+                x: 30,
+                y: 100,
+                dy: 3,
+                r: 50,
+                color: "goldenrod",
+                lw: 3,
+                start: Math.PI+Math.PI/2,
+                end: Math.PI-Math.PI/2
+            }
+
+            var rope = {
+                h: arc.r*2,
+                lw: 1,
+                x: arc.x-25,
+                color: "goldenrod",
+                status: true
+            }
+
+            var board = {
+                x: w-20,
+                y: h/2,
+                dy: 4,
+                height: 150,
+                width: 7
+            }
+
+            var boardY;
+            var boardMove = false;
+            var totalArr = 10;
+            updArr(totalArr);
+
+            function drawBoard() {
+                ctx.beginPath();
+                ctx.fillStyle = 'DarkSlateBlue'
+                ctx.fillRect(board.x, board.y-5, 20, board.width+3);
+                ctx.fillRect(board.x, board.y-board.height/2, board.width, board.height);
+
+                ctx.moveTo(board.x, board.y-15);
+                ctx.quadraticCurveTo(board.x-10, board.y, board.x, board.y+15);
+                //ctx.lineTo(10,6);
+                ctx.fillStyle = "#36e";
+                ctx.fill();
+                ctx.closePath();
+                ctx.fillStyle = "goldenrod";
+
+                if (board.y >= h || board.y <= 0) {
+                    board.dy *= -1;
+                }
+
+
+                if (autoMove) {
                     board.y += board.dy;
-                    arrow1.moveArrowWithBoard(1);
-                    arrow2.moveArrowWithBoard(1);
-                }
-            }
-            else{
-                if(Math.abs(board.y - boardY) > 5){
-                    board.y -= board.dy;
-                    arrow1.moveArrowWithBoard(-1);
-                    arrow2.moveArrowWithBoard(-1);
-                }
-            }
-        }
-    }
-
-    function Arrow(){
-        this.w = 85;
-        this.x = arc.x-25;
-        this.dx = 20;
-        this.status = false;
-        this.vis = true;
-        this.fy = arc.y;
-    }
-
-    Arrow.prototype.drawArrow = function() {
-        if(this.vis) {
-            if(this.status) {
-                ctx.fillRect(this.x,this.fy-3,10,6);
-                ctx.fillRect(this.x,this.fy-1,this.w,2);
-                ctx.beginPath();
-                ctx.fillStyle='goldenrod';
-                ctx.moveTo(this.x+this.w,this.fy-4);
-                ctx.lineTo(this.x+this.w+12,this.fy);
-                ctx.lineTo(this.x+this.w,this.fy+4);
-                ctx.fill();
-            
-                if(moveArrowCheck) {
-                    if(this.x < w-155){
-                        this.x += this.dx;
+                    if (checkArrowMoveWithBoard1) {
+                        arrow1.moveArrowWithBoard(1);
+                    } else if (checkArrowMoveWithBoard2) {
+                        arrow2.moveArrowWithBoard(1);
                     }
-                    else {
-                        if(!(this.fy <= board.y-board.height/2 || this.fy >= board.y+board.height/2) || this.x > w){
-                            if(this.x > w-110){
-                                if(this == arrow1){
-                                    arrow2.vis = true;
-                                    checkArrowMoveWithBoard1 = true;
-                                    checkArrowMoveWithBoard2 = false;
-                                }
-                                else {
-                                    arrow1.vis = true;
-                                    checkArrowMoveWithBoard1 = false;
-                                    checkArrowMoveWithBoard2 = true;
-                                }
-                                moveArrowCheck = false;
-                                score++;
-                                //console.log(score);
-                                if(score === 4){
-                                    arc.dy = 5;
-                                }
-                                else if(score === 8){
-                                    autoMove = true;
-                                }
-                        
-                        
-                                if(this.fy >= board.y-board.height/2 && this.fy <= board.y+board.height/2) {
-                                    var scores = this.fy - board.y;
-                                    var currentScore = Math.round(board.height/20)-Math.round(Math.abs(scores/10));
-                                    if(currentScore >= 7){
-                                        newF();
-                                        totalArr+=2;
-                                }
-                            
-                                totalScore += currentScore;
-                                gameScore.innerHTML = totalScore;
-                            
-                                animateScore(currentScore,totalArr);
-                            
-                                //board.y += scores;// + Math.floor(Math.random()*20);
-                                boardY = board.y + scores;
-                                if(scores>=0){
-                                    boardMove = true;
-                                }
-                                else {
-                                    boardMove = false;
-                                }
-                            
-                                //this.fy += scores;
-                            }
-                            else updArr(totalArr);
-                                if(totalArr <= 0){
-                                    clearInterval(intv);
-                                document.getElementById("animCanvas").removeEventListener("click",shoot);
-                                document.body.removeEventListener("keydown",shoot);
-                                startPage.style.display = "block";
-                                document.getElementById("title").innerHTML = "Your Score<br>"+totalScore;
-                                if(bestScore < totalScore){
-                                    bestScore = totalScore;
-                                    setBestScoreCookie(bestScore);
-                                    
-                            }
-                            document.getElementById("score").innerHTML = 0;
-                            document.getElementById("best").innerHTML = bestScore;
-                            }
-                        
-                            }
-                            else {
+                } else {
+
+                    if (boardMove) {
+                        if (Math.abs(board.y - boardY) > 5) {
+                            board.y += board.dy;
+                            arrow1.moveArrowWithBoard(1);
+                            arrow2.moveArrowWithBoard(1);
+                        }
+                    } else {
+                        if (Math.abs(board.y - boardY) > 5) {
+                            board.y -= board.dy;
+                            arrow1.moveArrowWithBoard(-1);
+                            arrow2.moveArrowWithBoard(-1);
+                        }
+                    }
+                }
+            }
+
+            function Arrow() {
+                this.w = 85;
+                this.x = arc.x-25;
+                this.dx = 20;
+                this.status = false;
+                this.vis = true;
+                this.fy = arc.y;
+            }
+
+            Arrow.prototype.drawArrow = function() {
+                if (this.vis) {
+                    if (this.status) {
+                        ctx.fillRect(this.x, this.fy-3, 10, 6);
+                        ctx.fillRect(this.x, this.fy-1, this.w, 2);
+                        ctx.beginPath();
+                        ctx.fillStyle = 'goldenrod';
+                        ctx.moveTo(this.x+this.w, this.fy-4);
+                        ctx.lineTo(this.x+this.w+12, this.fy);
+                        ctx.lineTo(this.x+this.w, this.fy+4);
+                        ctx.fill();
+
+                        if (moveArrowCheck) {
+                            if (this.x < w-155) {
                                 this.x += this.dx;
+                            } else {
+                                if (!(this.fy <= board.y-board.height/2 || this.fy >= board.y+board.height/2) || this.x > w) {
+                                    if (this.x > w-110) {
+                                        if (this == arrow1) {
+                                            arrow2.vis = true;
+                                            checkArrowMoveWithBoard1 = true;
+                                            checkArrowMoveWithBoard2 = false;
+                                        } else {
+                                            arrow1.vis = true;
+                                            checkArrowMoveWithBoard1 = false;
+                                            checkArrowMoveWithBoard2 = true;
+                                        }
+                                        moveArrowCheck = false;
+                                        score++;
+                                        //console.log(score);
+                                        if (score === 4) {
+                                            arc.dy = 5;
+                                        } else if (score === 8) {
+                                            autoMove = true;
+                                        }
+
+
+                                        if (this.fy >= board.y-board.height/2 && this.fy <= board.y+board.height/2) {
+                                            var scores = this.fy - board.y;
+                                            var currentScore = Math.round(board.height/20)-Math.round(Math.abs(scores/10));
+                                            if (currentScore >= 7) {
+                                                newF();
+                                                totalArr += 2;
+                                            }
+
+                                            totalScore += currentScore;
+                                            gameScore.innerHTML = totalScore;
+
+                                            animateScore(currentScore, totalArr);
+
+                                            //board.y += scores;// + Math.floor(Math.random()*20);
+                                            boardY = board.y + scores;
+                                            if (scores >= 0) {
+                                                boardMove = true;
+                                            } else {
+                                                boardMove = false;
+                                            }
+
+                                            //this.fy += scores;
+                                        } else updArr(totalArr);
+                                        if (totalArr <= 0) {
+                                            clearInterval(intv);
+                                            document.getElementById("animCanvas").removeEventListener("click", shoot);
+                                            document.body.removeEventListener("keydown", shoot);
+                                            startPage.style.display = "block";
+                                            document.getElementById("title").innerHTML = "Your Score<br>"+totalScore;
+                                            if (bestScore < totalScore) {
+                                                bestScore = totalScore;
+                                                setBestScoreCookie(bestScore);
+
+                                            }
+                                            document.getElementById("score").innerHTML = 0;
+                                            document.getElementById("best").innerHTML = bestScore;
+                                        }
+
+                                    } else {
+                                        this.x += this.dx;
+                                    }
+                                } else {
+                                    this.x += this.dx;
+                                }
                             }
                         }
-                        else {
-                            this.x += this.dx;
-                        }
+                    } else {
+                        ctx.fillRect(rope.x, arc.y-3, 10, 6);
+                        ctx.fillRect(rope.x, arc.y-1, this.w, 2);
+                        ctx.beginPath();
+                        ctx.fillStyle = 'goldenrod'
+                        ctx.moveTo(rope.x+this.w, arc.y-4);
+                        ctx.lineTo(rope.x+this.w+12, arc.y);
+                        ctx.lineTo(rope.x+this.w, arc.y+4);
+                        ctx.fill();
                     }
                 }
             }
-            else {
-                ctx.fillRect(rope.x,arc.y-3,10,6);
-                ctx.fillRect(rope.x,arc.y-1,this.w,2);
-                ctx.beginPath();
-                ctx.fillStyle='goldenrod'
-                ctx.moveTo(rope.x+this.w,arc.y-4);
-                ctx.lineTo(rope.x+this.w+12,arc.y);
-                ctx.lineTo(rope.x+this.w,arc.y+4);
-                ctx.fill();
-            }
-        }
-    }
 
-    // Arrow Move With Board
+            // Arrow Move With Board
 
-    Arrow.prototype.moveArrowWithBoard = function(dir) {
-        if(this == arrow1){
-            arrow1.fy += board.dy*dir;
-        }
-        else {
-            arrow2.fy += board.dy*dir;
-        }
-    }
-
-
-
-
-    var arrow1 = new Arrow();
-    var arrow2 = new Arrow();
-
-    var arrows = 0;
-    var moveArrowCheck = false;
-    var score = 0;
-
-    // Drawing functions...
-
-    function drawArc() {
-        ctx.beginPath();
-        ctx.fillStyle='goldenrod'
-          ctx.arc(arc.x,arc.y,arc.r,arc.start,arc.end);
-          ctx.fillStyle = arc.color;
-          ctx.lineWidth = arc.lw;
-          ctx.stroke();
-          ctx.closePath();
-    }
-
-    function drawRope() {
-        ctx.beginPath();
-        ctx.fillStyle='goldenrod'
-          ctx.moveTo(arc.x,arc.y-arc.r);
-          if(arrow1.vis && arrow2.vis){
-            ctx.lineTo(rope.x,arc.y);
-          }
-          ctx.lineTo(arc.x,arc.y+arc.r);
-          ctx.lineWidth = rope.lw;
-          ctx.fillStyle = rope.color;
-          ctx.stroke();
-          ctx.closePath();
-    }
-
-    // Moving function...
-
-    function move () {
-          ctx.clearRect(0,0,w,h);
-          if(arc.y>h-50 || arc.y<50){
-            arc.dy*=-1;
-          }
-          arc.y+=arc.dy;
-    }
-
-    function shoot(){
-          if(arrow1.vis && arrow2.vis && arrows != -1){
-              fn();
-            moveArrowCheck = true;
-            clearTimeout(countTimeOut);
-    countTime();
-            if(arrows%2===0){
-                  arrow1.status = true;
-                  arrow1.fy = arc.y;
-                  arrow2.status = false;
-                  arrow2.x = rope.x;
-                  arrow2.vis = false;
+            Arrow.prototype.moveArrowWithBoard = function(dir) {
+                if (this == arrow1) {
+                    arrow1.fy += board.dy*dir;
+                } else {
+                    arrow2.fy += board.dy*dir;
                 }
-            else{
-                  arrow1.status = false;
-                  arrow2.fy = arc.y;
-                  arrow2.status = true;
-                  arrow1.x = rope.x;
-                  arrow1.vis = false;
             }
-            totalArr--;
-          }
-          arrows++;
+
+
+
+
+            var arrow1 = new Arrow();
+            var arrow2 = new Arrow();
+
+            var arrows = 0;
+            var moveArrowCheck = false;
+            var score = 0;
+
+            // Drawing functions...
+
+            function drawArc() {
+                ctx.beginPath();
+                ctx.fillStyle = 'goldenrod'
+                ctx.arc(arc.x, arc.y, arc.r, arc.start, arc.end);
+                ctx.fillStyle = arc.color;
+                ctx.lineWidth = arc.lw;
+                ctx.stroke();
+                ctx.closePath();
+            }
+
+            function drawRope() {
+                ctx.beginPath();
+                ctx.fillStyle = 'goldenrod'
+                ctx.moveTo(arc.x, arc.y-arc.r);
+                if (arrow1.vis && arrow2.vis) {
+                    ctx.lineTo(rope.x, arc.y);
+                }
+                ctx.lineTo(arc.x, arc.y+arc.r);
+                ctx.lineWidth = rope.lw;
+                ctx.fillStyle = rope.color;
+                ctx.stroke();
+                ctx.closePath();
+            }
+
+            // Moving function...
+
+            function move () {
+                ctx.clearRect(0, 0, w, h);
+                if (arc.y > h-50 || arc.y < 50) {
+                    arc.dy*=-1;
+                }
+                arc.y += arc.dy;
+            }
+
+            function shoot() {
+                if (arrow1.vis && arrow2.vis && arrows != -1) {
+                    fn();
+                    moveArrowCheck = true;
+                    clearTimeout(countTimeOut);
+                    countTime();
+                    if (arrows%2 === 0) {
+                        arrow1.status = true;
+                        arrow1.fy = arc.y;
+                        arrow2.status = false;
+                        arrow2.x = rope.x;
+                        arrow2.vis = false;
+                    } else {
+                        arrow1.status = false;
+                        arrow2.fy = arc.y;
+                        arrow2.status = true;
+                        arrow1.x = rope.x;
+                        arrow1.vis = false;
+                    }
+                    totalArr--;
+                }
+                arrows++;
+            }
+
+            document.getElementById("animCanvas").addEventListener("click", shoot);
+            document.body.addEventListener("keydown", shoot);
+
+            var intv = setInterval(function() {
+                move();
+                drawArc();
+                drawRope();
+                arrow1.drawArrow();
+                arrow2.drawArrow();
+                drawBoard();
+            }, 15)
+        }
+    }
+    function setBestScoreCookie(bestScore) {
+        document.cookie = "bestScore=" + bestScore + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
     }
 
-    document.getElementById("animCanvas").addEventListener("click",shoot);
-     document.body.addEventListener("keydown",shoot);
+    // Function to get the best score from the cookie
+    function getBestScoreCookie() {
+        const name = "bestScore=";
+        const cookies = document.cookie.split(';');
 
-    var intv = setInterval(function(){
-          move();
-          drawArc();
-          drawRope();
-          arrow1.drawArrow();
-          arrow2.drawArrow();
-          drawBoard();
-    },15)
-}
-}
-function setBestScoreCookie(bestScore) {
-  document.cookie = "bestScore=" + bestScore + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
-}
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.indexOf(name) === 0) {
+                return parseInt(cookie.substring(name.length), 10);
+            }
+        }
 
-// Function to get the best score from the cookie
-function getBestScoreCookie() {
-  const name = "bestScore=";
-  const cookies = document.cookie.split(';');
-
-  for (let i = 0; i < cookies.length; i++) {
-    let cookie = cookies[i].trim();
-    if (cookie.indexOf(name) === 0) {
-      return parseInt(cookie.substring(name.length), 10);
+        return 0; // Return 0 if the cookie is not found
     }
-  }
-
-  return 0; // Return 0 if the cookie is not found
-}
 
 
-    </script>
+</script>
 </html>
