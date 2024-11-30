@@ -1,0 +1,20 @@
+{
+  "name": "Codes by Nuruzzaman",
+  "short_name": "Codes",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007BFF",
+  "icons": [
+    {
+      "src": "/pic/coding.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/pic/coding.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
