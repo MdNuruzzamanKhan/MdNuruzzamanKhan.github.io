@@ -69,10 +69,10 @@
         Saturated
     </p>
     <svg id="beaker">
-        <rect id="rect" width="200" height="100" x="0" y="100" style="fill:rgb(0, 255, 10);" />
+        <rect id="rect" width="200" height="100" x="0" y="100" style="fill:rgb(0, 240, 10);" />
         <rect id="rect2" width="200" height="100" x="0" y="200" style="fill:rgb(0, 100, 0);" />
-        <ellipse id="ellipse2" cx="100" cy="200" rx="100" ry="5" style="fill:rgb(0, 255, 10);" />
-        <ellipse id="ellipse" cx="100" cy="100" rx="100" ry="5" style="fill:rgb(0, 255, 10); stroke:gray; stroke-width:1" />
+        <ellipse id="ellipse2" cx="100" cy="200" rx="100" ry="5" style="fill:rgb(0, 240, 10);" />
+        <ellipse id="ellipse" cx="100" cy="100" rx="100" ry="5" style="fill:rgb(0, 240, 10); stroke:gray; stroke-width:1" />
     </svg>
     <svg width="100" height="120" xmlns="http://www.w3.org/2000/svg">
         <!-- Candle Body -->
@@ -113,10 +113,10 @@ function solve() {
 rect2.style.y = "200";
 ellipse2.style.cy = "200";
 
-rect.style.fill = "rgb(0, 255, 10)";
-ellipse.style.fill = "rgb(0, 255, 10)";
+rect.style.fill = "rgb(0, 240, 10)";
+ellipse.style.fill = "rgb(0, 240, 10)";
 ellipse.style.stroke = "gray";
-ellipse2.style.fill = "rgb(0, 255, 20)";
+ellipse2.style.fill = "rgb(0, 240, 20)";
 //rect.style.y = "100";
 //ellipse.style.cy = "100";
 let ksp = kspSlider.value;
@@ -131,10 +131,13 @@ flame.style.stroke = "white";
 }
 
 if (ksp == 0) {
-rect.style.fill = "rgb(245, 245, 255)";
-ellipse.style.fill = "rgb(245, 245, 255)";
+rect.style.fill = "rgb(240, 240, 255)";
+ellipse.style.fill = "rgb(240, 240, 255)";
 ellipse.style.stroke = "gray";
-ellipse2.style.fill = "rgb(245, 245, 255)";
+ellipse2.style.fill = "rgb(240, 240, 255)";
+if(kip == 100) {
+    ellipse.style.fill = "rgb(0, 100, 0)";
+}
 }
 
 ksp1 = ksp;
@@ -142,15 +145,15 @@ ksp1 = ksp;
 let diff = kip / ksp;
 console.log(diff);
 if (diff < 1) {
-rect.style.fill = "rgb(" + (255 - diff*255).toString() + ",255," +(255 - diff*255 + 10).toString() +")";
-ellipse.style.fill = "rgb(" + (255 - diff*255).toString() + ",255," +(255 - diff*255 + 10).toString() +")";
-//rect2.style.fill = "rgb(" + (diff*2.5).toString() + ",255," +(diff*2.5).toString() +")";
-ellipse2.style.fill = "rgb(" + (255 - diff*255).toString() + ",255," +(255 - diff*255 + 10).toString() +")";
+rect.style.fill = "rgb(" + (240 - diff*240).toString() + ",240," +(240 - diff*240 + 10).toString() +")";
+ellipse.style.fill = "rgb(" + (240 - diff*240).toString() + ",240," +(240 - diff*240 + 10).toString() +")";
+//rect2.style.fill = "rgb(" + (diff*2.5).toString() + ",240," +(diff*2.5).toString() +")";
+ellipse2.style.fill = "rgb(" + (240 - diff*240).toString() + ",240," +(240 - diff*240 + 10).toString() +")";
 typeShow.innerText = 'Unsaturated';
 } else if (diff == 1) {
-rect.style.fill = "rgb(0, 255, 10)";
-ellipse.style.fill = "rgb(0, 255, 10)";
-ellipse2.style.fill = "rgb(0, 255, 10)";
+rect.style.fill = "rgb(0, 240, 10)";
+ellipse.style.fill = "rgb(0, 240, 10)";
+ellipse2.style.fill = "rgb(0, 240, 10)";
 typeShow.innerText = 'Saturated';
 } else
 {
