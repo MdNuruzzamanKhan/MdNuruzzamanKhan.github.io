@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-74B5JE8ZZK"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -19,13 +19,14 @@
         body {
             font-family: Arial, sans-serif;
             justify-items: center;
+            scroll-behavior: smooth;
         }
-        #type {
+        #typeShow {
             margin: 5vh 0 2vh 0;
-            color:blueviolet;
+            color: blueviolet;
             font-size: 1.2em;
         }
-        #bkr {
+        #beaker {
             height: 200px;
             width: 200px;
             border: 5px solid black;
@@ -34,7 +35,9 @@
             border-radius: 0 0 15px 15px;
         }
         .slider-container {
-            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
             text-align: center;
             width: 90%;
             max-width: 400px;
@@ -47,16 +50,13 @@
 
         .slider-container label {
             display: block;
-            margin-top:10px;
             font-weight: bold;
             font-size: 1.2em;
             color: darkblue;
         }
 
         .slider-container input[type="range"] {
-            margin: 5px 0;
             width: 100%;
-            margin: 10px 0;
             height: 8px;
             border-radius: 5px;
         }
@@ -65,10 +65,12 @@
     </style>
 </head>
 <body>
-    <p id="type">Saturated</p>
-    <svg id="bkr">
+    <p id="typeShow">
+        Saturated
+    </p>
+    <svg id="beaker">
         <rect id="rect" width="200" height="100" x="0" y="100" style="fill:rgb(0, 255, 0);" />
-        <rect id="rect2" width="200" height="100" x="0" y="200" style="fill:rgb(0, 150, 0);" />
+        <rect id="rect2" width="200" height="100" x="0" y="200" style="fill:rgb(0, 100, 0);" />
         <ellipse id="ellipse2" cx="100" cy="200" rx="100" ry="5" style="fill:rgb(0, 255, 0);" />
         <ellipse id="ellipse" cx="100" cy="100" rx="100" ry="5" style="fill:rgb(0, 255, 0); stroke:gray; stroke-width:1" />
     </svg>
@@ -90,11 +92,11 @@
     </svg>
     <!-- Ksp Slider -->
     <div class="slider-container">
-        <label class="slider-label" for="ksp-slider">K<sub>sp</sub></label>
-        <input type="range" id="ksp-slider" min="0" max="100" value="50" step="1" />
+        <label class="slider-label" for="ksp-slider">K<sub>sp</sub>
+            <input type="range" id="ksp-slider" min="0" max="100" value="50" step="1" /></label>
 
-    <label class="slider-label" for="kip-slider">K<sub>ip</sub></label>
-    <input type="range" id="kip-slider" min="0" max="100" value="50" step="1" />
+    <label class="slider-label" for="kip-slider">K<sub>ip</sub>
+        <input type="range" id="kip-slider" min="0" max="100" value="50" step="1" /></label>
 </div>
 <script>
 // Update Ksp value dynamically
@@ -128,20 +130,18 @@ ksp1 = ksp;
 let diff = ksp - kip;
 console.log(diff);
 if (diff > 0) {
-rect.style.fill = "rgb(" + (diff*2.5).toString() + ",255," +(diff*2.5).toString() +")";
+rect.style.fill = "rgb(" + (diff*2.55).toString() + ",255," +(diff*2.55).toString() +")";
 ellipse.style.fill = "rgb(" + (diff*2.55).toString() + ",255," +(diff*2.55).toString() +")";
 //rect2.style.fill = "rgb(" + (diff*2.5).toString() + ",255," +(diff*2.5).toString() +")";
 ellipse2.style.fill = "rgb(" + (diff*2.55).toString() + ",255," +(diff*2.55).toString() +")";
-type.innerText = 'Unsaturated';
-}
-else if (diff == 0){
-type.innerText = 'Saturated';
-}
-else
+typeShow.innerText = 'Unsaturated';
+} else if (diff == 0) {
+typeShow.innerText = 'Saturated';
+} else
 {
-type.innerText = 'Over saturated';
 rect2.style.y = (200 + diff).toString();
 ellipse2.style.cy = (200 + diff).toString();
+typeShow.innerText = 'Over saturated';
 //rect.style.y = (100 + diff).toString();
 //ellipse.style.cy = (100 + diff).toString();
 }
