@@ -93,7 +93,7 @@
     <!-- Ksp Slider -->
     <div class="slider-container">
         <label class="slider-label" for="ksp-slider">K<sub>sp</sub>
-            <input type="range" id="ksp-slider" min="0" max="100" value="50" step="1" /></label>
+            <input type="range" id="ksp-slider" min="1" max="100" value="50" step="1" /></label>
 
     <label class="slider-label" for="kip-slider">K<sub>ip</sub>
         <input type="range" id="kip-slider" min="0" max="100" value="50" step="1" /></label>
@@ -127,20 +127,23 @@ flame.style.stroke = "white";
 
 ksp1 = ksp;
 
-let diff = ksp - kip;
+let diff = kip / ksp;
 console.log(diff);
-if (diff > 0) {
-rect.style.fill = "rgb(" + (diff*2.55).toString() + ",255," +(diff*2.55).toString() +")";
-ellipse.style.fill = "rgb(" + (diff*2.55).toString() + ",255," +(diff*2.55).toString() +")";
+if (diff < 1) {
+rect.style.fill = "rgb(" + (255 - diff*255).toString() + ",255," +(255 - diff*255).toString() +")";
+ellipse.style.fill = "rgb(" + (255 - diff*255).toString() + ",255," +(255 - diff*255).toString() +")";
 //rect2.style.fill = "rgb(" + (diff*2.5).toString() + ",255," +(diff*2.5).toString() +")";
-ellipse2.style.fill = "rgb(" + (diff*2.55).toString() + ",255," +(diff*2.55).toString() +")";
+ellipse2.style.fill = "rgb(" + (255 - diff*255).toString() + ",255," +(255 - diff*255).toString() +")";
 typeShow.innerText = 'Unsaturated';
-} else if (diff == 0) {
+} else if (diff == 1) {
+rect.style.fill = "rgb(0, 255, 0)";
+ellipse.style.fill = "rgb(0, 255, 0)";
+ellipse2.style.fill = "rgb(0, 255, 0)";
 typeShow.innerText = 'Saturated';
 } else
 {
-rect2.style.y = (200 + diff).toString();
-ellipse2.style.cy = (200 + diff).toString();
+rect2.style.y = (200 - diff).toString();
+ellipse2.style.cy = (200 - diff).toString();
 typeShow.innerText = 'Over saturated';
 //rect.style.y = (100 + diff).toString();
 //ellipse.style.cy = (100 + diff).toString();
