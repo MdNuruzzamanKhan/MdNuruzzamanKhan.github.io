@@ -1,7 +1,7 @@
 {
   "name": "TextJar",
   "short_name": "TextJar",
-  "start_url": "https://textjar.great-site.net/index.html",
+  "start_url": "https://textjar.great-site.net/explore.php",
   "display": "standalone",
   "background_color": "#fff",
   "theme_color": "#007bff",
